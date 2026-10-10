@@ -6,378 +6,1374 @@
 <title>Завод ВОЛГА · блочные тепловые пункты и насосные станции</title>
 <meta name="description" content="Завод ВОЛГА, Самара: БТП, БМТП, АНС, КНС, шкафы управления и котельные. Демонстрационная версия сайта.">
 <link rel="icon" href="img/logo.png">
-<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#f2f4f1;color:#0f1e1d}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Unbounded:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: the page is one continuous flight through the hall. A sticky film fills the screen; at each of the ten stops a heading band sits on top and the block's content on the bottom, so the product line in the middle stays clear. A route rail on the right counts the metres of the real camera path. */
+/* Light, flat, square: no shadows, no rounded corners, hairline grids and numbered mono labels.
+   The page opens with a flight through the hall (six stops, metres of the real camera path, hotspots on the products),
+   then scrolls on through the structure: условия, изделия в 3D, онлайн-заявка, объекты, проекты, вопросы, контакты, галерея. */
 :root {
-  --ink: #0b1110;
-  --ink-2: #131c1a;
-  --glass: rgba(9, 15, 14, .66);
-  --glass-hi: rgba(18, 28, 26, .82);
-  --line: rgba(232, 240, 238, .16);
-  --fg: #f1f5f4;
-  --muted: #a3b1ad;
+  --bg: #f2f4f1;
+  --paper: #ffffff;
+  --ink: #0f1e1d;
+  --ink-2: #33433f;
+  --muted: #64716f;
+  --line: #dde3e0;
+  --line-2: #c5cfcb;
   --green: #015a57;
-  --green-lt: #4bb8ae;
+  --green-dk: #00413f;
+  --green-tint: #e4efed;
   --red: #e84237;
-  --red-dk: #c8352b;
-  --f-display: 'Unbounded', 'Arial Black', 'Segoe UI', sans-serif;
-  --f-body: 'Golos Text', 'Segoe UI', Roboto, Arial, sans-serif;
+  --red-dk: #c9322a;
+  --f: 'Onest', 'Segoe UI', Roboto, Arial, sans-serif;
   --f-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
-  --gut: clamp(16px, 3.2vw, 48px);
-  --hdr: 68px;
-  --rail: 172px;
-  color-scheme: dark;
+  --gut: clamp(16px, 3vw, 40px);
+  --hdr: 72px;
+  --route: 44px;
+  --frame: clamp(8px, .9vw, 14px);
+  --pad: 14px;
+  --ease: cubic-bezier(.6, 0, .2, 1);
+  color-scheme: light;
 }
-* { box-sizing: border-box }
-html { background: var(--ink) }
-body { margin: 0; background: var(--ink); color: var(--fg); font: 400 16px/1.5 var(--f-body); -webkit-font-smoothing: antialiased }
+*, *::before, *::after { box-sizing: border-box; border-radius: 0 }
+html { background: var(--bg) }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16px/1.55 var(--f); -webkit-font-smoothing: antialiased }
+body.lock { overflow: hidden }
 a { color: inherit }
-button, input, select { font: inherit; color: inherit }
-:focus-visible { outline: 2px solid var(--green-lt); outline-offset: 2px }
-h1, h2, h3 { margin: 0; text-wrap: balance; font-family: var(--f-display); font-weight: 600; letter-spacing: -.01em }
+button, input, select, textarea { font: inherit; color: inherit }
+:focus-visible { outline: 2px solid var(--green); outline-offset: 2px }
+h1, h2, h3, h4 { margin: 0; text-wrap: balance; font-weight: 600; letter-spacing: -.02em }
 p { margin: 0 }
+ul, ol { margin: 0; padding: 0; list-style: none }
+img { max-width: 100% }
+section[id] { scroll-margin-top: var(--hdr) }
+.eb { display: flex; align-items: center; gap: 8px; font: 500 11.5px/1.2 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+.eb b { font-weight: 500; color: var(--red) }
 
-/* header */
-.top { position: fixed; left: 0; right: 0; top: 0; z-index: 30; height: calc(var(--hdr) + env(safe-area-inset-top, 0px)); padding: env(safe-area-inset-top, 0px) var(--gut) 0; display: flex; align-items: center; gap: 28px;
-  background: linear-gradient(to bottom, rgba(8, 12, 11, .78), rgba(8, 12, 11, 0)); }
-.top .logo { display: block; height: 38px; flex: none }
-.top .logo img { height: 100%; width: auto; display: block }
-.top nav { display: flex; gap: 22px; font-size: 14px; font-weight: 500; flex-wrap: nowrap }
-.top nav a { text-decoration: none; color: var(--fg); opacity: .86; white-space: nowrap }
-.top nav a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 4px }
-.top .sp { flex: 1 }
-.top .ph { font: 500 15px/1.2 var(--f-mono); white-space: nowrap; user-select: all }
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 0 20px; border-radius: 4px; border: 0; cursor: pointer; text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap; transition: background .15s, transform .15s }
+/* buttons: square, the label rolls up on hover */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 48px; padding: 0 22px; border: 1px solid transparent; font: 600 15px/1 var(--f); text-decoration: none; cursor: pointer; white-space: nowrap; transition: background-color .2s, border-color .2s, color .2s }
 .btn-red { background: var(--red); color: #fff }
 .btn-red:hover { background: var(--red-dk) }
-.btn-ghost { background: rgba(255, 255, 255, .08); color: var(--fg); box-shadow: inset 0 0 0 1px var(--line) }
-.btn-ghost:hover { background: rgba(255, 255, 255, .14) }
-.btn:active { transform: translateY(1px) }
+.btn-line { background: var(--paper); color: var(--ink); border-color: var(--line-2) }
+.btn-line:hover { border-color: var(--ink) }
+.btn-ink { background: var(--ink); color: #fff }
+.btn-ink:hover { background: var(--green) }
+.btn-sm { min-height: 38px; padding: 0 14px; font-size: 14px; gap: 8px }
+.btn .ar { display: inline-block; transition: transform .3s var(--ease) }
+.btn:hover .ar { transform: translateX(4px) }
+.sw { display: inline-grid; overflow: hidden; line-height: 1.15 }
+.sw > span, .sw::after { grid-area: 1 / 1; transition: transform .38s var(--ease) }
+.sw::after { content: attr(data-t); transform: translateY(110%) }
+.btn:hover .sw > span, a:hover > .sw > span { transform: translateY(-110%) }
+.btn:hover .sw::after, a:hover > .sw::after { transform: none }
+.lnk { display: inline-flex; align-items: center; gap: 8px; font: 500 12.5px/1.2 var(--f-mono); letter-spacing: .04em; text-transform: uppercase; color: var(--green); text-decoration: none; background: none; border: 0; padding: 0; cursor: pointer }
+.lnk:hover { text-decoration: underline; text-underline-offset: 4px }
+.tag { display: inline-flex; align-items: center; font: 500 11px/1 var(--f-mono); letter-spacing: .03em; padding: 6px 8px 5px; border: 1px solid var(--line); color: var(--ink-2); white-space: nowrap; background: var(--paper) }
+.tags { display: flex; flex-wrap: wrap; gap: 6px }
+input[type="checkbox"] { appearance: none; -webkit-appearance: none; width: 16px; height: 16px; margin: 1px 0 0; flex: none; border: 1px solid var(--line-2); background: var(--paper); display: inline-grid; place-items: center; cursor: pointer }
+input[type="checkbox"]:checked { background: var(--green); border-color: var(--green) }
+input[type="checkbox"]:checked::after { content: ''; width: 8px; height: 4px; border: 2px solid #fff; border-top: 0; border-right: 0; transform: translateY(-1px) rotate(-45deg) }
 
-/* the flight */
-#tour { position: relative }
-.stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: var(--ink) }
-.film { position: absolute; inset: 0 }
+/* ---------- preloader ---------- */
+.pre { position: fixed; inset: 0; z-index: 100; background: var(--paper); display: grid; grid-template-rows: auto 1fr auto; grid-template-columns: minmax(0, 1fr); padding: calc(22px + env(safe-area-inset-top, 0px)) var(--gut) calc(26px + env(safe-area-inset-bottom, 0px)); transition: transform .85s var(--ease) }
+.pre.out { transform: translateY(-101%) }
+.pre-top { display: flex; justify-content: space-between; align-items: center; gap: 16px }
+.pre-top img { height: 44px; width: auto; display: block }
+.pre-mid { align-self: center; display: grid; gap: 18px; max-width: 980px }
+.pre-log { display: grid; gap: 4px; font: 500 12px/1.4 var(--f-mono); color: var(--muted); letter-spacing: .04em; text-transform: uppercase; min-height: 5.6em }
+.pre-log span { animation: fadein .3s both }
+.pre-log span.ok::after { content: ' — ok'; color: var(--green) }
+.pre-line { font: 500 clamp(26px, 3.6vw, 50px)/1.08 var(--f); letter-spacing: -.03em; min-height: 2.2em }
+@keyframes fadein { from { opacity: 0; transform: translateY(6px) } }
+.pre-bot { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; border-top: 1px solid var(--line); padding-top: 18px }
+.pre-num { font: 600 clamp(84px, 15vw, 210px)/.8 var(--f); letter-spacing: -.055em; font-variant-numeric: tabular-nums }
+.pre-num small { font-size: .28em; letter-spacing: 0; color: var(--muted); margin-left: .12em }
+.pre-right { display: grid; gap: 12px; justify-items: end }
+.pre-cap { font: 500 12px/1.5 var(--f-mono); color: var(--muted); text-align: right; max-width: 32ch; letter-spacing: .03em }
+.pre-seg { display: grid; grid-template-columns: repeat(20, 10px); gap: 3px }
+.pre-seg i { height: 10px; background: var(--line) }
+.pre-seg i.on { background: var(--green) }
+
+/* ---------- header ---------- */
+.top { position: fixed; left: 0; right: 0; top: 0; z-index: 50; height: calc(var(--hdr) + env(safe-area-inset-top, 0px)); padding: env(safe-area-inset-top, 0px) var(--gut) 0; display: flex; align-items: center; gap: 20px; background: var(--paper); border-bottom: 1px solid var(--line) }
+.top::after { content: ''; position: absolute; left: 0; bottom: -1px; height: 2px; width: calc(var(--pp, 0) * 100%); background: var(--red) }
+.logo { flex: none; display: block }
+.logo img { height: 40px; width: auto; display: block }
+.nav { display: flex; align-items: center; gap: 0; margin-left: 8px }
+.nav-a { display: inline-flex; align-items: baseline; gap: 4px; height: 40px; padding: 0 11px; border: 0; background: none; font: 500 15px/40px var(--f); color: var(--ink); text-decoration: none; cursor: pointer; white-space: nowrap; position: relative }
+.nav-a .ni { font: 500 10px/1 var(--f-mono); color: var(--muted) }
+.nav-a::after { content: ''; position: absolute; left: 11px; right: 11px; bottom: 6px; height: 1px; background: var(--ink); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease) }
+.nav-a:hover::after, .nav-a[aria-expanded="true"]::after { transform: scaleX(1) }
+.nav-a svg { transition: transform .2s; align-self: center }
+.nav-a[aria-expanded="true"] svg { transform: rotate(180deg) }
+.sp { flex: 1 }
+.hph { display: grid; justify-items: end; gap: 3px; line-height: 1 }
+.hph .k { font: 500 10.5px/1 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+.hph .v { font: 500 15px/1 var(--f-mono); white-space: nowrap; user-select: all }
+.hcta .sm { display: none }
+.burger { display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 16px; border: 1px solid var(--line-2); background: var(--paper); font: 600 15px/1 var(--f); cursor: pointer; flex: none }
+.burger:hover { border-color: var(--ink) }
+.burger .bl { position: relative; width: 18px; height: 10px }
+.burger .bl i { position: absolute; left: 0; right: 0; height: 2px; background: var(--ink); transition: transform .25s, top .25s }
+.burger .bl i:first-child { top: 0 } .burger .bl i:last-child { top: 8px }
+.burger[aria-expanded="true"] .bl i:first-child { top: 4px; transform: rotate(45deg) }
+.burger[aria-expanded="true"] .bl i:last-child { top: 4px; transform: rotate(-45deg) }
+
+/* mega menu under «Каталог» */
+.mega { position: fixed; left: 0; right: 0; top: calc(var(--hdr) + env(safe-area-inset-top, 0px)); z-index: 46; background: var(--paper); border-bottom: 1px solid var(--line); padding: 28px var(--gut) 32px; animation: drop .3s var(--ease) }
+@keyframes drop { from { opacity: 0; transform: translateY(-8px) } }
+.mega-in { max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 1fr); gap: 40px }
+.mprods { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line) }
+.mprod { position: relative; display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 14px; align-items: center; padding: 14px; background: var(--paper); border: 0; text-align: left; cursor: pointer; transition: background-color .2s }
+.mprod:hover { background: var(--bg) }
+.mprod img { width: 96px; height: 72px; object-fit: cover; display: block }
+.mprod .s { font: 500 11px/1 var(--f-mono); color: var(--red); letter-spacing: .06em }
+.mprod b { display: block; font-weight: 600; font-size: 15px; line-height: 1.25; margin: 5px 0 3px }
+.mprod span.d { font-size: 13px; line-height: 1.35; color: var(--muted) }
+.b3d { position: absolute; right: 10px; top: 10px; font: 500 10px/1 var(--f-mono); padding: 4px 5px 3px; border: 1px solid var(--line-2); color: var(--ink-2); background: var(--paper) }
+.malso { display: grid; align-content: start }
+.malso .eb { padding-bottom: 12px; border-bottom: 1px solid var(--line) }
+.malso button { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 11px 0; border: 0; border-bottom: 1px solid var(--line); background: none; text-align: left; font-size: 14.5px; cursor: pointer; width: 100% }
+.malso button:hover { color: var(--green) }
+.malso .btn { margin-top: 16px; border-bottom: 0; justify-content: center }
+
+/* burger overlay */
+.menu { position: fixed; left: 0; right: 0; bottom: 0; top: calc(var(--hdr) + env(safe-area-inset-top, 0px)); z-index: 45; background: var(--paper); overflow-y: auto; overscroll-behavior: contain; padding: clamp(24px, 4vw, 56px) var(--gut) calc(28px + env(safe-area-inset-bottom, 0px)); animation: drop .4s var(--ease) }
+.menu-in { max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, .8fr) minmax(0, 1.05fr); gap: 40px }
+.mk { display: block; padding-bottom: 12px; margin-bottom: 4px; border-bottom: 1px solid var(--line) }
+.mbig button { display: flex; align-items: baseline; gap: 16px; width: 100%; padding: 11px 0; border: 0; border-bottom: 1px solid var(--line); background: none; text-align: left; cursor: pointer; font: 600 clamp(20px, 1.9vw, 27px)/1.15 var(--f); letter-spacing: -.02em; transition: color .2s, padding .3s var(--ease) }
+.mbig button:hover { color: var(--green); padding-left: 8px }
+.mbig .n, .msm .n { font: 500 11px/1 var(--f-mono); color: var(--muted); min-width: 24px; letter-spacing: 0 }
+.mbig .s { margin-left: auto; font: 500 12px/1 var(--f-mono); color: var(--muted); letter-spacing: .04em }
+.msm a, .msm button { display: flex; align-items: baseline; gap: 12px; width: 100%; padding: 7px 0; border: 0; background: none; text-align: left; font: 500 16px/1.3 var(--f); text-decoration: none; cursor: pointer }
+.msm a:hover, .msm button:hover { color: var(--green) }
+.soon { font: 500 10px/1 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line-2); padding: 4px 6px 3px; margin-left: 4px; align-self: center }
+.mcon { display: grid; gap: 14px; align-content: start }
+.mcon .row { display: grid; gap: 3px; padding-bottom: 12px; border-bottom: 1px solid var(--line) }
+.k-mono { font: 500 10.5px/1.2 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+.mcon .v { font-size: 15.5px; font-weight: 500; user-select: all; overflow-wrap: anywhere }
+.mcon .v.mono, .crow .v.mono { font-family: var(--f-mono) }
+.menu-bot { max-width: 1320px; margin: 48px auto 0; padding-top: 18px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px; font: 500 12px/1.4 var(--f-mono); color: var(--muted) }
+.menu.open li, .menu.open .mcon .row { animation: rise .5s both var(--ease); animation-delay: calc(var(--i, 0) * 26ms + 60ms) }
+@keyframes rise { from { opacity: 0; transform: translateY(10px) } }
+.copy { justify-self: start; background: none; border: 0; padding: 0; font: 500 11.5px/1.2 var(--f-mono); color: var(--green); cursor: pointer; text-decoration: underline; text-underline-offset: 3px }
+
+/* ---------- the flight ---------- */
+.tour { position: relative }
+.stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: var(--bg) }
+.route { position: absolute; left: var(--frame); right: var(--frame); top: calc(var(--hdr) + env(safe-area-inset-top, 0px)); height: var(--route); display: flex; align-items: center; gap: 28px; padding: 0 2px }
+.rsegs { flex: 1; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; min-width: 0 }
+.rsegs li { display: grid; gap: 6px; min-width: 0 }
+.rsegs button { display: flex; align-items: baseline; gap: 6px; background: none; border: 0; padding: 0; cursor: pointer; text-align: left; color: var(--muted); min-width: 0; font: 500 11.5px/1.2 var(--f-mono); letter-spacing: .05em; text-transform: uppercase }
+.rsegs button .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
+.rsegs button .m { margin-left: auto; font-size: 10.5px; letter-spacing: 0; opacity: .8; font-variant-numeric: tabular-nums; white-space: nowrap }
+.rsegs button:hover { color: var(--ink) }
+.rsegs li.past button { color: var(--ink-2) }
+.rsegs li.cur button { color: var(--ink) }
+.rsegs li.cur .n, .rsegs li.past .n { color: var(--red) }
+.rsegs .bar { display: block; height: 2px; background: var(--line); position: relative; overflow: hidden }
+.rsegs .bar b { position: absolute; inset: 0; background: var(--red); transform-origin: left; transform: scaleX(var(--f, 0)) }
+.rsegs li:last-child .bar { background: repeating-linear-gradient(to right, var(--line-2) 0 6px, transparent 6px 10px) }
+.odo { flex: none; display: flex; align-items: baseline; gap: 6px; font-family: var(--f-mono); white-space: nowrap }
+.odo .k { font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+.odo b { font-weight: 500; font-size: 22px; letter-spacing: -.02em; font-variant-numeric: tabular-nums; min-width: 3ch; text-align: right }
+.rcur { display: none }
+
+.frame { position: absolute; left: var(--frame); right: var(--frame); bottom: var(--frame); top: calc(var(--hdr) + env(safe-area-inset-top, 0px) + var(--route)) }
+.film { position: absolute; inset: 0; overflow: hidden; background: #dfe4e1 }
 .film canvas, .film .poster { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover }
 .film .poster { transition: opacity .4s }
-.scrim { position: absolute; left: 0; right: 0; pointer-events: none }
-.scrim.t { top: 0; height: 38%; background: linear-gradient(to bottom, rgba(7, 11, 10, .74), rgba(7, 11, 10, .28) 60%, rgba(7, 11, 10, 0)) }
-.scrim.b { bottom: 0; height: 46%; background: linear-gradient(to top, rgba(7, 11, 10, .84), rgba(7, 11, 10, .45) 55%, rgba(7, 11, 10, 0)) }
+.corner { position: absolute; width: 18px; height: 18px; border: 0 solid var(--paper); pointer-events: none; z-index: 2 }
+.corner.tl { left: 10px; top: 10px; border-left-width: 2px; border-top-width: 2px }
+.corner.tr { right: 10px; top: 10px; border-right-width: 2px; border-top-width: 2px }
+.corner.bl { left: 10px; bottom: 10px; border-left-width: 2px; border-bottom-width: 2px }
+.corner.br { right: 10px; bottom: 10px; border-right-width: 2px; border-bottom-width: 2px }
+.hint { position: absolute; right: var(--pad); top: var(--pad); z-index: 3; display: flex; align-items: center; gap: 10px; background: var(--paper); border: 1px solid var(--line); padding: 9px 14px 9px 12px; font: 500 11.5px/1 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); transition: opacity .3s; pointer-events: none }
+.hint i { width: 1px; height: 14px; background: var(--red); animation: tick 1.5s ease-in-out infinite }
+@keyframes tick { 0%, 100% { transform: scaleY(.3); transform-origin: top } 50% { transform: scaleY(1); transform-origin: top } }
 
-.stop { position: absolute; inset: 0; pointer-events: none; opacity: 0; visibility: hidden }
-.stop.on { pointer-events: auto }
-.stop .head { isolation: isolate; position: absolute; left: var(--gut); top: calc(var(--hdr) + env(safe-area-inset-top, 0px) + 18px); max-width: min(720px, calc(100% - var(--rail) - 2 * var(--gut))); display: grid; gap: 14px; justify-items: start }
-.stop .body { position: absolute; left: var(--gut); right: calc(var(--gut) + var(--rail)); bottom: calc(26px + env(safe-area-inset-bottom, 0px)) }
-.stop .head::before { content: ''; position: absolute; z-index: -1; inset: -48px -90px -48px -70px; background: radial-gradient(closest-side, rgba(7, 11, 10, .58), rgba(7, 11, 10, 0)); pointer-events: none }
-.stop h1, .stop h2, .lead { text-shadow: 0 2px 16px rgba(0, 0, 0, .45) }
-.plate { position: relative; display: inline-block; background: var(--green); color: #fff; font: 600 12px/1 var(--f-display); letter-spacing: .12em; text-transform: uppercase; padding: 9px 14px 8px; border-radius: 2px; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14), 0 6px 18px rgba(0, 0, 0, .25) }
-.plate::before, .plate::after { content: ''; position: absolute; top: -12px; width: 1px; height: 12px; background: rgba(230, 236, 234, .55) }
-.plate::before { left: 14px } .plate::after { right: 14px }
-.stop h1 { font-size: clamp(30px, 4.1vw, 58px); line-height: 1.04 }
-.stop h2 { font-size: clamp(24px, 2.9vw, 40px); line-height: 1.08 }
-.lead { font-size: clamp(16px, 1.25vw, 19px); color: #dfe7e5; max-width: 58ch }
-.btns { display: flex; flex-wrap: wrap; gap: 10px }
-.mono { font-family: var(--f-mono) }
+/* hotspots on the products in the film */
+.hots { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .25s; z-index: 1 }
+.hots.on { visibility: visible }
+.hot { position: absolute; transform: translate(-7px, -7px); display: flex; align-items: center; gap: 0; padding: 0; border: 0; background: none; cursor: pointer }
+.hot i { position: relative; width: 14px; height: 14px; background: var(--red); border: 2px solid var(--paper); flex: none }
+.hot i::before { content: ''; position: absolute; inset: -7px; border: 1px solid var(--paper); animation: ping 2s var(--ease) infinite }
+@keyframes ping { 0% { transform: scale(.5); opacity: 1 } 80%, 100% { transform: scale(1.5); opacity: 0 } }
+.hot .hl { display: flex; align-items: center; gap: 8px; margin-left: 8px; background: var(--paper); border: 1px solid var(--line); padding: 6px 9px 5px; font: 500 11px/1 var(--f-mono); letter-spacing: .05em; color: var(--ink); white-space: nowrap }
+.hot .hl em { font-style: normal; font-family: var(--f); font-size: 13px; letter-spacing: 0; max-width: 0; overflow: hidden; transition: max-width .45s var(--ease) }
+.hot .hl s { text-decoration: none; color: var(--red) }
+.hot:hover .hl em, .hot:focus-visible .hl em { max-width: 260px }
+.hot:hover .hl, .hot:focus-visible .hl { border-color: var(--ink) }
+.hot.flip { flex-direction: row-reverse; transform: translate(calc(-100% + 7px), -7px) }
+.hot.flip .hl { margin: 0 8px 0 0 }
 
-.glass { background: var(--glass); backdrop-filter: blur(10px) saturate(1.1); -webkit-backdrop-filter: blur(10px) saturate(1.1); box-shadow: inset 0 0 0 1px var(--line); border-radius: 6px }
-.row { display: flex; gap: 12px; flex-wrap: wrap; align-items: stretch }
-.chip { padding: 12px 16px; display: grid; gap: 2px; min-width: 150px }
-.chip .k { font: 500 11px/1.2 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
-.chip .v { font: 600 20px/1.15 var(--f-display) }
+#stops { position: absolute; inset: 0; pointer-events: none; z-index: 2 }
+.stop { position: absolute; inset: 0; opacity: 0; visibility: hidden }
+.stop.on .head, .stop.on .body { pointer-events: auto }
+.head { position: absolute; left: var(--pad); top: var(--pad); width: min(var(--hw, 600px), calc(100% - 2 * var(--pad))); background: var(--paper); border: 1px solid var(--line); padding: 18px 22px 20px; display: grid; gap: 10px; justify-items: start }
+.head::before { content: ''; position: absolute; left: -1px; top: -1px; width: 28px; height: 3px; background: var(--red) }
+.head h1 { font-size: clamp(28px, 2.8vw, 46px); line-height: 1.04; letter-spacing: -.03em }
+.head h2 { font-size: clamp(22px, 1.95vw, 32px); line-height: 1.1; letter-spacing: -.025em }
+.head .lead { font-size: clamp(14.5px, 1.02vw, 16.5px); line-height: 1.45; color: var(--ink-2); max-width: 58ch }
+.head .btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px }
+.w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .2em; margin-bottom: -.2em }
+.w > span { display: inline-block; transform: translateY(0); transition: transform .8s var(--ease); transition-delay: calc(var(--d, 0) * 45ms) }
+.split-wait .w > span { transform: translateY(110%) }
+.body { position: absolute; left: var(--pad); right: var(--pad); bottom: var(--pad) }
+.body.r { left: auto; width: min(var(--bw, 900px), calc(100% - 2 * var(--pad))) }
+.body.l { right: auto; width: min(var(--bw, 900px), calc(100% - 2 * var(--pad))) }
+.body.side { left: auto; width: clamp(320px, 26vw, 400px) }
+.panel { background: var(--paper); border: 1px solid var(--line); overflow: hidden }
+.cells { display: grid; grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); gap: 1px; background: var(--line) }
+.cells > * { background: var(--paper); min-width: 0 }
 
-.steps { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px }
-.step { padding: 14px 14px 16px; display: grid; gap: 6px; align-content: start }
-.step .n { font: 500 12px/1 var(--f-mono); color: var(--green-lt) }
-.step h3 { font: 600 15px/1.2 var(--f-body) }
-.step p { font-size: 13px; line-height: 1.4; color: var(--muted) }
+.fact { padding: 14px 18px 16px; display: grid; gap: 4px }
+.fact .v { font-size: clamp(18px, 1.5vw, 24px); font-weight: 600; letter-spacing: -.02em; line-height: 1.1 }
 
-.prods { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(170px, 1fr); gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 4px; scrollbar-width: thin }
-.prod { scroll-snap-align: start; overflow: hidden; display: grid; grid-template-rows: auto 1fr; text-decoration: none; transition: transform .2s }
-.prod:hover { transform: translateY(-3px) }
-.prod .im { aspect-ratio: 4 / 3; overflow: hidden; background: var(--ink-2) }
-.prod .im img { width: 100%; height: 100%; object-fit: cover; display: block }
-.prod .tx { padding: 10px 12px 12px; display: grid; gap: 4px; align-content: start }
-.prod .tx b { font: 600 13px/1 var(--f-display); letter-spacing: .06em; color: var(--green-lt) }
-.prod .tx span { font-size: 13.5px; line-height: 1.35; color: #e3eae8 }
+/* services: auto-sliding tabs */
+.usl { display: grid; grid-template-columns: minmax(200px, 250px) minmax(0, 1fr); --ush: clamp(168px, 25vh, 236px) }
+.utabs { display: grid; grid-template-rows: repeat(6, 1fr); height: calc(var(--ush) + 2px); padding: 6px 0; border-right: 1px solid var(--line) }
+.utab { position: relative; display: flex; align-items: center; gap: 12px; width: 100%; height: 100%; padding: 0 18px; border: 0; background: none; text-align: left; cursor: pointer; color: var(--muted); font: 500 14.5px/1.2 var(--f) }
+.utab .n { font: 500 11px/1 var(--f-mono) }
+.utab:hover { color: var(--ink) }
+.utab[aria-selected="true"] { color: var(--ink); background: var(--bg) }
+.utab[aria-selected="true"] .n { color: var(--red) }
+.utab .pr { position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--line); opacity: 0 }
+.utab[aria-selected="true"] .pr { opacity: 1 }
+.utab .pr b { display: block; width: 100%; height: 0; background: var(--red) }
+.uslides { position: relative; height: calc(var(--ush) + 2px) }
+.uslide { position: absolute; inset: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 22px; padding: 12px; opacity: 0; visibility: hidden; transition: opacity .5s, visibility .5s }
+.uslide.on { opacity: 1; visibility: visible }
+.uslide .ph { position: relative; height: calc(var(--ush) - 22px); aspect-ratio: 4 / 3; overflow: hidden }
+.uslide img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.06); transition: transform 6s linear }
+.uslide.on img { transform: scale(1) }
+.utx { display: grid; align-content: center; gap: 9px; padding-right: 12px; min-width: 0 }
+.utx h3 { font-size: clamp(19px, 1.5vw, 24px); line-height: 1.15 }
+.utx p { font-size: 14.5px; line-height: 1.45; color: var(--ink-2); max-width: 52ch }
 
-.gauges { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; max-width: 980px }
-.gauge { padding: 14px 16px 16px; display: grid; gap: 4px; align-content: start }
-.gauge svg { width: 110px; height: auto; display: block }
-.gauge b { font: 700 30px/1 var(--f-display); font-variant-numeric: tabular-nums }
-.gauge span { font-size: 13.5px; color: var(--muted); line-height: 1.35 }
+/* catalog in the film */
+.cat { --n: 7; grid-template-columns: repeat(6, minmax(0, 1fr)) minmax(0, 1.1fr) }
+.pcard { position: relative; display: grid; gap: 7px; align-content: start; padding: 10px 10px 12px; border: 0; text-align: left; cursor: pointer; transition: background-color .25s }
+.pcard:hover { background: var(--bg) }
+.pcard .im { position: relative; height: clamp(78px, 12.5vh, 136px); overflow: hidden; background: var(--bg) }
+.pcard .im img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s var(--ease) }
+.pcard:hover .im img { transform: scale(1.06) }
+.pcard .im .b3d { right: 6px; top: 6px }
+.pcard .s { font: 500 11px/1 var(--f-mono); color: var(--red); letter-spacing: .06em; margin-top: 2px }
+.pcard b { font-size: 14.5px; line-height: 1.2; font-weight: 600 }
+.pcard .d { font-size: 12.5px; line-height: 1.35; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden }
+.also { padding: 12px 14px; display: grid; align-content: start; gap: 2px }
+.also .eb { margin-bottom: 6px }
+.also button { display: flex; justify-content: space-between; gap: 8px; padding: 5px 0; border: 0; border-bottom: 1px solid var(--line); background: none; text-align: left; font-size: 13px; line-height: 1.25; cursor: pointer }
+.also button:hover { color: var(--green) }
 
-.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; max-width: 1080px }
-.cell { padding: 14px 16px; display: grid; gap: 4px; align-content: start }
-.cell h3 { font: 600 15.5px/1.25 var(--f-body) }
-.cell p { font-size: 13.5px; line-height: 1.4; color: var(--muted) }
-.cell .k { font: 500 11px/1.2 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--green-lt) }
+/* numbers */
+.stats { --n: 5 }
+.stat { padding: 16px 20px 18px; display: grid; gap: 6px; align-content: start }
+.stat b { font-size: clamp(36px, 3.5vw, 60px); line-height: .95; font-weight: 600; letter-spacing: -.04em; font-variant-numeric: tabular-nums }
+.stat b small { font-size: .4em; letter-spacing: 0; color: var(--muted); margin-left: 4px; font-weight: 500 }
+.stat > span:last-child { font-size: 14px; line-height: 1.35; color: var(--ink-2) }
+.statcta { padding: 16px 20px 18px; display: grid; align-content: space-between; gap: 12px }
+.statcta p { font-size: 14px; color: var(--ink-2); line-height: 1.4 }
 
-.warranty { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 24px; align-items: center; padding: 18px 22px; max-width: 920px }
-.warranty .big { font: 700 72px/0.9 var(--f-display); color: var(--red) }
-.warranty .big small { display: block; font: 600 16px/1 var(--f-display); letter-spacing: .1em; color: var(--fg); margin-top: 6px }
-.warranty p { color: #d9e2e0; font-size: 15px; max-width: 52ch }
-.warranty .stamp { width: 118px }
+/* advantages */
+.adv-p { --n: 6 }
+.adv { padding: 14px 16px 16px; display: grid; gap: 7px; align-content: start; transition: background-color .25s }
+.adv:hover { background: var(--bg) }
+.adv .n { display: flex; align-items: center; gap: 8px; font: 500 11px/1 var(--f-mono); color: var(--red) }
+.adv .n::after { content: ''; width: 18px; height: 1px; background: var(--red); transition: width .4s var(--ease) }
+.adv:hover .n::after { width: 36px }
+.adv h3 { font-size: 15.5px; line-height: 1.2; letter-spacing: -.01em }
+.adv p { font-size: 13px; line-height: 1.4; color: var(--muted) }
 
-.form { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.2fr) auto; gap: 10px; align-items: end; padding: 16px; max-width: 1080px }
+/* warranty + first CTA: a column on the right, the gauge and the stand stay in view */
+.cta1 { position: relative; display: grid; gap: 14px; padding: 18px 20px 16px }
+.cta1 .stamp { width: clamp(84px, 7vw, 108px); position: absolute; right: 16px; top: 14px; animation: spin 40s linear infinite }
+@keyframes spin { to { transform: rotate(360deg) } }
+.cta1 h3 { font-size: clamp(19px, 1.45vw, 23px); line-height: 1.15; padding-right: clamp(92px, 7.6vw, 116px) }
+.cta1 > div { display: grid; gap: 10px; min-width: 0 }
+.cta1 .sub { padding-right: clamp(92px, 7.6vw, 116px); font-size: 14px; color: var(--ink-2) }
+.cta1 form { display: grid; grid-template-columns: minmax(0, 1fr); gap: 9px }
+.cta1 form .btn { width: 100% }
+.cta1 .field input, .cta1 .field select { height: 42px }
+@media (max-height: 700px) and (min-width: 761px) { .cta1 .f-e { display: none } }
+
+/* ---------- forms ---------- */
 .field { display: grid; gap: 6px; min-width: 0 }
-.field label { font: 500 11px/1.2 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
-.field input, .field select { height: 46px; border-radius: 4px; border: 0; padding: 0 12px; background: rgba(255, 255, 255, .08); box-shadow: inset 0 0 0 1px var(--line); width: 100%; min-width: 0 }
-.field select option { background: var(--ink-2); color: var(--fg) }
-.form .note, .done { grid-column: 1 / -1; font-size: 13px; color: var(--muted) }
-.done { color: var(--green-lt) }
+.field label, .fl { font: 500 10.5px/1.2 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+.field input, .field select, .field textarea { width: 100%; min-width: 0; height: 46px; padding: 0 13px; border: 1px solid var(--line-2); background: var(--paper); font: 400 15px/1.3 var(--f); color: var(--ink); appearance: none; -webkit-appearance: none }
+.field select { background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%); background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 32px }
+.field textarea { height: 116px; padding: 12px 13px; resize: vertical }
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--green); outline: none }
+.field input::placeholder, .field textarea::placeholder { color: #98a4a1 }
+.field input[type="file"] { padding: 11px 13px; height: auto; font-size: 13.5px }
+.consent { display: flex; gap: 9px; align-items: flex-start; font-size: 12.5px; line-height: 1.4; color: var(--muted); grid-column: 1 / -1 }
+.consent button { background: none; border: 0; padding: 0; color: var(--green); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; font-size: inherit }
+.note { grid-column: 1 / -1; font-size: 12.5px; color: var(--muted); min-height: 1.4em }
+.note.done { color: var(--green) }
+.note.err { color: var(--red-dk) }
 
-.cases { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(250px, 1fr); gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; max-width: 1180px; scrollbar-width: thin }
-.case { scroll-snap-align: start; display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 12px; padding: 12px; align-items: start }
-.case img { width: 92px; height: 92px; object-fit: cover; border-radius: 4px; display: block }
-.case b { display: block; font-size: 14px; line-height: 1.3 }
-.case p { font-size: 13px; color: var(--muted); line-height: 1.35; margin-top: 3px }
-.params { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px }
-.params span { font: 500 11.5px/1 var(--f-mono); padding: 5px 7px; border-radius: 3px; background: rgba(75, 184, 174, .14); color: #cdeeea; white-space: nowrap }
+/* ---------- sections after the flight ---------- */
+.sec { padding-block: clamp(72px, 9vw, 132px); padding-inline: var(--gut); border-top: 1px solid var(--line) }
+.wrap { max-width: 1320px; margin: 0 auto }
+.sh { display: flex; align-items: center; gap: 14px; margin-bottom: clamp(28px, 4vw, 52px) }
+.sh::after { content: ''; flex: 1; height: 1px; background: var(--line) }
+.sh .idx { font: 500 11.5px/1 var(--f-mono); color: var(--muted); letter-spacing: .06em; order: 3 }
+.st { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 20px 56px; align-items: end; margin-bottom: clamp(36px, 5vw, 64px) }
+.st h2 { font-size: clamp(32px, 4.4vw, 66px); line-height: 1.02; letter-spacing: -.035em }
+.st p { font-size: clamp(16px, 1.15vw, 18px); line-height: 1.5; color: var(--ink-2); max-width: 46ch }
 
-.contacts { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 12px; max-width: 1080px }
-.clist { padding: 16px 18px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px }
-.clist div { display: grid; gap: 2px; min-width: 0 }
-.clist .k { font: 500 11px/1.2 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
-.clist .v { font-size: 15px; font-weight: 500; overflow-wrap: anywhere; user-select: all }
-.clist .v.mono { font-size: 15.5px; white-space: nowrap; overflow-wrap: normal }
-.copy { justify-self: start; margin-top: 2px; background: none; border: 0; padding: 0; font: 500 12px/1.2 var(--f-mono); color: var(--green-lt); cursor: pointer; text-decoration: underline; text-underline-offset: 3px }
-.mini { padding: 16px; display: grid; gap: 10px; align-content: start }
+.tgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line) }
+.tcell { position: relative; background: var(--paper); padding: clamp(22px, 2.4vw, 34px); display: grid; gap: 10px; align-content: start; min-height: 230px; overflow: hidden }
+.tcell::after { content: ''; position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease) }
+.tcell:hover::after { transform: scaleX(1) }
+.tcell .v { font-size: clamp(30px, 3vw, 46px); font-weight: 600; line-height: 1; letter-spacing: -.035em; color: var(--green); margin-top: clamp(18px, 3vw, 44px) }
+.tcell p { font-size: 15px; line-height: 1.5; color: var(--ink-2); max-width: 40ch }
+.flow { margin-top: clamp(40px, 5vw, 72px); display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; position: relative; --fp: 0 }
+.flow::before, .flow::after { content: ''; position: absolute; left: 0; right: 0; top: 7px; height: 1px; background: var(--line-2) }
+.flow::after { height: 2px; top: 6px; background: var(--red); transform-origin: left; transform: scaleX(var(--fp)) }
+.flow li { position: relative; display: grid; gap: 8px; align-content: start; padding-top: 30px; opacity: .45; transition: opacity .4s }
+.flow li.on { opacity: 1 }
+.flow li::before { content: ''; position: absolute; left: 0; top: 0; width: 15px; height: 15px; background: var(--bg); border: 1px solid var(--green); z-index: 1; transition: background-color .3s, border-color .3s }
+.flow li.on::before { background: var(--red); border-color: var(--red) }
+.flow .k { font: 500 11px/1.2 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--green) }
+.flow b { font-size: 16px; line-height: 1.25; font-weight: 600 }
+.flow span { font-size: 13.5px; line-height: 1.4; color: var(--muted) }
 
-/* route rail */
-.rail { position: absolute; right: var(--gut); top: calc(var(--hdr) + env(safe-area-inset-top, 0px) + 18px); bottom: 26px; width: calc(var(--rail) - 16px); display: grid; grid-template-rows: auto 1fr auto; gap: 14px; z-index: 5; padding: 14px 14px 12px; background: var(--glass); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 0 0 1px var(--line); border-radius: 6px }
-.odo { display: grid; gap: 2px; justify-items: end; text-align: right }
-.odo .k { font: 500 10.5px/1.2 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted) }
-.odo .v { font: 600 30px/1 var(--f-mono); font-variant-numeric: tabular-nums; letter-spacing: -.02em }
-.odo .v small { font-size: 14px; color: var(--muted); margin-left: 4px }
-.line { position: relative; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; justify-content: space-between }
-.line::before { content: ''; position: absolute; right: 5px; top: 6px; bottom: 6px; width: 2px; background: rgba(232, 240, 238, .18); border-radius: 1px }
-.line .fill { position: absolute; right: 5px; top: 6px; width: 2px; background: var(--red); border-radius: 1px; height: 0 }
-.line li { position: relative; display: flex; justify-content: flex-end; align-items: center; gap: 10px }
-.line button { display: flex; align-items: center; gap: 10px; background: none; border: 0; padding: 2px 0; cursor: pointer; text-align: right; color: #c3ceca }
-.line button:hover { color: var(--fg) }
-.line button .nm { font: 500 11px/1.15 var(--f-mono); letter-spacing: .06em; text-transform: uppercase }
-.line button .m { font: 400 10.5px/1 var(--f-mono); opacity: .75; font-variant-numeric: tabular-nums; min-width: 38px }
-.line button i { width: 12px; height: 12px; border-radius: 50%; background: var(--ink); box-shadow: inset 0 0 0 2px rgba(232, 240, 238, .45); flex: none; position: relative; z-index: 1 }
-.line li.past button i { background: var(--red); box-shadow: none }
-.line li.cur button { color: var(--fg) }
-.line li.cur button i { background: var(--fg); box-shadow: 0 0 0 4px rgba(232, 66, 55, .45) }
-.load { font: 500 11px/1.3 var(--f-mono); color: var(--muted); text-align: right; min-height: 1.3em }
-.load .bar { display: block; height: 2px; background: rgba(232, 240, 238, .16); margin-top: 6px; border-radius: 1px; overflow: hidden }
-.load .bar i { display: block; height: 100%; width: 0; background: var(--green-lt); transition: width .3s }
-.hint { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); font: 500 11px/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: rgba(241, 245, 244, .7); display: flex; gap: 10px; align-items: center; transition: opacity .3s; pointer-events: none }
-.hint i { width: 1px; height: 22px; background: currentColor; animation: drop 1.6s ease-in-out infinite }
-@keyframes drop { 0%, 100% { transform: scaleY(.3); transform-origin: top } 50% { transform: scaleY(1); transform-origin: top } }
+.ticker { overflow: hidden; border-top: 1px solid var(--line); background: var(--paper); padding-block: clamp(18px, 2.4vw, 30px) }
+.ticker .tt { display: flex; width: max-content; animation: run 48s linear infinite }
+.ticker:hover .tt { animation-play-state: paused }
+.ticker .tt > span { display: flex; align-items: center; gap: clamp(20px, 2.6vw, 40px); padding-right: clamp(20px, 2.6vw, 40px); font: 600 clamp(34px, 5vw, 76px)/1 var(--f); letter-spacing: -.04em; white-space: nowrap }
+.ticker .tt i { width: .3em; height: .3em; background: var(--red); flex: none }
+.ticker .tt em { font-style: normal; color: var(--green) }
+@keyframes run { to { transform: translateX(-50%) } }
 
-/* after the flight */
-.foot { padding-block: 56px 40px; padding-inline: var(--gut); background: var(--ink); border-top: 1px solid var(--line) }
-.foot .wrap { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.3fr) repeat(3, minmax(0, 1fr)); gap: 28px }
-.foot h3 { font: 600 12px/1.2 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px }
-.foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 14.5px }
-.foot a { text-decoration: none; opacity: .9 }
-.foot a:hover { text-decoration: underline }
-.foot .fine { grid-column: 1 / -1; font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 18px }
-.foot img { height: 40px; width: auto }
+/* 3D section */
+.v3 { display: grid; grid-template-columns: 240px minmax(0, 1fr) 320px; border: 1px solid var(--line); background: var(--paper) }
+.v3tabs { display: grid; align-content: start; border-right: 1px solid var(--line) }
+.v3tab { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 2px 8px; padding: 16px 18px; border: 0; border-bottom: 1px solid var(--line); background: none; text-align: left; cursor: pointer; position: relative; transition: background-color .2s }
+.v3tab .n { font: 500 11px/1.4 var(--f-mono); color: var(--muted); grid-row: span 2 }
+.v3tab b { font: 500 12px/1.2 var(--f-mono); letter-spacing: .06em; color: var(--red) }
+.v3tab span { font-size: 15px; line-height: 1.25; font-weight: 500 }
+.v3tab:hover { background: var(--bg) }
+.v3tab[aria-selected="true"] { background: var(--bg) }
+.v3tab[aria-selected="true"]::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--red) }
+.v3stage { position: relative; min-height: clamp(380px, 42vw, 600px); background: linear-gradient(var(--paper), #eef1ee); overflow: hidden }
+.v3stage .slot, .dw-stage .slot { position: absolute; inset: 0 }
+.v3stage canvas, .dw-stage canvas { display: block; width: 100%; height: 100%; cursor: grab }
+.v3stage canvas:active, .dw-stage canvas:active { cursor: grabbing }
+.v3stage .fb, .dw-stage .fb { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover }
+.v3msg { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: var(--paper); border: 1px solid var(--line); padding: 12px 16px; font: 500 12px/1.4 var(--f-mono); color: var(--ink-2); text-align: center; max-width: 80%; z-index: 2 }
+.v3bar { position: absolute; left: 14px; right: 14px; bottom: 14px; display: flex; align-items: center; gap: 8px; z-index: 2; pointer-events: none }
+.v3bar > * { pointer-events: auto }
+.v3bar .hint3 { margin-right: auto; font: 500 11px/1.3 var(--f-mono); color: var(--muted); letter-spacing: .04em; text-transform: uppercase; background: rgba(255, 255, 255, .86); padding: 6px 8px }
+.sq { width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid var(--line-2); background: var(--paper); cursor: pointer; font: 500 16px/1 var(--f-mono) }
+.sq:hover { border-color: var(--ink) }
+.sq:disabled { opacity: .35; cursor: default }
+.v3go { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2 }
+.v3spec { padding: 24px 24px 26px; display: grid; gap: 14px; align-content: start; border-left: 1px solid var(--line) }
+.v3spec h3 { font-size: 24px; line-height: 1.12 }
+.v3spec p { font-size: 14.5px; line-height: 1.5; color: var(--ink-2) }
+.parts { display: grid; gap: 0; counter-reset: p }
+.parts li { counter-increment: p; display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 14px; line-height: 1.35 }
+.parts li::before { content: counter(p, decimal-leading-zero); font: 500 11px/1.6 var(--f-mono); color: var(--red) }
+.v3spec .btns { display: grid; gap: 8px; margin-top: 6px }
 
-.filmbox { padding: 0; border: 0; background: var(--ink); width: min(1280px, calc(100vw - 32px)); max-width: none; border-radius: 6px; box-shadow: 0 30px 80px rgba(0, 0, 0, .6), inset 0 0 0 1px var(--line); color: var(--fg) }
-.filmbox::backdrop { background: rgba(4, 7, 6, .82) }
+/* online application */
+.cta2 { background: var(--green); color: #fff; border-top: 0 }
+.cta2 .sh .eb { color: rgba(255, 255, 255, .72) }
+.cta2 .sh .eb b, .cta2 .sh .idx { color: #fff }
+.cta2 .sh::after { background: rgba(255, 255, 255, .22) }
+.cta2 .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 620px); gap: clamp(32px, 5vw, 80px); align-items: start }
+.cta2 h2 { font-size: clamp(32px, 4.2vw, 62px); line-height: 1.02; letter-spacing: -.035em }
+.cta2 .lead2 { font-size: clamp(16px, 1.15vw, 18px); line-height: 1.5; color: rgba(255, 255, 255, .84); max-width: 46ch; margin-top: 20px }
+.ticks { display: grid; gap: 12px; margin-top: 32px }
+.ticks li { display: flex; gap: 14px; align-items: baseline; font-size: 16px }
+.ticks li::before { content: ''; flex: none; width: 10px; height: 10px; background: #fff; transform: translateY(-1px) }
+.wiz { background: var(--paper); color: var(--ink); border: 1px solid rgba(255, 255, 255, .2) }
+.wsteps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 1px solid var(--line) }
+.wsteps button { display: grid; gap: 4px; padding: 14px 16px 12px; border: 0; border-right: 1px solid var(--line); background: none; text-align: left; cursor: pointer; position: relative; color: var(--muted) }
+.wsteps button:last-child { border-right: 0 }
+.wsteps button .n { font: 500 11px/1 var(--f-mono) }
+.wsteps button span { font-size: 13.5px; font-weight: 500 }
+.wsteps button::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform .4s var(--ease) }
+.wsteps button.done, .wsteps button.cur { color: var(--ink) }
+.wsteps button.done::after, .wsteps button.cur::after { transform: scaleX(1) }
+.wsteps button.done .n { color: var(--green) }
+.wsteps button:disabled { cursor: default }
+.wpanes { padding: clamp(20px, 2.6vw, 30px) }
+.wpane { display: grid; gap: 16px; animation: fadein .35s both }
+.wpane h3 { font-size: 21px; line-height: 1.2 }
+.opts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line) }
+.opt { position: relative; display: grid; gap: 3px; padding: 12px 12px 12px 14px; background: var(--paper); cursor: pointer; transition: background-color .2s }
+.opt input { position: absolute; opacity: 0; pointer-events: none }
+.opt b { font: 500 11px/1 var(--f-mono); color: var(--red); letter-spacing: .06em }
+.opt span { font-size: 14px; line-height: 1.25; font-weight: 500 }
+.opt:hover { background: var(--bg) }
+.opt:has(input:checked) { background: var(--green-tint); box-shadow: inset 0 0 0 1px var(--green) }
+.opt:has(input:focus-visible) { outline: 2px solid var(--green); outline-offset: -2px }
+.opts.chips { grid-template-columns: repeat(3, minmax(0, 1fr)) }
+.opts:not(.chips) .opt:last-child { grid-column: 1 / -1 }
+.btn:disabled { opacity: .35; cursor: default; pointer-events: none }
+.wgrid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px }
+.wgrid .wide { grid-column: 1 / -1 }
+.wfoot { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px clamp(20px, 2.6vw, 30px); border-top: 1px solid var(--line) }
+.wfoot .cnt { font: 500 12px/1 var(--f-mono); color: var(--muted) }
+.wdone { display: grid; gap: 14px }
+.wdone dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8px 18px; margin: 0; padding: 14px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line) }
+.wdone dt { font: 500 10.5px/1.6 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+.wdone dd { margin: 0; font-size: 14.5px }
+
+/* industries */
+.itabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); border-bottom: 0; background: var(--paper) }
+.itab { display: grid; gap: 6px; padding: 18px 20px; border: 0; border-right: 1px solid var(--line); background: none; text-align: left; cursor: pointer; position: relative; transition: background-color .2s }
+.itab:last-child { border-right: 0 }
+.itab .n { font: 500 11px/1 var(--f-mono); color: var(--muted) }
+.itab span { font-size: clamp(16px, 1.3vw, 19px); font-weight: 600; letter-spacing: -.01em }
+.itab:hover { background: var(--bg) }
+.itab[aria-selected="true"] { background: var(--ink); color: #fff }
+.itab[aria-selected="true"] .n { color: rgba(255, 255, 255, .6) }
+.ipanel { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); border: 1px solid var(--line); background: var(--paper) }
+.ipanel .ph { position: relative; min-height: 420px; overflow: hidden; background: var(--bg) }
+.ipanel .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; animation: zoomin 1.2s var(--ease) both }
+@keyframes zoomin { from { transform: scale(1.08); opacity: .4 } }
+.ipanel .tx { padding: clamp(24px, 3vw, 44px); display: grid; gap: 18px; align-content: start; animation: fadein .45s both }
+.ipanel h3 { font-size: clamp(26px, 2.4vw, 38px); line-height: 1.08; letter-spacing: -.03em }
+.ipanel p { font-size: 16px; line-height: 1.55; color: var(--ink-2); max-width: 44ch }
+.ipanel .use { display: grid; gap: 0; border-top: 1px solid var(--line) }
+.ipanel .use button { display: flex; align-items: center; gap: 12px; padding: 12px 0; border: 0; border-bottom: 1px solid var(--line); background: none; text-align: left; cursor: pointer; font-size: 15px }
+.ipanel .use button b { font: 500 11px/1 var(--f-mono); color: var(--red); min-width: 70px; letter-spacing: .05em }
+.ipanel .use button em { margin-left: auto; font-style: normal; font: 500 11px/1 var(--f-mono); color: var(--muted) }
+.ipanel .use button:hover { color: var(--green) }
+
+/* projects */
+.cases-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 20px }
+.filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px }
+.fbtn { display: inline-flex; align-items: baseline; gap: 6px; padding: 9px 13px; border: 1px solid var(--line-2); background: var(--paper); font: 500 13.5px/1 var(--f); cursor: pointer }
+.fbtn sup { font: 500 10px/1 var(--f-mono); color: var(--muted) }
+.fbtn:hover { border-color: var(--ink) }
+.fbtn[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff }
+.fbtn[aria-pressed="true"] sup { color: rgba(255, 255, 255, .6) }
+.ctrl { display: flex; align-items: center; gap: 0; flex: none; border: 1px solid var(--line-2) }
+.ctrl .cnt { font: 500 13px/1 var(--f-mono); font-variant-numeric: tabular-nums; min-width: 82px; text-align: center; border-left: 1px solid var(--line-2); border-right: 1px solid var(--line-2); align-self: stretch; display: grid; place-items: center }
+.ctrl button { width: 48px; height: 46px; border: 0; background: var(--paper); display: grid; place-items: center; cursor: pointer }
+.ctrl button:hover:not(:disabled) { background: var(--bg) }
+.ctrl button:disabled { opacity: .35; cursor: default }
+.track { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 40px) / 3); gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; align-items: start }
+.track::-webkit-scrollbar { display: none }
+.case { scroll-snap-align: start; background: var(--paper); border: 1px solid var(--line); display: grid; grid-template-rows: auto 1fr; animation: fadein .4s both }
+.case .im { aspect-ratio: 16 / 10; background: var(--bg); overflow: hidden; position: relative }
+.case .im img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s var(--ease) }
+.case:hover .im img { transform: scale(1.04) }
+.case .im .n { position: absolute; left: 0; top: 0; background: var(--paper); padding: 8px 10px; font: 500 11.5px/1 var(--f-mono); letter-spacing: .06em }
+.case .tx { padding: 20px 22px 22px; display: grid; gap: 12px; align-content: start }
+.case h3 { font-size: 19px; line-height: 1.25; letter-spacing: -.015em }
+.case p { font-size: 14.5px; line-height: 1.45; color: var(--ink-2) }
+.case .more { justify-self: start; display: inline-flex; gap: 8px; align-items: center; font: 500 12px/1 var(--f-mono); letter-spacing: .04em; text-transform: uppercase; color: var(--green); background: none; border: 0; padding: 4px 0; cursor: pointer }
+.case .more i { font-style: normal; display: inline-block; transition: transform .3s }
+.case .more[aria-expanded="true"] i { transform: rotate(45deg) }
+.case dl { display: grid; grid-template-rows: 0fr; margin: 0; transition: grid-template-rows .4s var(--ease) }
+.case dl.open { grid-template-rows: 1fr }
+.case dl > div { overflow: hidden }
+.case dl .r { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 10px; padding: 7px 0; border-top: 1px solid var(--line); font-size: 14px }
+.case dl dt { font: 500 10.5px/1.6 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted) }
+.case dl dd { margin: 0 }
+.letters-h { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin: clamp(48px, 6vw, 80px) 0 20px; padding-top: 20px; border-top: 1px solid var(--line) }
+.letters-h h3 { font-size: clamp(22px, 2vw, 30px) }
+.letters-h p { font-size: 14.5px; color: var(--muted); max-width: 52ch }
+.letters { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px }
+.letter { margin: 0; display: grid; gap: 10px }
+.doc { aspect-ratio: 1 / 1.36; background: var(--paper); border: 1px solid var(--line); padding: 10% 11%; display: flex; flex-direction: column; gap: 7px; transition: border-color .2s, transform .4s var(--ease) }
+.letter:hover .doc { border-color: var(--line-2); transform: translateY(-4px) }
+.doc .lh { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14% }
+.doc .lh i { display: block; width: 34%; height: 9px; background: var(--line) }
+.doc .lh em { display: block; width: 22%; height: 5px; background: var(--line) }
+.doc .tt { align-self: center; font: 600 clamp(9px, .8vw, 12px)/1.2 var(--f); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 8% }
+.doc .ln { height: 4px; background: var(--bg) }
+.doc .sg { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end }
+.doc .sg i { width: 30%; height: 4px; background: var(--line) }
+.doc .sg b { width: 26%; aspect-ratio: 1; border-radius: 50%; border: 1.5px solid rgba(232, 66, 55, .5) }
+.letter figcaption { font-size: 13.5px; color: var(--muted) }
+
+/* FAQ */
+.faq { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 5vw, 80px); align-items: start }
+.faq .side { display: grid; gap: 20px; position: sticky; top: calc(var(--hdr) + 24px) }
+.faq .side h2 { font-size: clamp(32px, 4vw, 58px); line-height: 1.02; letter-spacing: -.035em }
+.faq .side p { color: var(--ink-2); max-width: 40ch }
+.qa { border-top: 1px solid var(--ink) }
+.qa li { border-bottom: 1px solid var(--line) }
+.qa button { display: grid; grid-template-columns: 40px minmax(0, 1fr) 30px; gap: 12px; align-items: center; width: 100%; padding: 20px 0; border: 0; background: none; text-align: left; cursor: pointer; font: 600 clamp(17px, 1.4vw, 21px)/1.3 var(--f); letter-spacing: -.01em }
+.qa button .n { font: 500 11.5px/1 var(--f-mono); color: var(--muted) }
+.qa button .pm { position: relative; width: 30px; height: 30px; border: 1px solid var(--line-2) }
+.qa button .pm::before, .qa button .pm::after { content: ''; position: absolute; left: 50%; top: 50%; width: 12px; height: 1.5px; background: var(--ink); transform: translate(-50%, -50%); transition: transform .3s var(--ease) }
+.qa button .pm::after { transform: translate(-50%, -50%) rotate(90deg) }
+.qa button[aria-expanded="true"] .pm { background: var(--ink); border-color: var(--ink) }
+.qa button[aria-expanded="true"] .pm::before, .qa button[aria-expanded="true"] .pm::after { background: #fff }
+.qa button[aria-expanded="true"] .pm::after { transform: translate(-50%, -50%) rotate(0) }
+.qa button:hover { color: var(--green) }
+.qa .ans { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s var(--ease) }
+.qa .ans.open { grid-template-rows: 1fr }
+.qa .ans > div { overflow: hidden }
+.qa .ans p { padding: 0 42px 22px 52px; font-size: 16px; line-height: 1.55; color: var(--ink-2); max-width: 64ch }
+
+/* questions + contacts */
+.cgrid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 20px; align-items: start }
+.qform { background: var(--paper); border: 1px solid var(--line); padding: clamp(22px, 2.8vw, 38px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px }
+.qform h3 { grid-column: 1 / -1; font-size: 24px; line-height: 1.15 }
+.qform .sub { grid-column: 1 / -1; font-size: 15px; color: var(--ink-2); margin-top: -4px }
+.qform .wide, .qform .btn { grid-column: 1 / -1 }
+.qform .btn { justify-self: start }
+.cbox { background: var(--paper); border: 1px solid var(--line); padding: clamp(22px, 2.8vw, 38px); display: grid }
+.crow { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--line) }
+.crow:first-child { padding-top: 0 }
+.crow .k-mono { grid-column: 1 / -1 }
+.crow .v { font-size: 17px; font-weight: 500; user-select: all; overflow-wrap: anywhere; min-width: 0 }
+.crow .v.mono { font-size: 19px }
+.crow.big .v { font-size: clamp(24px, 2.3vw, 32px); letter-spacing: -.02em }
+.cbox .maps { margin-top: 18px; justify-self: start }
+
+/* gallery */
+.gal { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: clamp(150px, 16vw, 250px); grid-auto-flow: dense; gap: 12px }
+.gi { position: relative; overflow: hidden; background: var(--line); border: 0; padding: 0; cursor: zoom-in; display: block; animation: fadein .45s both }
+.gal:not(.flat) .gi.w { grid-column: span 2 }
+.gal:not(.flat) .gi.t { grid-row: span 2 }
+.gi img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s var(--ease) }
+.gi:hover img { transform: scale(1.04) }
+.gi .cap { position: absolute; left: 0; bottom: 0; max-width: 100%; background: var(--paper); padding: 7px 10px; font-size: 12.5px; line-height: 1.3; font-weight: 500; text-align: left; color: var(--ink); transform: translateY(100%); transition: transform .35s var(--ease) }
+.gi:hover .cap, .gi:focus-visible .cap { transform: none }
+.gi .gn { position: absolute; right: 0; top: 0; background: var(--paper); padding: 5px 7px; font: 500 10.5px/1 var(--f-mono) }
+
+/* footer */
+.foot { background: var(--paper); border-top: 1px solid var(--line); padding-block: clamp(48px, 6vw, 80px) calc(28px + env(safe-area-inset-bottom, 0px)); padding-inline: var(--gut) }
+.slogan { font: 600 clamp(36px, 6vw, 96px)/.98 var(--f); letter-spacing: -.045em; max-width: 14ch; margin-bottom: clamp(40px, 6vw, 80px) }
+.slogan em { font-style: normal; color: var(--green) }
+.fgrid { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(4, minmax(0, 1fr)); gap: 32px; padding-top: 32px; border-top: 1px solid var(--line) }
+.fabout { display: grid; gap: 16px; align-content: start; justify-items: start }
+.fabout img { height: 44px; width: auto }
+.fabout p { font-size: 14.5px; color: var(--ink-2); max-width: 36ch; line-height: 1.5 }
+.foot h4 { font: 500 10.5px/1.2 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px }
+.foot ul { display: grid; gap: 9px; font-size: 14.5px }
+.foot ul a, .foot ul button { text-decoration: none; background: none; border: 0; padding: 0; cursor: pointer; text-align: left; font-size: inherit }
+.foot ul a:hover, .foot ul button:hover { color: var(--green) }
+.foot .fc li { user-select: all }
+.fbot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px; margin-top: clamp(36px, 5vw, 64px); padding-top: 20px; border-top: 1px solid var(--line); font: 500 12px/1.5 var(--f-mono); color: var(--muted) }
+.fbot button { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 3px }
+
+/* dialogs, drawer, toast */
+dialog { border: 0; padding: 0; background: var(--paper); color: var(--ink); max-width: none }
+dialog::backdrop { background: rgba(15, 30, 29, .62) }
+.filmbox { width: min(1280px, calc(100vw - 32px)) }
 .filmbox video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #000 }
-.filmbox .x { position: absolute; top: 10px; right: 10px; min-height: 36px }
-@media (max-width: 1280px) {
-  .top nav { gap: 16px } .top nav a.x { display: none }
-  .steps { grid-template-columns: repeat(3, minmax(0, 1fr)) } .steps .step p { display: none }
+.dbar { display: flex; align-items: center; gap: 10px; padding: 12px 14px 12px 18px; border-top: 1px solid var(--line) }
+.dbar .t { flex: 1; font-size: 14.5px; font-weight: 500; min-width: 0 }
+.dbar .c { font: 500 12.5px/1 var(--f-mono); color: var(--muted); font-variant-numeric: tabular-nums }
+.lb { width: min(1200px, calc(100vw - 32px)) }
+.lb img { display: block; width: 100%; height: min(76vh, 820px); object-fit: contain; background: var(--bg) }
+.dw { margin: 0 0 0 auto; width: min(820px, 100vw); height: 100%; max-height: 100%; overflow-y: auto; overscroll-behavior: contain; border-left: 1px solid var(--line) }
+.dw[open] { animation: slidein .45s var(--ease) }
+@keyframes slidein { from { transform: translateX(40px); opacity: 0 } }
+.dw-top { position: sticky; top: 0; z-index: 3; display: flex; align-items: center; gap: 10px; padding: calc(12px + env(safe-area-inset-top, 0px)) 16px 12px 20px; background: var(--paper); border-bottom: 1px solid var(--line) }
+.dw-top .ix { font: 500 12px/1 var(--f-mono); color: var(--muted); min-width: 56px; text-align: center }
+.dw-modes { display: flex; border-bottom: 1px solid var(--line) }
+.dw-modes button { flex: 1; padding: 13px 16px; border: 0; border-right: 1px solid var(--line); background: var(--paper); font: 500 12px/1 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; cursor: pointer; color: var(--muted) }
+.dw-modes button:last-child { border-right: 0 }
+.dw-modes button[aria-pressed="true"] { background: var(--ink); color: #fff }
+.dw-stage { position: relative; aspect-ratio: 16 / 10; background: linear-gradient(var(--paper), #eef1ee); overflow: hidden }
+.dw-stage > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; animation: fadein .3s both }
+.dw-stage .cap { position: absolute; left: 0; bottom: 0; background: var(--paper); padding: 7px 10px; font-size: 13px; font-weight: 500; z-index: 2; display: flex; gap: 8px; align-items: center }
+.dw-stage .cap b { font: 500 10.5px/1 var(--f-mono); color: var(--red); letter-spacing: .06em }
+.dw-strip { display: flex; gap: 6px; padding: 10px 20px; overflow-x: auto; border-bottom: 1px solid var(--line); scrollbar-width: thin }
+.dw-strip button { flex: none; width: 92px; height: 58px; padding: 0; border: 1px solid transparent; background: var(--bg); cursor: pointer; opacity: .7; transition: opacity .2s }
+.dw-strip button img { width: 100%; height: 100%; object-fit: cover; display: block }
+.dw-strip button[aria-current="true"] { opacity: 1; border-color: var(--ink) }
+.dw-strip button:hover { opacity: 1 }
+.dw-body { padding: 24px 20px 32px; display: grid; gap: 18px }
+.dw-body h2 { font-size: clamp(26px, 3vw, 38px); line-height: 1.05; letter-spacing: -.03em }
+.dw-body > p { font-size: 16px; line-height: 1.55; color: var(--ink-2); max-width: 62ch }
+.dw-body .parts { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px }
+.dw-body .btns { display: flex; flex-wrap: wrap; gap: 10px }
+.toast { position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); z-index: 120; transform: translate(-50%, 16px); opacity: 0; pointer-events: none; background: var(--ink); color: #fff; padding: 12px 18px; font-size: 14px; max-width: calc(100vw - 32px); transition: opacity .25s, transform .25s }
+.toast.show { opacity: 1; transform: translate(-50%, 0) }
+
+/* reveal on scroll */
+.js [data-rv] { opacity: 0; transform: translateY(18px); transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: calc(var(--rd, 0) * 70ms) }
+.js [data-rv].in { opacity: 1; transform: none }
+
+/* ---------- smaller screens ---------- */
+@media (max-width: 1640px) { .nav .ni { display: none } }
+@media (max-width: 1360px) {
+  .nav .x { display: none }
+  .nav-a { padding: 0 8px } .nav-a::after { left: 8px; right: 8px }
+  .rsegs button .m { display: none }
 }
-@media (max-width: 1080px) {
-  :root { --rail: 0px }
-  .rail .line, .rail .load { display: none }
-  .rail { bottom: auto; width: auto; height: auto; top: calc(var(--hdr) + env(safe-area-inset-top, 0px) + 18px); padding: 10px 12px }
-  .top nav { display: none }
-  .gauges { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+@media (max-width: 1300px) { .hph { display: none } }
+@media (max-width: 1180px) {
+  .nav { display: none }
+  .cat { --n: 6; grid-template-columns: repeat(6, minmax(0, 1fr)) } .also { display: none }
+  .adv p { display: none }
+  .menu-in { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) }
+  .fgrid { grid-template-columns: repeat(3, minmax(0, 1fr)) } .fabout { grid-column: 1 / -1 }
+  .usl { grid-template-columns: 200px minmax(0, 1fr) }
+  .v3 { grid-template-columns: 200px minmax(0, 1fr) } .v3spec { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--line); grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 32px } .v3spec .parts { grid-row: span 4 }
+}
+@media (max-width: 980px) {
+  .hph { display: none }
+  .rsegs button .nm { display: none }
+  .st, .cta2 .grid, .cgrid, .faq { grid-template-columns: minmax(0, 1fr) }
+  .faq .side { position: static }
+  .tgrid { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  .flow { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 28px } .flow::before, .flow::after { display: none }
+  .track { grid-auto-columns: calc((100% - 20px) / 2) }
+  .letters { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  .mega-in { grid-template-columns: minmax(0, 1fr) } .mprods { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  .stats { --n: 2 } .stats .statcta { display: none }
+  .adv-p { --n: 3 }
+  .itabs { grid-template-columns: repeat(2, minmax(0, 1fr)) } .itab:nth-child(2) { border-right: 0 } .itab:nth-child(-n+2) { border-bottom: 1px solid var(--line) }
+  .ipanel { grid-template-columns: minmax(0, 1fr) } .ipanel .ph { min-height: 300px }
 }
 
-/* phones: the film takes the upper part of the screen, the block sits under it on solid ground */
+/* phones: the film takes the upper part of the screen, the stop sits under it on the light ground */
 @media (max-width: 760px) {
-  :root { --hdr: 56px; --filmh: 52svh }
-  .top { gap: 12px } .top .logo { height: 30px } .top .ph { display: none } .top .btn { min-height: 38px; padding: 0 14px; font-size: 13.5px }
+  :root { --hdr: 60px; --route: 38px; --frame: 8px; --filmh: 34svh }
+  .top { gap: 10px } .logo img { height: 32px }
+  .top .hcta { min-height: 40px; padding: 0 12px; font-size: 13.5px }
+  .hcta .lg { display: none } .hcta .sm { display: inline }
+  .burger { height: 40px; padding: 0 12px; font-size: 14px }
+  .route { gap: 12px }
+  .rsegs { gap: 4px; order: 2 } .rsegs button { display: none } .rsegs li { gap: 0 }
+  .rcur { display: block; order: 1; font: 500 11px/1 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; max-width: 42% }
+  .rcur b { color: var(--red); font-weight: 500 }
+  .odo { order: 3 } .odo .k { display: none } .odo b { font-size: 15px }
   .film { bottom: auto; height: var(--filmh) }
-  .scrim.t { height: 30% } .scrim.b { top: calc(var(--filmh) - 90px); bottom: auto; height: 90px; background: linear-gradient(to top, var(--ink), rgba(11, 17, 16, 0)) }
-  .rail { display: none }
-  .stop .head { position: absolute; top: calc(var(--filmh) - 4px); left: var(--gut); right: var(--gut); max-width: none; gap: 8px }
-  .stop .head .btns { display: none } .stop .head.keep .btns { display: flex } .stop .head.keep .btn-ghost { display: none }
-  .lead { font-size: 14px; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden }
-  .stop .head.keep .lead { display: none }
-  .stop .head::before { display: none }
-  .stop h1 { font-size: 26px } .stop h2 { font-size: 21px }
-  .plate { position: absolute; top: calc(-1 * var(--filmh) + var(--hdr) + env(safe-area-inset-top, 0px) + 22px); font-size: 10.5px; padding: 7px 10px 6px }
-  .stop .body { left: var(--gut); right: var(--gut); bottom: calc(14px + env(safe-area-inset-bottom, 0px)) }
-  .stop .body .row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px } .chip { min-width: 0; padding: 9px 12px } .chip .v { font-size: 15px }
-  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px } .step { padding: 10px 12px } .step h3 { font-size: 13.5px }
-  .prods { grid-auto-columns: 148px } .prod .tx span { font-size: 12.5px }
-  .gauges { gap: 6px } .gauge { padding: 10px 12px; grid-template-columns: auto 1fr; align-items: center; column-gap: 10px } .gauge svg { width: 54px; grid-row: span 2 } .gauge b { font-size: 20px } .gauge span { font-size: 12px }
-  .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px } .cell { padding: 10px 12px } .cell p { display: none } .cell h3 { font-size: 13.5px }
-  .warranty { grid-template-columns: auto minmax(0, 1fr); gap: 14px; padding: 14px } .warranty .big { font-size: 48px } .warranty .stamp { display: none } .warranty p { font-size: 13px }
-  .form { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); padding: 12px; gap: 8px } .form .field.wide { grid-column: 1 / -1 } .form .btn { grid-column: 1 / -1 } .field input, .field select { height: 42px }
-  .cases { grid-auto-columns: 260px } .case { grid-template-columns: 64px minmax(0, 1fr) } .case img { width: 64px; height: 64px }
-  .contacts { grid-template-columns: minmax(0, 1fr) } .contacts .mini { display: none } .clist { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px 14px; padding: 12px 14px } .clist .v { font-size: 13px } .clist .v.mono { font-size: 12.5px }
-  .hint { display: none }
-  .foot .wrap { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) } .foot .wrap > :first-child { grid-column: 1 / -1 }
+  .hint, .corner { display: none }
+  .hot .hl { padding: 4px 6px 3px; font-size: 10px; margin-left: 5px } .hot .hl em { display: none }
+  .hot.flip .hl { margin: 0 5px 0 0 }
+  .pre-top span { display: none } .pre-bot { flex-direction: column; align-items: stretch; gap: 14px } .pre-right { justify-items: stretch } .pre-cap { text-align: left } .pre-seg { grid-template-columns: repeat(20, minmax(0, 1fr)) }
+  .head, .stop .head { top: calc(var(--filmh) + 12px); left: 2px; right: 2px; width: auto; background: none; border: 0; padding: 0; gap: 6px }
+  .head::before { display: none }
+  .head h1 { font-size: 25px } .head h2 { font-size: 21px }
+  .head .lead { font-size: 14px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden }
+  .head.hero .lead { display: none }
+  .head .btns .btn { min-height: 42px; padding: 0 16px; font-size: 14px }
+  .head .btns .btn-line { display: none }
+  .body, .body.r, .body.l, .body.side { left: 0; right: 0; bottom: 0; width: auto }
+  .facts { --n: 2 } .fact { padding: 10px 12px } .fact .v { font-size: 16px }
+  .usl { grid-template-columns: minmax(0, 1fr); --ush: 112px }
+  .utabs { grid-template-rows: none; grid-auto-flow: column; grid-auto-columns: max-content; height: auto; padding: 0; border-right: 0; border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none }
+  .utab { height: 42px; padding: 0 10px; font-size: 13px; gap: 6px }
+  .utab .pr { left: 0; right: 0; top: auto; bottom: 0; width: auto; height: 2px } .utab .pr b { height: 100%; width: 0 }
+  .uslide { gap: 12px; padding: 10px }
+  .uslide .ph { height: calc(var(--ush) - 20px) }
+  .utx { gap: 4px; padding-right: 2px } .utx h3 { font-size: 16px } .utx p { font-size: 12.5px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden } .utx .tags, .utx .lnk, .utx .eb { display: none }
+  .cat { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none }
+  .cat .pcard { flex: none; width: 138px; scroll-snap-align: start; padding: 8px 8px 10px; gap: 5px }
+  .pcard .im { height: 84px } .pcard b { font-size: 13px } .pcard .d { font-size: 11.5px }
+  .stat { padding: 10px 12px 12px; gap: 3px } .stat b { font-size: 30px } .stat > span:last-child { font-size: 12px }
+  .adv-p { --n: 2 } .adv { padding: 10px 12px; gap: 4px } .adv h3 { font-size: 13.5px } .adv .n::after { display: none }
+  .cta1 { padding: 12px; gap: 8px } .cta1 .stamp, .cta1 h3, .cta1 .sub { display: none }
+  .cta1 form { grid-template-columns: minmax(0, 1fr) auto; align-items: end } .cta1 form .f-n, .cta1 form .f-e { display: none } .cta1 .field input { height: 42px } .cta1 form .btn { min-height: 42px; padding: 0 14px; width: auto }
+  .cta1 .consent { font-size: 11.5px }
+  .sec { padding-block: 64px }
+  .tgrid { grid-template-columns: minmax(0, 1fr) } .tcell { min-height: 0 } .tcell .v { margin-top: 10px }
+  .flow { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) }
+  .v3 { grid-template-columns: minmax(0, 1fr) }
+  .v3tabs { grid-auto-flow: column; grid-auto-columns: max-content; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--line); scrollbar-width: none }
+  .v3tab { border-bottom: 0; border-right: 1px solid var(--line); padding: 12px 14px } .v3tab .n { display: none } .v3tab { grid-template-columns: minmax(0, 1fr) }
+  .v3tab[aria-selected="true"]::before { left: 0; right: 0; top: auto; bottom: 0; width: auto; height: 3px }
+  .v3stage { min-height: 0; aspect-ratio: 4 / 3 }
+  .v3spec { grid-template-columns: minmax(0, 1fr); padding: 20px 16px 22px } .v3spec .parts { grid-row: auto }
+  .v3bar .hint3 { display: none }
+  .opts, .opts.chips { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  .wgrid { grid-template-columns: minmax(0, 1fr) }
+  .wsteps button { padding: 10px 8px } .wsteps button span { font-size: 11.5px }
+  .qform { grid-template-columns: minmax(0, 1fr) }
+  .itab { padding: 14px } .itab span { font-size: 15px }
+  .cases-top { align-items: flex-start; flex-direction: column }
+  .track { grid-auto-columns: 86%; gap: 12px }
+  .letters { gap: 12px }
+  .qa button { grid-template-columns: 30px minmax(0, 1fr) 30px; font-size: 16px; padding: 16px 0 } .qa .ans p { padding: 0 0 18px 42px; font-size: 15px }
+  .gal { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 150px; gap: 8px }
+  .gi .cap { display: none }
+  .menu-in { grid-template-columns: minmax(0, 1fr); gap: 32px }
+  .fgrid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) }
+  .dbar .t { font-size: 13px }
+  .dw-body .parts { grid-template-columns: minmax(0, 1fr) }
+  .dw-top .btn .sw { display: none }
 }
-@media (prefers-reduced-motion: reduce) { .prod, .btn, .film .poster { transition: none } .hint i { animation: none } }
+@media (prefers-reduced-motion: reduce) {
+  .pre, .uslide, .uslide img, .gi img, .film .poster, .toast, .w > span, .js [data-rv] { transition: none }
+  .hint i, .mega, .menu, .menu.open li, .menu.open .mcon .row, .ticker .tt, .cta1 .stamp, .hot i::before, .dw[open], .gi, .case, .ipanel .ph img, .ipanel .tx, .wpane { animation: none }
+  .js [data-rv] { opacity: 1; transform: none }
+}
 </style>
 </head>
 <body>
-<header class="top">
+<div class="pre" id="pre" role="status" aria-live="polite" aria-label="Загрузка страницы">
+  <div class="pre-top"><img src="img/logo.png" alt="Завод ВОЛГА" width="480" height="167"><span class="eb">// Самара · с 2020 года</span></div>
+  <div class="pre-mid"><span class="eb"><b>//</b> Подождите <b>//</b> загружаем цех</span><p class="pre-line" id="preLine">Свариваем обвязку теплового пункта</p><div class="pre-log" id="preLog"></div></div>
+  <div class="pre-bot"><span class="pre-num"><span id="preNum">0</span><small>%</small></span><div class="pre-right"><div class="pre-seg" id="preSeg"></div><span class="pre-cap">Загружаем кадры цеха, чтобы камера ехала без рывков</span></div></div>
+</div>
+
+<header class="top" id="top">
   <a class="logo" href="#s1" data-jump="0" aria-label="Завод ВОЛГА, в начало"><img src="img/logo.png" alt="Завод ВОЛГА" width="480" height="167"></a>
-  <nav aria-label="Разделы">
-    <a href="#s3" data-jump="2">Каталог</a>
-    <a href="#s2" data-jump="1">Услуги</a>
-    <a href="#s7" data-jump="6">Условия</a>
-    <a href="#s9" data-jump="8" class="x">Проекты</a>
-    <a href="#s10" data-jump="9">Контакты</a>
+  <nav class="nav" aria-label="Главное меню">
+    <button class="nav-a" type="button" id="megaBtn" aria-expanded="false" aria-controls="mega"><span class="ni">01_</span>Каталог <svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+    <a class="nav-a" href="#s2" data-jump="1"><span class="ni">02_</span>Услуги</a>
+    <a class="nav-a" href="#v3d"><span class="ni">03_</span>3D</a>
+    <a class="nav-a" href="#s4" data-jump="3"><span class="ni">04_</span>О компании</a>
+    <a class="nav-a" href="#terms"><span class="ni">05_</span>Условия</a>
+    <a class="nav-a" href="#cases"><span class="ni">06_</span>Проекты</a>
+    <a class="nav-a x" href="#faq"><span class="ni">07_</span>Вопросы</a>
+    <a class="nav-a" href="#contacts"><span class="ni">08_</span>Контакты</a>
   </nav>
   <span class="sp"></span>
-  <span class="ph" id="hdrPhone"></span>
-  <a class="btn btn-red" href="#s8" data-jump="7">Расчёт за 1 день</a>
+  <div class="hph"><span class="k" id="hdrHours"></span><span class="v" id="hdrPhone"></span></div>
+  <a class="btn btn-red hcta" href="#s6" data-cta><span class="lg">Рассчитать за 1 день</span><span class="sm">Расчёт</span></a>
+  <button class="burger" type="button" id="menuBtn" aria-expanded="false" aria-controls="menu"><span class="bl" aria-hidden="true"><i></i><i></i></span><span id="menuTxt">Меню</span></button>
 </header>
 
-<main id="tour">
-  <div class="stage" id="stage">
-    <div class="film" id="film">
-      <img class="poster" id="poster" src="frames3/stills/s1.webp" alt="Цех Завода ВОЛГА: зона сборки с тепловым пунктом и насосной станцией">
-      <canvas id="cv" aria-hidden="true"></canvas>
-    </div>
-    <div class="scrim t"></div><div class="scrim b"></div>
-    <div id="stops"></div>
-    <aside class="rail" aria-label="Маршрут по заводу">
-      <div class="odo"><span class="k">Пройдено по маршруту</span><span class="v"><span id="odo">0</span><small>м</small></span><span class="k" id="odoOf">из 756 м</span></div>
-      <ol class="line" id="line"><span class="fill" id="fill"></span></ol>
-      <div class="load" id="load"></div>
-    </aside>
-    <div class="hint" id="hint"><i></i>Листайте, чтобы пройти по заводу</div>
+<div class="mega" id="mega" hidden>
+  <div class="mega-in">
+    <div class="mprods" id="mprods"></div>
+    <div class="malso" id="malso"></div>
   </div>
-</main>
+</div>
 
-<dialog class="filmbox" id="filmbox" aria-label="Видео цеха целиком">
-  <video id="filmv" controls playsinline preload="none" poster="frames3/stills/s1.webp"><source src="film.mp4" type="video/mp4"></video>
-  <button class="btn btn-ghost x" type="button" id="filmx">Закрыть</button>
-</dialog>
+<div class="menu" id="menu" hidden>
+  <div class="menu-in">
+    <div><span class="eb mk"><b>//</b> Продукция</span><ol class="mbig" id="mProd"></ol></div>
+    <div><span class="eb mk"><b>//</b> Главная по разделам</span><ol class="msm" id="mSecs"></ol></div>
+    <div><span class="eb mk"><b>//</b> Компания</span><ul class="msm" id="mComp"></ul></div>
+    <div><span class="eb mk"><b>//</b> Связаться</span><div class="mcon" id="mCon"></div></div>
+  </div>
+  <div class="menu-bot"><span>© 2026 Завод ВОЛГА</span><span>Производство в Самаре · доставка по всей России</span></div>
+</div>
+
+<main>
+  <section class="tour" id="tour" aria-label="Пролёт по цеху">
+    <div class="stage" id="stage">
+      <div class="route" aria-label="Маршрут по заводу">
+        <span class="rcur" id="rcur"></span>
+        <ol class="rsegs" id="rsegs"></ol>
+        <div class="odo"><span class="k">Пройдено</span><b id="odo">0</b><span class="k" id="odoOf"></span></div>
+      </div>
+      <div class="frame">
+        <div class="film" id="film">
+          <img class="poster" id="poster" src="frames3/stills/s1.webp" alt="Цех Завода ВОЛГА: зона сборки с тепловым пунктом и насосной станцией">
+          <canvas id="cv" aria-hidden="true"></canvas>
+          <div id="hotsWrap"></div>
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div class="hint" id="hint"><i></i>Листайте: камера поедет по цеху</div>
+        </div>
+        <div id="stops"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="terms" aria-labelledby="terms-h">
+    <div class="wrap">
+      <div class="sh"><span class="eb"><b>07_</b> Условия работы</span><span class="idx">07 / 14</span></div>
+      <div class="st"><h2 id="terms-h" data-split>Понятные сроки на каждом этапе</h2><p data-rv>Отгружаем из Самары готовые блоки, на объекте остаётся подключить их к сетям. Сроки и гарантию фиксируем в договоре.</p></div>
+      <div class="tgrid" id="tgrid"></div>
+      <ol class="flow" id="flow" aria-label="Как проходит заказ"></ol>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true"><div class="tt" id="ticker"></div></div>
+
+  <section class="sec" id="v3d" aria-labelledby="v3d-h">
+    <div class="wrap">
+      <div class="sh"><span class="eb"><b>08_</b> Изделия в 3D</span><span class="idx">08 / 14</span></div>
+      <div class="st"><h2 id="v3d-h" data-split>Покрутите оборудование со всех сторон</h2><p data-rv>Модели собраны по фотографиям наших изделий. Так же до изготовления мы показываем заказчику 3D-модель узла и расстановку оборудования.</p></div>
+      <div class="v3" data-rv>
+        <div class="v3tabs" role="tablist" aria-label="Изделия" id="v3tabs"></div>
+        <div class="v3stage" id="v3stage"><img class="fb" id="v3fb" src="img3d/btp-hero.webp" alt=""><div class="slot" id="v3slot"></div><div class="v3msg" id="v3msg" hidden></div>
+          <button class="btn btn-ink v3go" type="button" id="v3go" hidden>Крутить 3D-модель</button>
+          <div class="v3bar"><span class="hint3">Зажмите и ведите, чтобы вращать</span><button class="sq" type="button" id="v3zo" aria-label="Отдалить">−</button><button class="sq" type="button" id="v3zi" aria-label="Приблизить">+</button><button class="sq" type="button" id="v3rs" aria-label="Сбросить вид">↺</button></div></div>
+        <div class="v3spec" id="v3spec"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec cta2" id="cta2" aria-labelledby="cta2-h">
+    <div class="wrap">
+      <div class="sh"><span class="eb"><b>09_</b> Онлайн-заявка на расчёт</span><span class="idx">09 / 14</span></div>
+      <div class="grid">
+        <div>
+          <h2 id="cta2-h" data-split>Рассчитаем стоимость за 1 день</h2>
+          <p class="lead2" data-rv>Ответьте на четыре вопроса или приложите опросный лист: уточним параметры объекта и предложим несколько вариантов комплектации.</p>
+          <ul class="ticks" data-rv><li>Расчёт за 1 день</li><li>Изготовление до 6 недель</li><li>Гарантия 5 лет на всё изделие</li><li>Доставка по всей России</li></ul>
+        </div>
+        <div class="wiz" id="wiz" data-rv></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="objects" aria-labelledby="objects-h">
+    <div class="wrap">
+      <div class="sh"><span class="eb"><b>10_</b> Для каких объектов</span><span class="idx">10 / 14</span></div>
+      <div class="st"><h2 id="objects-h" data-split>Оборудование под задачу объекта</h2><p data-rv>Жилой дом, склад, школа или посёлок: подбираем состав оборудования под назначение здания и параметры сетей.</p></div>
+      <div data-rv><div class="itabs" role="tablist" aria-label="Типы объектов" id="itabs"></div><div class="ipanel" id="ipanel" role="tabpanel"></div></div>
+    </div>
+  </section>
+
+  <section class="sec" id="cases" aria-labelledby="cases-h">
+    <div class="wrap">
+      <div class="sh"><span class="eb"><b>11_</b> Проекты и благодарственные письма</span><span class="idx">11 / 14</span></div>
+      <div class="st"><h2 id="cases-h" data-split>Оборудование уже работает на объектах</h2><p data-rv>Тепловые пункты и насосные станции для жилых комплексов, складов и общественных зданий.</p></div>
+      <div class="cases-top"><div class="filters" id="cFilt" style="margin:0"></div>
+        <div class="ctrl"><button type="button" id="cPrev" aria-label="Предыдущий проект"><svg width="16" height="12" viewBox="0 0 16 12" aria-hidden="true"><path d="M6 1L1 6l5 5M1 6h14" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button><span class="cnt" id="cCnt">01 / 04</span><button type="button" id="cNext" aria-label="Следующий проект"><svg width="16" height="12" viewBox="0 0 16 12" aria-hidden="true"><path d="M10 1l5 5-5 5M15 6H1" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
+      </div>
+      <div class="track" id="track"></div>
+      <div class="letters-h"><h3>Благодарственные письма</h3><p>Место для сканов писем от заказчиков: завод пришлёт их, и мы поставим сюда с увеличением по клику.</p></div>
+      <div class="letters" id="letters"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="faq" aria-labelledby="faq-h">
+    <div class="wrap">
+      <div class="sh"><span class="eb"><b>12_</b> Частые вопросы</span><span class="idx">12 / 14</span></div>
+      <div class="faq">
+        <div class="side"><h2 id="faq-h" data-split>Отвечаем на частые вопросы</h2><p data-rv>Не нашли ответ? Задайте вопрос, ответим в рабочее время.</p><a class="btn btn-ink" href="#contacts" data-rv>Задать свой вопрос <span class="ar">→</span></a></div>
+        <ol class="qa" id="qa"></ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="contacts" aria-labelledby="contacts-h">
+    <div class="wrap">
+      <div class="sh"><span class="eb"><b>13_</b> Остались вопросы и контакты</span><span class="idx">13 / 14</span></div>
+      <div class="st"><h2 id="contacts-h" data-split>Ответим на вопросы по вашему объекту</h2><p data-rv>Напишите вопрос или позвоните в отдел продаж. Если есть проект или опросный лист, приложите его к онлайн-заявке.</p></div>
+      <div class="cgrid" data-rv>
+        <form class="qform" id="ask" novalidate></form>
+        <div class="cbox" id="cbox"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="gallery" aria-labelledby="gallery-h">
+    <div class="wrap">
+      <div class="sh"><span class="eb"><b>14_</b> Галерея</span><span class="idx">14 / 14</span></div>
+      <div class="st"><h2 id="gallery-h" data-split>Цех и объекты</h2><p data-rv>Фотографии с производства в Самаре и с объектов, где работает наше оборудование. Нажмите на фото, чтобы увеличить.</p></div>
+      <div class="filters" id="gFilt"></div>
+      <div class="gal" id="gal"></div>
+    </div>
+  </section>
+</main>
 
 <footer class="foot">
   <div class="wrap">
-    <div><img src="img/logo.png" alt="Завод ВОЛГА" width="480" height="167"><p style="margin-top:12px;color:var(--muted);font-size:14px;max-width:38ch">Проектируем и собираем тепловые пункты, насосные станции и шкафы управления в Самаре. Доставляем по всей России.</p></div>
-    <div><h3>Оборудование</h3><ul><li><a href="#s3" data-jump="2">Блочные тепловые пункты</a></li><li><a href="#s3" data-jump="2">Блочно-модульные БТП</a></li><li><a href="#s3" data-jump="2">Насосные станции АНС</a></li><li><a href="#s3" data-jump="2">Канализационные КНС</a></li><li><a href="#s3" data-jump="2">Шкафы управления</a></li><li><a href="#s3" data-jump="2">Котельные</a></li></ul></div>
-    <div><h3>Компания</h3><ul><li><a href="#s2" data-jump="1">Услуги</a></li><li><a href="#s7" data-jump="6">Условия работы</a></li><li><a href="#s9" data-jump="8">Проекты и письма</a></li><li><a href="#s4" data-jump="3">О заводе в цифрах</a></li></ul></div>
-    <div><h3>Связаться</h3><ul id="footContacts"></ul></div>
-    <p class="fine">Демоверсия главной страницы. Видео собрано из роликов, сгенерированных по сцене цеха: пролёт от изделий к складу, отгрузка и улица появятся, когда будут готовы их ролики. Заявки с этой страницы не отправляются.</p>
+    <p class="slogan" data-split>Собираем на заводе. <em>Подключаете на объекте.</em></p>
+    <div class="fgrid">
+      <div class="fabout"><img src="img/logo.png" alt="Завод ВОЛГА" width="480" height="167"><p>Проектируем и собираем тепловые пункты, насосные станции, шкафы управления и котельные в Самаре. Доставляем по всей России.</p><a class="btn btn-red" href="#cta2">Рассчитать за 1 день <span class="ar">→</span></a></div>
+      <div><h4>// Продукция</h4><ul id="fProd"></ul></div>
+      <div><h4>// Компания</h4><ul id="fComp"></ul></div>
+      <div><h4>// Покупателям</h4><ul id="fBuy"></ul></div>
+      <div><h4>// Контакты</h4><ul class="fc" id="fCon"></ul></div>
+    </div>
+    <div class="fbot"><span>© 2026 Завод ВОЛГА. Демоверсия главной: заявки не отправляются.</span><span><button type="button" data-soon>Политика конфиденциальности</button></span></div>
   </div>
 </footer>
 
+<dialog class="filmbox" id="filmbox" aria-label="Видео цеха целиком">
+  <video id="filmv" controls playsinline preload="none" poster="frames3/stills/s1.webp"><source src="film.mp4" type="video/mp4"></video>
+  <div class="dbar"><span class="t">Пролёт по цеху Завода ВОЛГА</span><button class="btn btn-line btn-sm" type="button" id="filmx">Закрыть</button></div>
+</dialog>
+<dialog class="lb" id="lb" aria-label="Фото">
+  <img id="lbImg" src="" alt="">
+  <div class="dbar"><span class="t" id="lbCap"></span><span class="c" id="lbCnt"></span><button class="sq" type="button" id="lbPrev" aria-label="Предыдущее фото">←</button><button class="sq" type="button" id="lbNext" aria-label="Следующее фото">→</button><button class="btn btn-line btn-sm" type="button" id="lbX">Закрыть</button></div>
+</dialog>
+<dialog class="dw" id="dw" aria-labelledby="dwTitle">
+  <div class="dw-top"><span class="eb" id="dwCode"></span><span class="sp"></span><button class="sq" type="button" id="dwPrev" aria-label="Предыдущее изделие">←</button><span class="ix" id="dwIx"></span><button class="sq" type="button" id="dwNext" aria-label="Следующее изделие">→</button><button class="btn btn-line btn-sm" type="button" id="dwX">✕ <span class="sw" data-t="Закрыть"><span>Закрыть</span></span></button></div>
+  <div class="dw-modes" role="group" aria-label="Режим просмотра"><button type="button" id="dwG" aria-pressed="true">Фото и рендеры</button><button type="button" id="dw3" aria-pressed="false">Крутить 3D</button></div>
+  <div class="dw-stage" id="dwStage"><img id="dwImg" src="" alt=""><span class="cap" id="dwCap"></span><div class="slot" id="dwSlot" hidden></div><div class="v3msg" id="dwMsg" hidden></div></div>
+  <div class="dw-strip" id="dwStrip"></div>
+  <div class="dw-body"><h2 id="dwTitle"></h2><p id="dwText"></p><span class="eb"><b>//</b> Пример исполнения</span><ol class="parts" id="dwParts"></ol><div class="btns" id="dwBtns"></div></div>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 <script>
+document.documentElement.classList.add('js');
+// contacts come from the old sites and still need the client's check
 const C = { phone: '+7 (846) 214-03-34', phone2: '+7 (939) 700-67-73', email: 'sales@zavod-volga.ru', addr: 'г. Самара, ул. Авроры, 114А к2, офис 402', hours: 'Пн–Пт, 9:00–18:00', msg: '+7 927 015-72-96' };
-// real camera path of the Blender route, metres per leg (01→02 … 09→10)
-const LEGS = [45.3, 128.2, 139.3, 142.9, 13.0, 156.0, 33.0, 62.2, 35.9];
+// real camera path of the Blender route, metres per leg (01→02 … 05→06)
+const LEGS = [45.3, 128.2, 139.3, 142.9, 13.0];
 const AT = LEGS.reduce((a, l) => (a.push(a[a.length - 1] + l), a), [0]);
+const TOTAL_M = AT[AT.length - 1];
+const pad2 = n => String(n).padStart(2, '0');
+const $ = id => document.getElementById(id);
+const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const decode = self.createImageBitmap.bind(self);
+const sw = t => `<span class="sw" data-t="${t}"><span>${t}</span></span>`;
 
-const gauge = f => { let t = '';
-  for (let i = 0; i <= 10; i++) { const a = Math.PI * i / 10, r1 = i % 5 ? 36 : 32; t += `<line x1="${(60 - 40 * Math.cos(a)).toFixed(1)}" y1="${(64 - 40 * Math.sin(a)).toFixed(1)}" x2="${(60 - r1 * Math.cos(a)).toFixed(1)}" y2="${(64 - r1 * Math.sin(a)).toFixed(1)}" stroke="#dfe7e5" stroke-width="${i % 5 ? 1 : 1.6}"/>`; }
-  const a = Math.PI * f;
-  return `<svg viewBox="0 0 120 72" aria-hidden="true"><path d="M12 64 A48 48 0 0 1 108 64" fill="none" stroke="rgba(232,240,238,.18)" stroke-width="7"/><path d="M12 64 A48 48 0 0 1 108 64" fill="none" stroke="#4bb8ae" stroke-width="7" stroke-dasharray="${(150.8 * f).toFixed(1)} 200"/><path d="M94 30 A48 48 0 0 1 108 64" fill="none" stroke="#e84237" stroke-width="7"/>${t}<line x1="60" y1="64" x2="${(60 - 38 * Math.cos(a)).toFixed(1)}" y2="${(64 - 38 * Math.sin(a)).toFixed(1)}" stroke="#e84237" stroke-width="2.8" stroke-linecap="round"/><circle cx="60" cy="64" r="5.5" fill="#f1f5f4"/><circle cx="60" cy="64" r="2" fill="#0b1110"/></svg>`; };
-const stamp = `<svg viewBox="0 0 160 160" role="img" aria-label="Штамп ОТК: гарантия 5 лет"><defs><path id="stP" d="M80 80 m-57 0 a57 57 0 1 1 114 0 a57 57 0 1 1 -114 0"/></defs><circle cx="80" cy="80" r="74" fill="none" stroke="#e84237" stroke-width="3"/><circle cx="80" cy="80" r="45" fill="none" stroke="#e84237" stroke-width="1.6"/><text font-family="IBM Plex Mono, monospace" font-size="11" font-weight="500" letter-spacing="2" fill="#e84237"><textPath href="#stP">ОТК · ЗАВОД ВОЛГА · САМАРА · ПРОВЕРЕНО ·</textPath></text><text x="80" y="77" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="500" fill="#e84237" letter-spacing="1">ГАРАНТИЯ</text><text x="80" y="99" text-anchor="middle" font-family="Unbounded, sans-serif" font-size="20" font-weight="600" fill="#e84237">5 ЛЕТ</text></svg>`;
-const PRODS = [
-  ['БТП', 'Блочные тепловые пункты на раме с узлом учёта', 'btp-3.webp', 'Блочный тепловой пункт на раме в цехе'],
-  ['БМТП', 'Тепловой пункт в утеплённом блок-модуле', 'bmtp-1.webp', 'Блочно-модульный тепловой пункт с открытой дверью'],
-  ['АНС', 'Насосные станции пожаротушения и водоснабжения', 'ans-1.webp', 'Насосная станция с вертикальными насосами и красным шкафом'],
-  ['КНС', 'Канализационные станции в корпусе из стеклопластика', 'kns-1.webp', 'Корпус КНС из стеклопластика'],
-  ['ШУ', 'Шкафы управления насосами и тепловыми пунктами', 'shu-1.webp', 'Красный шкаф управления с сенсорной панелью'],
-  ['Котельные', 'Блочно-модульные котельные для отопления и ГВС', 'kotelnye.webp', 'Ряды белых блочных котельных в цехе']];
+// products: catalog, hotspots, drawer and the 3D section all read from here; descriptions follow the 3D models built from the plant's photos
+const PD = [
+  { id: 'btp', s: 'БТП', n: 'Блочные тепловые пункты', one: 'Блочный тепловой пункт', d: 'На раме с узлом учёта, для отопления, ГВС и вентиляции', img: 'img/btp-3.webp', glb: 'glb/btp.glb.txt',
+    text: 'Теплообменники, насосы, арматура, учёт тепла и автоматика собраны на общей раме в цехе. Перед отгрузкой блок испытываем, на объекте его остаётся подключить к сетям.',
+    parts: ['Пластинчатые теплообменники', 'Сдвоенные циркуляционные насосы', 'Грязевик и сетчатые фильтры', 'Клапан с электроприводом', 'Теплосчётчик', 'Манометры и термометры', 'Шкаф с панелью оператора'],
+    media: [['img/g40.webp', 'Готовый БТП на раме перед отгрузкой', 'Фото'], ['img/g163.webp', 'БТП с двумя пластинчатыми теплообменниками', 'Фото'], ['img/usl-2.webp', 'Тепловой пункт в цехе', 'Фото'], ['img3d/btp-hero.webp', 'Общий вид', '3D'], ['img3d/btp-right.webp', 'Вид справа', '3D'], ['img3d/btp-pumps.webp', 'Сдвоенные циркуляционные насосы', '3D'], ['img3d/btp-phe.webp', 'Пластинчатый теплообменник', '3D'], ['img3d/btp-valves.webp', 'Шаровые краны и сетчатый фильтр', '3D']] },
+  { id: 'bmtp', s: 'БМТП', n: 'Блочно-модульные тепловые пункты', one: 'Блочно-модульный тепловой пункт', d: 'Тепловой пункт в утеплённом блок-модуле', img: 'img/bmtp-1.webp', glb: 'glb/bmtp.glb.txt',
+    text: 'Утеплённый блок-модуль из сэндвич-панелей, внутри полностью собранный тепловой пункт. Ввод теплосети через один торец, выходы на здание через другой.',
+    parts: ['Каркас модуля', 'Сэндвич-панели', 'Дверь и жалюзи', 'Тепловой пункт на раме внутри', 'Ввод теплосети в ППУ-изоляции', 'Выходы на здание', 'Освещение'],
+    media: [['img/bmtp-1.webp', 'Модуль с открытой дверью', 'Фото'], ['img3d/bmtp-ext.webp', 'Блок-модуль и ввод теплосети в торец', '3D'], ['img3d/bmtp-ext2.webp', 'Блок-модуль со стороны двери', '3D'], ['img3d/bmtp-cut.webp', 'Разрез: оборудование внутри', '3D'], ['img3d/bmtp-cut_close.webp', 'Тепловой пункт в модуле', '3D']] },
+  { id: 'ans', s: 'АНС', n: 'Насосные станции', one: 'Автоматическая насосная станция', d: 'Пожаротушение и водоснабжение', img: 'img/ans-1.webp', glb: 'glb/ans.glb.txt',
+    text: 'Вертикальные многоступенчатые насосы на раме, коллекторы, затворы и обратные клапаны на каждой линии, шкаф управления. Для пожаротушения и водоснабжения.',
+    parts: ['Вертикальные насосы', 'Коллекторы из нержавеющей стали', 'Дисковые затворы', 'Обратные клапаны', 'Мембранный бак', 'Датчики давления', 'Шкаф управления'],
+    media: [['img/g241.webp', 'Насосные станции пожаротушения в цехе', 'Фото'], ['img/ans-1.webp', 'Станция с вертикальными насосами', 'Фото'], ['img/c242.webp', 'Станция со шкафом управления', 'Фото'], ['img3d/ans-hero.webp', 'Общий вид', '3D'], ['img3d/ans-right.webp', 'Вид со стороны шкафа', '3D'], ['img3d/ans-pumps.webp', 'Насосы и обвязка', '3D'], ['img3d/ans-cab.webp', 'Шкаф управления', '3D']] },
+  { id: 'kns', s: 'КНС', n: 'Канализационные станции', one: 'Канализационная насосная станция', d: 'В корпусе из стеклопластика', img: 'img/kns-1.webp', glb: 'glb/kns.glb.txt',
+    text: 'Корпус из стеклопластика с рёбрами жёсткости, погружные насосы на направляющих, напорные трубопроводы с арматурой, лестница и площадка обслуживания.',
+    parts: ['Корпус из стеклопластика', 'Погружные насосы', 'Направляющие', 'Задвижки и обратные клапаны', 'Поплавки уровня', 'Лестница'],
+    media: [['img/kns-1.webp', 'Корпус КНС в котловане', 'Фото'], ['img3d/kns-cut.webp', 'Разрез станции', '3D'], ['img3d/kns-cut_close.webp', 'Насосы на направляющих', '3D']] },
+  { id: 'shu', s: 'ШУ', n: 'Шкафы управления', one: 'Шкаф управления', d: 'Для насосов и тепловых пунктов', img: 'img/shu-1.webp', glb: 'glb/shu.glb.txt',
+    text: 'Шкафы управления насосами и тепловыми пунктами: автоматы, контакторы, реле, частотные преобразователи и панель оператора.',
+    parts: ['Автоматические выключатели', 'Контакторы и реле', 'Частотный преобразователь', 'Клеммники', 'Кабель-каналы', 'Панель оператора'],
+    media: [['img/shu-1.webp', 'Шкаф с сенсорной панелью', 'Фото'], ['img3d/shu-pair.webp', 'Шкаф насосов и пожарный шкаф', '3D'], ['img3d/shu-inside.webp', 'Внутри шкафа', '3D']] },
+  { id: 'kotel', s: 'Котельные', n: 'Блочно-модульные котельные', one: 'Блочно-модульная котельная', d: 'Для отопления и горячего водоснабжения', img: 'img/kotelnye.webp', glb: 'glb/kotel.glb.txt',
+    text: 'Модуль из сэндвич-панелей с котельным оборудованием, дымовые трубы на ферме с растяжками, газовый ввод и выход тепловой сети.',
+    parts: ['Модуль котельной', 'Дымовые трубы', 'Ферма с растяжками', 'Газовый ввод', 'Тепловые сети'],
+    media: [['img/kotelnye.webp', 'Блочные котельные в цехе', 'Фото'], ['img/g207.webp', 'Котельная изнутри', 'Фото'], ['img3d/kotel-ext.webp', 'Котельная на площадке', '3D'], ['img3d/kotel-ext2.webp', 'Вид с дымовыми трубами', '3D']] }];
+const P = Object.fromEntries(PD.map((p, i) => [p.id, Object.assign(p, { i })]));
+const ALSO = ['Грязевики абонентские', 'Пластинчатые теплообменники', 'Насосное оборудование', 'Автоматика и электрооборудование', 'Запорная арматура и КИП'];
+// hotspots: product position in the still of a stop, as a share of width and height
+const HOTS = { 0: [['btp', .45, .474], ['ans', .633, .393], ['shu', .743, .452]], 2: [['shu', .325, .57], ['btp', .4375, .556], ['ans', .583, .496], ['kns', .717, .437], ['kotel', .80, .459], ['bmtp', .90, .444]] };
+const USL = [
+  ['Проектирование', 'img/usl-1.webp', '3D-модель блочного теплового пункта', 'Разрабатываем решение по техзаданию, опросному листу или готовому проекту и показываем 3D-модель узла до изготовления.', ['Схема по нагрузкам', '3D-модель', 'Расстановка в помещении']],
+  ['Подбор оборудования', 'img/usl-2.webp', 'Тепловой пункт с пластинчатым теплообменником в цехе', 'Предлагаем несколько вариантов комплектации под параметры объекта и бюджет.', ['Насосы', 'Теплообменники', 'Арматура и автоматика']],
+  ['Производство', 'img/usl-3.webp', 'Монтажники собирают обвязку теплового пункта', 'Собираем узлы в своём цехе в Самаре, 80% комплектующих отечественного производства.', ['Сварка обвязки', 'Сборка на раме', 'До 6 недель']],
+  ['Доставка', 'img/usl-4.webp', 'Зона отгрузки цеха с готовым оборудованием', 'Отгружаем готовые блоки с завода и доставляем в любой регион России.', ['Отгрузка с завода', 'Доставка по России']],
+  ['Монтаж и запуск', 'img/usl-5.webp', 'Смонтированный тепловой пункт со шкафом ВОЛГА', 'Монтируем оборудование на объекте, проводим пусконаладку и обучаем персонал.', ['Монтаж', 'Пусконаладка', 'Обучение персонала']],
+  ['Сервис', 'img/usl-6.webp', 'Тепловой пункт на объекте после монтажа', 'Гарантия 5 лет на всё изделие, гарантийное и постгарантийное обслуживание.', ['Гарантия 5 лет', 'Обслуживание', 'Запчасти со склада']]];
+const TERMS = [['Расчёт', '1 день', 'По параметрам объекта или опросному листу, в нескольких вариантах комплектации.'], ['Изготовление', 'до 6 недель', 'Срок фиксируем в договоре и отвечаем за него.'], ['Логистика', 'по всей России', 'Отгружаем готовые блоки из Самары в любой регион.'], ['Монтаж', 'на объекте', 'Монтаж, пусконаладка и обучение персонала заказчика.'], ['Гарантия', '5 лет', 'На тепловой пункт или станцию целиком, а не на отдельные узлы.'], ['Сервис', 'после запуска', 'Гарантийное и постгарантийное обслуживание, запчасти со склада.']];
+const FLOW = [['день 0', 'Заявка', 'Телефон, опросный лист или проект'], ['1 день', 'Расчёт', 'Несколько вариантов комплектации'], ['в договоре', 'Договор', 'Фиксируем срок и гарантию'], ['до 6 недель', 'Производство', 'Сборка и испытания в цехе'], ['по России', 'Доставка', 'Готовый блок на объект'], ['на объекте', 'Запуск', 'Монтаж и пусконаладка']];
+const IND = [
+  ['Жилые комплексы', 'img/g87.webp', 'Тепловые пункты для домов и общие ЦТП для групп домов с поэтапным подключением и узлами учёта.', ['btp', 'bmtp', 'shu']],
+  ['Производство и склады', 'img/g241.webp', 'Насосные станции пожаротушения и водоснабжения, тепловые пункты для цехов и складских комплексов.', ['ans', 'btp', 'shu']],
+  ['Общественные здания', 'img/c236.webp', 'Тепловые пункты для отопления, вентиляции, бассейнов и ГВС административных и общественных зданий.', ['btp', 'ans', 'shu']],
+  ['Коммунальное хозяйство', 'img/g207.webp', 'Канализационные станции, блочные котельные и насосные станции водоснабжения для посёлков и микрорайонов.', ['kns', 'kotel', 'ans']]];
+// case data from the old sites, waiting for the client's check; photos are illustrative
 const CASES = [
-  ['АО «ФСК Лада-Дом», Самара', 'Насосная станция пожаротушения производственно-складских помещений', 'ans-1.webp', ['Q 553 м³/ч', 'H 78 м', 'P 90 кВт', 'Ду 250']],
-  ['ООО «А1-Проект», Москва', 'БТП для административно-жилого комплекса: отопление, вентиляция, бассейн и ГВС', 'btp-1.webp', ['0,467 Гкал/ч', 'T 95/70 °C', 'Ду 100']],
-  ['ООО «Вираж-Спецстрой», Самара', 'Общий ЦТП для группы домов с поэтапным подключением и узлами учёта', 'btp-4.webp', ['Погодное регулирование']],
-  ['Объект в Казани', 'Автоматическая установка водяного пожаротушения', 'ans-2.webp', ['Q 163 м³/ч', 'H 70 м', 'P 22 кВт']]];
-const OPTS = ['Блочный тепловой пункт', 'Блочно-модульный тепловой пункт', 'Насосная станция (АНС)', 'Канализационная станция (КНС)', 'Шкаф управления', 'Котельная', 'Другое'];
+  ['АО «ФСК Лада-Дом», Самара', 'Насосная станция пожаротушения производственно-складских помещений', 'img/c240.webp', 'ans', [['Изделие', 'АНС пожаротушения'], ['Подача', '553 м³/ч'], ['Напор', '78 м'], ['Мощность', '90 кВт'], ['Ду', '250']]],
+  ['ООО «А1-Проект», Москва', 'БТП для административно-жилого комплекса: отопление, вентиляция, бассейн и ГВС', 'img/c236.webp', 'btp', [['Изделие', 'БТП'], ['Нагрузка', '0,467 Гкал/ч'], ['График', '95/70 °C'], ['Ду', '100']]],
+  ['ООО «Вираж-Спецстрой», Самара', 'Общий ЦТП для группы домов с поэтапным подключением и узлами учёта', 'img/c170.webp', 'btp', [['Изделие', 'ЦТП'], ['Регулирование', 'погодное'], ['Подключение', 'поэтапное']]],
+  ['Объект в Казани', 'Автоматическая установка водяного пожаротушения', 'img/c242.webp', 'ans', [['Изделие', 'АНС пожаротушения'], ['Подача', '163 м³/ч'], ['Напор', '70 м'], ['Мощность', '22 кВт']]]];
+const GAL = [['g40', 'Готовый БТП на раме перед отгрузкой', 'w', 'prod'], ['g158', 'Сварка обвязки в цехе', 't', 'shop'], ['g241', 'Насосные станции пожаротушения', 't', 'prod'], ['g125', 'Сборка теплового пункта', '', 'shop'], ['g149', 'Склад комплектующих', '', 'shop'],
+  ['g207', 'Блочная котельная изнутри', 't', 'site'], ['g95', 'Тепловой пункт на объекте', 'w', 'site'], ['g87', 'БТП на объекте после монтажа', 't', 'site'], ['g163', 'БТП с двумя пластинчатыми теплообменниками', '', 'prod'], ['g159', 'Производственный цех в Самаре', '', 'shop']];
+const GCAT = [['all', 'Все'], ['shop', 'Цех и склад'], ['prod', 'Изделия'], ['site', 'Объекты']];
+const FAQ = [
+  ['Сколько стоит тепловой пункт или насосная станция?', 'Цена зависит от нагрузки, схемы и комплектации. Пришлите параметры объекта или опросный лист: рассчитаем стоимость за 1 день в нескольких вариантах.'],
+  ['Какие сроки изготовления?', 'До 6 недель. Срок фиксируем в договоре и отвечаем за него.'],
+  ['Какая гарантия?', '5 лет на всё изделие целиком, а не только на комплектующие.'],
+  ['Доставляете ли в другие регионы?', 'Да, по всей России. Отгружаем готовые блоки с завода в Самаре.'],
+  ['Что нужно для расчёта?', 'Опросный лист, проект или техническое задание. Если документов нет, хватит основных параметров: назначение объекта, нагрузки и температурный график.'],
+  ['Делаете ли монтаж и пусконаладку?', 'Да. Монтируем оборудование на объекте, проводим пусконаладку и обучаем персонал заказчика.'],
+  ['Можно ли увидеть оборудование до изготовления?', 'Да. Показываем 3D-модель узлов и расстановку оборудования до начала производства.'],
+  ['Какие документы передаёте с оборудованием?', 'Паспорт изделия, сертификаты на комплектующие и руководство по эксплуатации.']];
+const OBJ = ['Жилой дом', 'Производство', 'Склад', 'Общественное здание', 'Коммунальный объект', 'Другое'];
+const SECS = [['Главный экран', 0], ['Услуги', 1], ['Каталог', 2], ['О компании в цифрах', 3], ['Преимущества', 4], ['Гарантия и расчёт', 5], ['Условия работы', '#terms'], ['Изделия в 3D', '#v3d'], ['Онлайн-заявка', '#cta2'], ['Для каких объектов', '#objects'], ['Проекты и письма', '#cases'], ['Частые вопросы', '#faq'], ['Вопросы и контакты', '#contacts'], ['Галерея', '#gallery']];
+const COMP = [['О компании', 3], ['Проекты', '#cases'], ['Условия', '#terms'], ['Новости', null], ['Акции', null], ['Контакты', '#contacts']];
+const link = ([t, to], cls = '') => to === null ? `<button type="button" data-soon class="${cls}">${t}<span class="soon">скоро</span></button>`
+  : typeof to === 'number' ? `<a href="#s${to + 1}" data-jump="${to}" class="${cls}">${t}</a>` : `<a href="${to}" class="${cls}">${t}</a>`;
 
-const form = (id, btn) => `<form class="form glass" id="${id}" novalidate>
-  <div class="field"><label for="${id}-n">Имя</label><input id="${id}-n" name="n" autocomplete="name" placeholder="Как к вам обращаться"></div>
-  <div class="field"><label for="${id}-p">Телефон</label><input id="${id}-p" name="p" type="tel" autocomplete="tel" placeholder="+7 ___ ___-__-__"></div>
-  <div class="field wide"><label for="${id}-e">Оборудование</label><select id="${id}-e" name="e">${OPTS.map(o => `<option>${o}</option>`).join('')}</select></div>
-  <button class="btn btn-red" type="submit">${btn}</button>
-  <p class="note" aria-live="polite">Перезвоним в рабочее время и пришлём опросный лист.</p></form>`;
+const stamp = `<svg viewBox="0 0 160 160" role="img" aria-label="Штамп ОТК: гарантия 5 лет"><defs><path id="stP" d="M80 80 m-57 0 a57 57 0 1 1 114 0 a57 57 0 1 1 -114 0"/></defs><circle cx="80" cy="80" r="74" fill="none" stroke="#e84237" stroke-width="3"/><circle cx="80" cy="80" r="45" fill="none" stroke="#e84237" stroke-width="1.6"/><text font-family="IBM Plex Mono, monospace" font-size="11" font-weight="500" letter-spacing="2" fill="#e84237"><textPath href="#stP">ОТК · ЗАВОД ВОЛГА · САМАРА · ПРОВЕРЕНО ·</textPath></text><text x="80" y="77" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="500" fill="#e84237" letter-spacing="1">ГАРАНТИЯ</text><text x="80" y="101" text-anchor="middle" font-family="Onest, sans-serif" font-size="23" font-weight="700" fill="#e84237">5 ЛЕТ</text></svg>`;
+const consent = () => `<label class="consent"><input type="checkbox" name="ok" checked> <span>Согласен на обработку персональных данных по <button type="button" data-soon>политике конфиденциальности</button></span></label>`;
+const OPTS = PD.map(p => p.one).concat('Другое');
+const sel = id => `<select id="${id}" name="e">${OPTS.map(o => `<option>${o}</option>`).join('')}</select>`;
 
 const STOPS = [
-  { zone: 'Сборка', name: 'Сборка', h: 'h1', title: 'Тепловые пункты и насосные станции заводской сборки',
+  { zone: 'Главная', h: 'h1', hero: true, hw: 620, title: 'Тепловые пункты и насосные станции заводской сборки',
     lead: 'Проектируем и собираем БТП, БМТП, АНС, КНС, шкафы управления и котельные в своём цехе в Самаре и привозим на объект готовыми к подключению.',
-    btns: `<a class="btn btn-red" href="#s8" data-jump="7">Рассчитать стоимость</a><button class="btn btn-ghost" type="button" data-film><svg width="12" height="14" viewBox="0 0 12 14" aria-hidden="true"><path d="M0 0l12 7-12 7z" fill="currentColor"/></svg>Видео цеха целиком</button>`, keep: true,
-    body: `<div class="row">${[['Расчёт', '1 день'], ['Изготовление', 'до 6 недель'], ['Гарантия', '5 лет'], ['Доставка', 'по всей России']].map(([k, v]) => `<div class="chip glass"><span class="k">${k}</span><span class="v">${v}</span></div>`).join('')}</div>` },
-  { zone: 'Проектирование', name: 'Проект', title: 'Берём на себя весь путь оборудования', lead: 'Можно заказать одну услугу или всё вместе: от расчёта до сервиса после запуска.',
-    body: `<div class="steps">${[['Проектирование', 'Инженерное решение с нуля или по вашему проекту и опросному листу.'], ['Подбор', 'Несколько вариантов комплектации под параметры и бюджет.'], ['Производство', 'Сборка узлов в своём цехе и испытания до отгрузки.'], ['Доставка', 'В любой регион России, груз застрахован.'], ['Монтаж и запуск', 'Монтаж, пусконаладка и обучение персонала.'], ['Сервис', 'Гарантийное и постгарантийное обслуживание.']].map(([t, d], i) => `<div class="step glass"><span class="n">${String(i + 1).padStart(2, '0')}</span><h3>${t}</h3><p>${d}</p></div>`).join('')}</div>` },
-  { zone: 'Изделия', name: 'Каталог', title: 'Оборудование собственного производства', lead: 'Всё, что стоит в этом ряду, мы проектируем и собираем сами.',
-    body: `<div class="prods">${PRODS.map(([s, t, img, alt]) => `<a class="prod glass" href="#s8" data-jump="7"><div class="im"><img src="img/${img}" alt="${alt}" loading="lazy" width="320" height="240"></div><div class="tx"><b>${s}</b><span>${t}</span></div></a>`).join('')}</div>` },
-  { zone: 'Склад', name: 'Цифры', title: 'Завод в цифрах', lead: 'Производим оборудование с 2020 года и держим комплектующие на своём складе.',
-    body: `<div class="gauges">${[[.55, 'с 2020', 'года производим оборудование'], [.66, '150', 'тепловых пунктов для 100 клиентов'], [.8, '450', 'насосных станций для 200 клиентов'], [.8, '80%', 'комплектующих отечественного производства']].map(([f, b, s]) => `<div class="gauge glass">${gauge(f)}<b>${b}</b><span>${s}</span></div>`).join('')}</div>` },
-  { zone: 'Испытания', name: 'Испытания', title: 'Каждую установку испытываем до отгрузки', lead: 'Поэтому на объект приезжает проверенный блок, а не набор деталей для сборки в подвале.',
-    body: `<div class="grid3">${[['Заводская сборка', 'Узлы собирают монтажники в цехе, в контролируемых условиях.'], ['Испытания на заводе', 'Гидравлические испытания и проверка автоматики до отгрузки.'], ['3D-модель заранее', 'Показываем узлы и расстановку оборудования до изготовления.'], ['Документы в комплекте', 'Паспорт, сертификаты на комплектующие, руководство по эксплуатации.'], ['Сроки в договоре', 'Фиксируем срок изготовления и отвечаем за него.'], ['Отечественная база', '80% комплектующих российского производства.']].map(([t, d]) => `<div class="cell glass"><h3>${t}</h3><p>${d}</p></div>`).join('')}</div>` },
-  { zone: 'Манометр', name: 'Гарантия', title: 'Заводская гарантия 5 лет на всё изделие', lead: '',
-    body: `<div class="warranty glass"><div class="big">5<small>ЛЕТ</small></div><div style="display:grid;gap:12px"><p>Гарантия распространяется на тепловой пункт или станцию целиком, а не только на комплектующие. Бесплатно заменим или отремонтируем неисправные детали при нормальной эксплуатации.</p><div class="btns"><a class="btn btn-red" href="#s8" data-jump="7">Получить расчёт с гарантией</a></div></div><div class="stamp">${stamp}</div></div>` },
-  { zone: 'Отгрузка', name: 'Условия', title: 'Условия работы', lead: 'Отгружаем из Самары готовые блоки, остаётся подключить их к сетям.',
-    body: `<div class="grid3">${[['01', 'Расчёт за 1 день', 'По параметрам объекта или опросному листу, в нескольких вариантах.'], ['02', 'Изготовление до 6 недель', 'Срок прописываем в договоре.'], ['03', 'Доставка по России', 'В любой регион, груз застрахован.'], ['04', 'Монтаж и пусконаладка', 'Запускаем и помогаем сдать объект.'], ['05', 'Гарантия 5 лет', 'На всё изделие целиком.'], ['06', 'Сервис и запчасти', 'Обслуживание и комплектующие со склада.']].map(([k, t, d]) => `<div class="cell glass"><span class="k">${k}</span><h3>${t}</h3><p>${d}</p></div>`).join('')}</div>` },
-  { zone: 'В путь', name: 'Заявка', title: 'Рассчитаем стоимость за 1 день', lead: 'Оставьте телефон: уточним параметры и пришлём расчёт в нескольких вариантах комплектации.',
-    body: form('f1', 'Получить расчёт') },
-  { zone: 'На объекте', name: 'Проекты', title: 'Наше оборудование уже работает на объектах', lead: 'Тепловые пункты и насосные станции для жилых комплексов, складов и общественных зданий.',
-    body: `<div class="cases">${CASES.map(([w, t, img, ps]) => `<div class="case glass"><img src="img/${img}" alt="" loading="lazy" width="92" height="92"><div><b>${w}</b><p>${t}</p><div class="params">${ps.map(p => `<span>${p}</span>`).join('')}</div></div></div>`).join('')}</div>` },
-  { zone: 'Контакты', name: 'Контакты', title: 'Ваш объект может стать следующим', lead: 'Позвоните или оставьте заявку, ответим в рабочее время.',
-    body: `<div class="contacts"><div class="clist glass">${[['Телефон', C.phone, 1], ['Отдел продаж', C.phone2, 1], ['Почта', C.email, 1], ['WhatsApp и Telegram', C.msg, 1], ['Адрес офиса', C.addr], ['Часы работы', C.hours]].map(([k, v, cp]) => `<div><span class="k">${k}</span><span class="v${cp ? ' mono' : ''}">${v}</span>${cp ? `<button class="copy" type="button" data-copy="${v}">Скопировать</button>` : ''}</div>`).join('')}</div>
-      <form class="mini glass" id="f2" novalidate><div class="field"><label for="f2-p">Телефон</label><input id="f2-p" type="tel" autocomplete="tel" placeholder="+7 ___ ___-__-__"></div><button class="btn btn-red" type="submit">Перезвоните мне</button><p class="note" aria-live="polite" style="font-size:13px;color:var(--muted)">Заявки в демоверсии не отправляются.</p></form></div>` }];
+    btns: `<a class="btn btn-red" href="#s6" data-jump="5">${sw('Рассчитать стоимость')} <span class="ar">→</span></a><button class="btn btn-line" type="button" data-film><svg width="11" height="13" viewBox="0 0 12 14" aria-hidden="true"><path d="M0 0l12 7-12 7z" fill="currentColor"/></svg>${sw('Видео цеха целиком')}</button>`,
+    align: 'l', bw: 840,
+    body: `<div class="panel"><div class="cells facts">${[['Расчёт', '1 день'], ['Изготовление', 'до 6 недель'], ['Гарантия', '5 лет'], ['Доставка', 'по всей России']].map(([k, v]) => `<div class="fact"><span class="k-mono">${k}</span><span class="v">${v}</span></div>`).join('')}</div></div>` },
+  { zone: 'Услуги', hw: 560, title: 'Берём на себя весь путь оборудования', lead: 'Можно заказать одну услугу или всё вместе: от расчёта до сервиса после запуска.',
+    align: 'r', bw: 980,
+    body: `<div class="panel usl" id="usl"><ol class="utabs" role="tablist" aria-label="Услуги">${USL.map(([t], i) => `<li><button class="utab" type="button" role="tab" id="ut${i}" aria-controls="us${i}" aria-selected="${i === 0}" tabindex="${i ? -1 : 0}"><span class="n">${pad2(i + 1)}</span>${t}<i class="pr"><b></b></i></button></li>`).join('')}</ol>
+      <div class="uslides">${USL.map(([t, img, alt, d, tags], i) => `<article class="uslide${i ? '' : ' on'}" role="tabpanel" id="us${i}" aria-labelledby="ut${i}"><div class="ph"><img src="${img}" alt="${alt}" width="960" height="720" decoding="async"></div><div class="utx"><span class="eb"><b>${pad2(i + 1)}_</b> / 06</span><h3>${t}</h3><p>${d}</p><div class="tags">${tags.map(p => `<span class="tag">${p}</span>`).join('')}</div><button class="lnk" type="button" data-jump="5">Обсудить задачу →</button></div></article>`).join('')}</div></div>` },
+  { zone: 'Каталог', hw: 640, title: 'Оборудование собственного производства', lead: 'Нажмите на метку в цеху или на карточку: откроется изделие с фото, составом и 3D-моделью.',
+    body: `<div class="panel"><div class="cells cat">${PD.map(p => `<button class="pcard" type="button" data-prod="${p.id}"><div class="im"><img src="${p.img}" alt="" width="360" height="270" decoding="async"><span class="b3d">3D</span></div><span class="s">${p.s}</span><b>${p.n}</b><span class="d">${p.d}</span></button>`).join('')}
+      <div class="also"><span class="eb">Также поставляем</span>${ALSO.map(a => `<button type="button" data-ask="${a}">${a}<span aria-hidden="true">→</span></button>`).join('')}</div></div></div>` },
+  { zone: 'О компании', hw: 600, title: 'Завод в цифрах', lead: 'Производим оборудование с 2020 года на своей площадке в Самаре и держим комплектующие на складе.',
+    body: `<div class="panel"><div class="cells stats">${[['Год запуска', '2020', '', 'производим оборудование на одной площадке в Самаре', 0], ['Тепловые пункты', '150', 'БТП', 'для 100 клиентов', 1], ['Насосные станции', '450', 'АНС', 'для 200 клиентов', 1], ['Комплектующие', '80', '%', 'отечественного производства', 1]].map(([k, b, u, s, cnt]) => `<div class="stat"><span class="k-mono">${k}</span><b><span${cnt ? ` data-count="${b}"` : ''}>${b}</span>${u ? `<small>${u}</small>` : ''}</b><span>${s}</span></div>`).join('')}
+      <div class="statcta"><p>Посмотрите, как выглядят цех, склад и объекты с нашим оборудованием.</p><a class="lnk" href="#gallery">Галерея завода →</a></div></div></div>` },
+  { zone: 'Преимущества', hw: 600, title: 'Каждую установку испытываем до отгрузки', lead: 'Поэтому на объект приезжает проверенный блок, а не набор деталей для сборки в подвале.',
+    body: `<div class="panel"><div class="cells adv-p">${[['Заводская сборка', 'Узлы собирают монтажники в цехе, в контролируемых условиях.'], ['Испытания на заводе', 'Гидравлические испытания и проверка автоматики до отгрузки.'], ['3D-модель заранее', 'Показываем узлы и расстановку оборудования до изготовления.'], ['Документы в комплекте', 'Паспорт, сертификаты на комплектующие, руководство по эксплуатации.'], ['Сроки в договоре', 'Фиксируем срок изготовления и отвечаем за него.'], ['Отечественная база', '80% комплектующих российского производства.']].map(([t, d], i) => `<div class="adv"><span class="n">${pad2(i + 1)}</span><h3>${t}</h3><p>${d}</p></div>`).join('')}</div></div>` },
+  { zone: 'Гарантия', hw: 560, title: 'Гарантия 5 лет на всё изделие', lead: 'Гарантия распространяется на тепловой пункт или станцию целиком, а не только на комплектующие.',
+    align: 'side',
+    body: `<div class="panel cta1"><div class="stamp">${stamp}</div><div><h3>Рассчитаем стоимость за 1 день</h3><p class="sub">Оставьте телефон: уточним параметры и пришлём расчёт в нескольких вариантах комплектации.</p>
+      <form id="f1" novalidate><div class="field f-n"><label for="f1-n">Имя</label><input id="f1-n" name="n" autocomplete="name" placeholder="Как к вам обращаться"></div><div class="field"><label for="f1-p">Телефон</label><input id="f1-p" name="p" type="tel" autocomplete="tel" placeholder="+7 ___ ___-__-__"></div><div class="field f-e"><label for="f1-e">Оборудование</label>${sel('f1-e')}</div><button class="btn btn-red" type="submit">${sw('Получить расчёт')} <span class="ar">→</span></button>${consent()}<p class="note" aria-live="polite"></p></form></div></div>` }];
 
-const stopsEl = document.getElementById('stops');
-stopsEl.innerHTML = STOPS.map((s, i) => `<section class="stop" id="s${i + 1}" aria-label="${s.name}"><div class="head${s.keep ? ' keep' : ''}"><span class="plate">${s.zone}</span><${s.h || 'h2'}>${s.title}</${s.h || 'h2'}>${s.lead ? `<p class="lead">${s.lead}</p>` : ''}${s.btns ? `<div class="btns">${s.btns}</div>` : ''}</div><div class="body">${s.body}</div></section>`).join('');
+/* ---------- render ---------- */
+const stopsEl = $('stops');
+stopsEl.innerHTML = STOPS.map((s, i) => `<section class="stop" id="s${i + 1}" aria-label="${s.zone}"><div class="head${s.hero ? ' hero' : ''}" style="--hw:${s.hw}px"><span class="eb"><b>${pad2(i + 1)}_</b> / 06 · ${s.zone}</span><${s.h || 'h2'}${s.hero ? ' data-split' : ''}>${s.title}</${s.h || 'h2'}>${s.lead ? `<p class="lead">${s.lead}</p>` : ''}${s.btns ? `<div class="btns">${s.btns}</div>` : ''}</div><div class="body${s.align ? ' ' + s.align : ''}" style="--bw:${s.bw || 900}px">${s.body}</div></section>`).join('');
 const stopEls = [...stopsEl.children];
-document.getElementById('hdrPhone').textContent = C.phone;
-document.getElementById('footContacts').innerHTML = [C.phone, C.phone2, C.email, C.addr].map(v => `<li style="user-select:all">${v}</li>`).join('');
-const line = document.getElementById('line');
-line.insertAdjacentHTML('beforeend', STOPS.map((s, i) => `<li><button type="button" data-jump="${i}"><span class="nm">${s.name}</span><span class="m">${Math.round(AT[i])} м</span><i></i></button></li>`).join(''));
-const lis = [...line.querySelectorAll('li')];
+$('hotsWrap').innerHTML = Object.entries(HOTS).map(([s, list]) => `<div class="hots" data-s="${s}">${list.map(([id, x, y]) => `<button class="hot" type="button" data-prod="${id}" data-x="${x}" data-y="${y}" aria-label="${P[id].one}: открыть карточку"><i></i><span class="hl"><s>${P[id].s}</s><em>${P[id].one}</em></span></button>`).join('')}</div>`).join('');
+const hotLayers = [...document.querySelectorAll('.hots')];
+$('rsegs').innerHTML = STOPS.map((s, i) => `<li><button type="button" data-jump="${i}"><span class="n">${pad2(i + 1)}_</span><span class="nm">${s.zone}</span><span class="m">${Math.round(AT[i])} м</span></button><i class="bar"><b></b></i></li>`).join('');
+const segs = [...$('rsegs').children];
+$('odoOf').textContent = `из ${Math.round(TOTAL_M)} м`;
+$('hdrPhone').textContent = C.phone; $('hdrHours').textContent = C.hours;
 
-const fb = document.getElementById('filmbox'), fv = document.getElementById('filmv');
-document.addEventListener('click', e => { if (e.target.closest('[data-film]')) { try { fb.showModal(); } catch (_) { fb.setAttribute('open', ''); } fv.play().catch(() => {}); } });
-document.getElementById('filmx').addEventListener('click', () => { fv.pause(); fb.close ? fb.close() : fb.removeAttribute('open'); });
+$('mprods').innerHTML = PD.map(p => `<button class="mprod" type="button" data-prod="${p.id}"><img src="${p.img}" alt="" width="96" height="72" loading="lazy"><div><span class="s">${p.s}</span><b>${p.n}</b><span class="d">${p.d}</span></div><span class="b3d">3D</span></button>`).join('');
+$('malso').innerHTML = `<span class="eb">// Также поставляем</span>${ALSO.map(a => `<button type="button" data-ask="${a}">${a}<span aria-hidden="true">→</span></button>`).join('')}<a class="btn btn-red" href="#cta2">${sw('Подобрать оборудование')} <span class="ar">→</span></a>`;
+$('mProd').innerHTML = PD.map((p, i) => `<li style="--i:${i}"><button type="button" data-prod="${p.id}"><span class="n">${pad2(i + 1)}</span>${p.n}<span class="s">${p.s}</span></button></li>`).join('');
+$('mSecs').innerHTML = SECS.map(([t, to], i) => `<li style="--i:${i + 2}">${link([`<span class="n">${pad2(i + 1)}_</span>${t}`, to])}</li>`).join('');
+$('mComp').innerHTML = COMP.map((c, i) => `<li style="--i:${i + 4}">${link(c)}</li>`).join('');
+const conRows = [['Телефон', C.phone, 1], ['Отдел продаж', C.phone2, 1], ['Почта', C.email, 1], ['WhatsApp и Telegram', C.msg, 1], ['Адрес офиса', C.addr], ['Часы работы', C.hours]];
+$('mCon').innerHTML = conRows.map(([k, v, cp], i) => `<div class="row" style="--i:${i + 6}"><span class="k-mono">${k}</span><span class="v${cp && k !== 'Почта' ? ' mono' : ''}">${v}</span>${cp ? `<button class="copy" type="button" data-copy="${v}">Скопировать</button>` : ''}</div>`).join('') + `<a class="btn btn-red" href="#cta2">${sw('Рассчитать за 1 день')} <span class="ar">→</span></a>`;
+
+$('tgrid').innerHTML = TERMS.map(([t, v, d], i) => `<div class="tcell" data-rv style="--rd:${i % 3}"><span class="eb"><b>${pad2(i + 1)}_</b> ${t}</span><div class="v">${v}</div><p>${d}</p></div>`).join('');
+$('flow').innerHTML = FLOW.map(([k, b, s]) => `<li><span class="k">${k}</span><b>${b}</b><span>${s}</span></li>`).join('');
+const tick1 = PD.map(p => `<span>${p.s}<i></i></span>`).join('') + `<span><em>Расчёт за 1 день</em><i></i></span><span><em>Гарантия 5 лет</em><i></i></span><span><em>Доставка по России</em><i></i></span>`;
+$('ticker').innerHTML = tick1 + tick1;
+$('v3tabs').innerHTML = PD.map((p, i) => `<button class="v3tab" type="button" role="tab" aria-selected="${i === 0}" tabindex="${i ? -1 : 0}" data-v3="${p.id}"><span class="n">${pad2(i + 1)}</span><b>${p.s}</b><span>${p.one}</span></button>`).join('');
+$('track').innerHTML = '';
+$('letters').innerHTML = [1, 2, 3, 4].map(i => `<figure class="letter" data-rv style="--rd:${i - 1}"><div class="doc" aria-hidden="true"><div class="lh"><i></i><em></em></div><span class="tt">Благодарственное письмо</span>${[92, 100, 96, 100, 78, 100, 88, 60].map(w => `<span class="ln" style="width:${w}%"></span>`).join('')}<div class="sg"><i></i><b></b></div></div><figcaption>Здесь будет скан письма ${i}</figcaption></figure>`).join('');
+$('qa').innerHTML = FAQ.map(([q, a], i) => `<li data-rv style="--rd:${i % 4}"><button type="button" aria-expanded="false" aria-controls="qa${i}" id="qb${i}"><span class="n">${pad2(i + 1)}_</span>${q}<span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa${i}" role="region" aria-labelledby="qb${i}"><div><p>${a}</p></div></div></li>`).join('');
+$('ask').innerHTML = `<h3>Остались вопросы?</h3><p class="sub">Ответим в рабочее время, ${C.hours.toLowerCase().replace('пн–пт, ', 'пн–пт ')}.</p><div class="field"><label for="q-n">Имя</label><input id="q-n" name="n" autocomplete="name" placeholder="Как к вам обращаться"></div><div class="field"><label for="q-p">Телефон</label><input id="q-p" name="p" type="tel" autocomplete="tel" placeholder="+7 ___ ___-__-__"></div>
+  <div class="field wide"><label for="q-m">Почта</label><input id="q-m" name="m" type="email" autocomplete="email" placeholder="name@company.ru"></div><div class="field wide"><label for="q-q">Вопрос</label><textarea id="q-q" name="q" placeholder="Опишите объект или задайте вопрос"></textarea></div>${consent()}<button class="btn btn-red" type="submit">${sw('Отправить вопрос')} <span class="ar">→</span></button><p class="note" aria-live="polite"></p>`;
+$('cbox').innerHTML = conRows.map(([k, v, cp], i) => `<div class="crow${i === 0 ? ' big' : ''}"><span class="k-mono">${k}</span><span class="v${cp && k !== 'Почта' ? ' mono' : ''}">${v}</span>${cp ? `<button class="copy" type="button" data-copy="${v}">Скопировать</button>` : ''}</div>`).join('') + `<a class="btn btn-line maps" href="https://yandex.ru/maps/?text=${encodeURIComponent('Самара, ул. Авроры, 114А к2')}" target="_blank" rel="noopener">${sw('Открыть адрес в Яндекс Картах')} <span class="ar">↗</span></a>`;
+$('fProd').innerHTML = PD.map(p => `<li><button type="button" data-prod="${p.id}">${p.n}</button></li>`).join('') + `<li><button type="button" data-ask="Комплектующие">Комплектующие и арматура</button></li>`;
+$('fComp').innerHTML = COMP.map(c => `<li>${link(c)}</li>`).join('');
+$('fBuy').innerHTML = [['Онлайн-заявка', '#cta2'], ['Изделия в 3D', '#v3d'], ['Условия работы', '#terms'], ['Частые вопросы', '#faq'], ['Опросные листы', null], ['Галерея', '#gallery']].map(c => `<li>${link(c)}</li>`).join('');
+$('fCon').innerHTML = [C.phone, C.phone2, C.email, C.addr, C.hours].map(v => `<li>${v}</li>`).join('');
+
+// headings rise word by word
+document.querySelectorAll('[data-split]').forEach(el => {
+  let k = 0; const walk = n => [...n.childNodes].forEach(c => {
+    if (c.nodeType === 3) { const f = document.createDocumentFragment(); c.textContent.split(/(\s+)/).forEach(t => { if (!t) return; if (/^\s+$/.test(t)) f.appendChild(document.createTextNode(t)); else { const w = document.createElement('span'); w.className = 'w'; w.innerHTML = `<span style="--d:${k++}"></span>`; w.firstChild.textContent = t; f.appendChild(w); } }); c.replaceWith(f); }
+    else if (c.nodeType === 1) walk(c); });
+  walk(el); if (!reduced()) el.classList.add('split-wait');
+});
+
+/* ---------- small interactions ---------- */
+const toastEl = $('toast'); let toastT = 0;
+function toast(t) { toastEl.textContent = t; toastEl.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove('show'), 2600); }
+const mega = $('mega'), megaBtn = $('megaBtn'), menu = $('menu'), menuBtn = $('menuBtn');
+function setMega(open) { mega.hidden = !open; megaBtn.setAttribute('aria-expanded', open); if (open) setMenu(false); }
+function setMenu(open) {
+  menu.hidden = !open; menuBtn.setAttribute('aria-expanded', open); $('menuTxt').textContent = open ? 'Закрыть' : 'Меню';
+  document.body.classList.toggle('lock', open);
+  if (open) { setMega(false); menu.classList.remove('open'); void menu.offsetWidth; menu.classList.add('open'); menu.querySelector('a, button').focus({ preventScroll: true }); }
+}
+megaBtn.addEventListener('click', () => setMega(mega.hidden));
+menuBtn.addEventListener('click', () => { const o = menu.hidden; setMenu(o); if (!o) menuBtn.focus(); });
+let megaT = 0; const hoverOK = matchMedia('(hover: hover) and (pointer: fine)');
+[megaBtn, mega].forEach(el => {
+  el.addEventListener('mouseenter', () => { if (!hoverOK.matches) return; clearTimeout(megaT); megaT = setTimeout(() => setMega(true), el === megaBtn ? 120 : 0); });
+  el.addEventListener('mouseleave', () => { if (!hoverOK.matches) return; clearTimeout(megaT); megaT = setTimeout(() => setMega(false), 260); });
+});
+addEventListener('keydown', e => { if (e.key === 'Escape') { if (!mega.hidden) { setMega(false); megaBtn.focus(); } if (!menu.hidden) { setMenu(false); menuBtn.focus(); } } });
+document.addEventListener('click', e => { if (!mega.hidden && !e.target.closest('#mega, #megaBtn')) setMega(false); });
+
+const fb = $('filmbox'), fv = $('filmv');
+const openD = d => { try { d.showModal(); } catch (_) { d.setAttribute('open', ''); } };
+const closeD = d => { d.close ? d.close() : d.removeAttribute('open'); };
+$('filmx').addEventListener('click', () => { fv.pause(); closeD(fb); });
 fb.addEventListener('close', () => fv.pause());
-document.addEventListener('submit', e => { e.preventDefault(); const n = e.target.querySelector('.note'); if (n) { n.textContent = 'Это демоверсия: заявка не отправлена. На рабочем сайте она уйдёт в отдел продаж.'; n.classList.add('done'); } });
+[fb, $('lb'), $('dw')].forEach(d => d.addEventListener('click', e => { if (e.target === d) closeD(d); }));
+
+// gallery with filters and a lightbox
+const lb = $('lb'); let gI = 0, gList = GAL.map((_, i) => i);
+$('gFilt').innerHTML = GCAT.map(([k, t], i) => `<button class="fbtn" type="button" data-gf="${k}" aria-pressed="${!i}">${t}<sup>${pad2(k === 'all' ? GAL.length : GAL.filter(g => g[3] === k).length)}</sup></button>`).join('');
+function renderGal(cat) {
+  gList = GAL.map((_, i) => i).filter(i => cat === 'all' || GAL[i][3] === cat);
+  $('gal').classList.toggle('flat', cat !== 'all');
+  $('gal').innerHTML = gList.map((i, k) => { const [f, cap, sz] = GAL[i]; return `<button class="gi${sz ? ' ' + sz : ''}" type="button" data-g="${k}" aria-label="Увеличить: ${cap}" style="animation-delay:${k * 40}ms"><img src="img/${f}.webp" alt="${cap}" loading="lazy" decoding="async"><span class="gn">${pad2(k + 1)}</span><span class="cap">${cap}</span></button>`; }).join('');
+  document.querySelectorAll('[data-gf]').forEach(b => b.setAttribute('aria-pressed', b.dataset.gf === cat));
+}
+renderGal('all');
+function showG(k) { gI = (k + gList.length) % gList.length; const [f, cap] = GAL[gList[gI]]; $('lbImg').src = `img/${f}.webp`; $('lbImg').alt = cap; $('lbCap').textContent = cap; $('lbCnt').textContent = `${pad2(gI + 1)} / ${pad2(gList.length)}`; }
+$('lbPrev').addEventListener('click', () => showG(gI - 1)); $('lbNext').addEventListener('click', () => showG(gI + 1)); $('lbX').addEventListener('click', () => closeD(lb));
+lb.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') showG(gI - 1); if (e.key === 'ArrowRight') showG(gI + 1); });
+
+// projects: filters, carousel, parameters on demand
+const track = $('track'), cPrev = $('cPrev'), cNext = $('cNext'); let cList = CASES.map((_, i) => i);
+const CF = [['all', 'Все проекты'], ['ans', 'Насосные станции'], ['btp', 'Тепловые пункты']];
+$('cFilt').innerHTML = CF.map(([k, t], i) => `<button class="fbtn" type="button" data-cf="${k}" aria-pressed="${!i}">${t}<sup>${pad2(k === 'all' ? CASES.length : CASES.filter(c => c[3] === k).length)}</sup></button>`).join('');
+function renderCases(cat) {
+  cList = CASES.map((_, i) => i).filter(i => cat === 'all' || CASES[i][3] === cat);
+  track.innerHTML = cList.map((i, k) => { const [w, t, img, , rows] = CASES[i]; return `<article class="case" style="animation-delay:${k * 60}ms"><div class="im"><img src="${img}" alt="" width="960" height="600" loading="lazy"><span class="n">${pad2(i + 1)} / ${pad2(CASES.length)}</span></div><div class="tx"><h3>${w}</h3><p>${t}</p><div class="tags">${rows.slice(0, 3).map(r => `<span class="tag">${r[1]}</span>`).join('')}</div><button class="more" type="button" aria-expanded="false">Параметры <i>+</i></button><dl><div>${rows.map(([a, b]) => `<div class="r"><dt>${a}</dt><dd>${b}</dd></div>`).join('')}</div></dl></div></article>`; }).join('');
+  document.querySelectorAll('[data-cf]').forEach(b => b.setAttribute('aria-pressed', b.dataset.cf === cat));
+  track.scrollLeft = 0; cUpd();
+}
+const cStep = () => { const c = track.children[0]; return c ? c.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 20) : 1; };
+function cUpd() { const st = cStep(), max = track.scrollWidth - track.clientWidth; const i = Math.min(cList.length - 1, Math.round(track.scrollLeft / st));
+  $('cCnt').textContent = `${pad2(i + 1)} / ${pad2(cList.length)}`; cPrev.disabled = track.scrollLeft < 4; cNext.disabled = track.scrollLeft > max - 4; }
+cPrev.addEventListener('click', () => track.scrollBy({ left: -cStep(), behavior: reduced() ? 'auto' : 'smooth' }));
+cNext.addEventListener('click', () => track.scrollBy({ left: cStep(), behavior: reduced() ? 'auto' : 'smooth' }));
+track.addEventListener('scroll', () => requestAnimationFrame(cUpd), { passive: true }); addEventListener('resize', cUpd);
+renderCases('all');
+
+// industries
+let iI = 0;
+$('itabs').innerHTML = IND.map(([t], i) => `<button class="itab" type="button" role="tab" aria-selected="${!i}" tabindex="${i ? -1 : 0}" data-it="${i}"><span class="n">${pad2(i + 1)}_</span><span>${t}</span></button>`).join('');
+function renderInd(i, focus) {
+  iI = (i + IND.length) % IND.length; const [t, img, d, use] = IND[iI];
+  document.querySelectorAll('.itab').forEach((b, k) => { b.setAttribute('aria-selected', k === iI); b.tabIndex = k === iI ? 0 : -1; if (k === iI && focus) b.focus(); });
+  $('ipanel').innerHTML = `<div class="ph"><img src="${img}" alt="" loading="lazy"></div><div class="tx"><span class="eb"><b>${pad2(iI + 1)}_</b> / ${pad2(IND.length)}</span><h3>${t}</h3><p>${d}</p><span class="eb">// Что поставляем</span><div class="use">${use.map(id => `<button type="button" data-prod="${id}"><b>${P[id].s}</b>${P[id].one}<em>Открыть →</em></button>`).join('')}</div><div><a class="btn btn-red" href="#cta2" data-obj="${t}">${sw('Обсудить объект')} <span class="ar">→</span></a></div></div>`;
+}
+renderInd(0);
+$('itabs').addEventListener('keydown', e => { const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key]; if (d) { e.preventDefault(); renderInd(iI + d, true); } });
+
+// FAQ
+$('qa').addEventListener('click', e => { const b = e.target.closest('button[aria-expanded]'); if (!b) return; const o = b.getAttribute('aria-expanded') !== 'true'; b.setAttribute('aria-expanded', o); b.nextElementSibling.classList.toggle('open', o); });
+
+/* online application: four short steps */
+const W = { step: 0, prod: null, obj: null, city: '', params: '', file: '', mount: true, done: false };
+const WSTEPS = ['Оборудование', 'Объект', 'Параметры', 'Контакты'];
+function wizRender(focus) {
+  const s = W.step, wiz = $('wiz');
+  const head = `<div class="wsteps">${WSTEPS.map((t, i) => `<button type="button" data-ws="${i}" class="${i < s || W.done ? 'done' : i === s ? 'cur' : ''}" ${i > s && !W.done ? 'disabled' : ''}><span class="n">${pad2(i + 1)}_</span><span>${t}</span></button>`).join('')}</div>`;
+  let body;
+  if (W.done) {
+    const sum = [['Оборудование', W.prod ? (P[W.prod] ? P[W.prod].one : 'Другое') : '—'], ['Объект', W.obj || '—'], ['Город', W.city || '—'], ['Параметры', W.params || '—'], ['Файл', W.file || 'не приложен'], ['Монтаж', W.mount ? 'нужен' : 'не нужен']];
+    body = `<div class="wpanes"><div class="wpane wdone"><span class="eb"><b>//</b> Заявка собрана</span><h3>Спасибо! В демоверсии заявка не отправляется</h3><dl>${sum.map(([a, b]) => `<dt>${a}</dt><dd>${b.replace(/</g, '&lt;')}</dd>`).join('')}</dl><p style="font-size:14px;color:var(--ink-2)">На рабочем сайте она уйдёт в отдел продаж, и мы перезвоним в рабочее время.</p></div></div><div class="wfoot"><span class="cnt">04 / 04</span><button class="btn btn-line" type="button" data-wnew>${sw('Новая заявка')}</button></div>`;
+  } else {
+    const panes = [
+      `<h3>Какое оборудование нужно?</h3><div class="opts" role="radiogroup" aria-label="Оборудование">${PD.map(p => `<label class="opt"><input type="radio" name="wp" value="${p.id}" ${W.prod === p.id ? 'checked' : ''}><b>${p.s}</b><span>${p.one}</span></label>`).join('')}<label class="opt"><input type="radio" name="wp" value="other" ${W.prod === 'other' ? 'checked' : ''}><b>…</b><span>Другое или не знаю</span></label></div>`,
+      `<h3>Что за объект?</h3><div class="opts chips" role="radiogroup" aria-label="Объект">${OBJ.map(o => `<label class="opt"><input type="radio" name="wo" value="${o}" ${W.obj === o ? 'checked' : ''}><span>${o}</span></label>`).join('')}</div><div class="field"><label for="w-city">Город или регион</label><input id="w-city" value="${W.city.replace(/"/g, '&quot;')}" placeholder="Например, Самара"></div>`,
+      `<h3>Параметры и документы</h3><div class="wgrid"><div class="field wide"><label for="w-par">Что известно об объекте</label><textarea id="w-par" placeholder="Нагрузки, температурный график, назначение, сроки">${W.params.replace(/</g, '&lt;')}</textarea></div><div class="field wide"><label for="w-file">Опросный лист, проект или ТЗ</label><input id="w-file" type="file"></div><label class="consent wide"><input type="checkbox" id="w-mount" ${W.mount ? 'checked' : ''}> <span>Нужны монтаж и пусконаладка</span></label></div>`,
+      `<h3>Куда прислать расчёт?</h3><form class="wgrid" id="wform" novalidate><div class="field"><label for="w-n">Имя</label><input id="w-n" autocomplete="name" placeholder="Как к вам обращаться"></div><div class="field"><label for="w-p">Телефон</label><input id="w-p" type="tel" autocomplete="tel" placeholder="+7 ___ ___-__-__"></div><div class="field wide"><label for="w-m">Почта, если удобнее</label><input id="w-m" type="email" autocomplete="email" placeholder="name@company.ru"></div>${consent()}<p class="note" aria-live="polite"></p></form>`];
+    body = `<div class="wpanes"><div class="wpane">${panes[s]}<p class="note" id="wnote" aria-live="polite"></p></div></div><div class="wfoot"><button class="btn btn-line" type="button" data-wback ${s ? '' : 'disabled'}>${sw('Назад')}</button><span class="cnt">${pad2(s + 1)} / 04</span><button class="btn btn-red" type="button" data-wnext>${sw(s === 3 ? 'Отправить заявку' : 'Далее')} <span class="ar">→</span></button></div>`;
+  }
+  wiz.innerHTML = head + body;
+  if (focus) { const f = wiz.querySelector('.wpane input, .wpane textarea'); if (f) f.focus({ preventScroll: true }); }
+}
+function wizSave() {
+  const q = s => $('wiz').querySelector(s);
+  if (W.step === 0) { const r = q('input[name="wp"]:checked'); if (r) W.prod = r.value; }
+  if (W.step === 1) { const r = q('input[name="wo"]:checked'); if (r) W.obj = r.value; W.city = q('#w-city').value.trim(); }
+  if (W.step === 2) { W.params = q('#w-par').value.trim(); const f = q('#w-file'); if (f.files && f.files[0]) W.file = f.files[0].name; W.mount = q('#w-mount').checked; }
+}
+function wizNext() {
+  wizSave(); const note = $('wnote');
+  if (W.step === 0 && !W.prod) { note.textContent = 'Выберите оборудование или «Другое».'; note.className = 'note err'; return; }
+  if (W.step === 3) { const p = $('w-p'), ok = $('wiz').querySelector('input[name="ok"]');
+    if (!p.value.trim()) { note.textContent = 'Укажите телефон, чтобы мы могли перезвонить.'; note.className = 'note err'; p.focus(); return; }
+    if (!ok.checked) { note.textContent = 'Отметьте согласие на обработку данных.'; note.className = 'note err'; return; }
+    W.done = true; wizRender(); return; }
+  W.step++; wizRender(true);
+}
+$('wiz').addEventListener('click', e => {
+  if (e.target.closest('[data-wnext]')) wizNext();
+  else if (e.target.closest('[data-wback]')) { wizSave(); W.step = Math.max(0, W.step - 1); wizRender(true); }
+  else if (e.target.closest('[data-wnew]')) { Object.assign(W, { step: 0, prod: null, obj: null, city: '', params: '', file: '', mount: true, done: false }); wizRender(true); }
+  else { const b = e.target.closest('[data-ws]'); if (b && !b.disabled && !W.done) { wizSave(); W.step = +b.dataset.ws; wizRender(true); } }
+});
+$('wiz').addEventListener('change', e => { if (e.target.name === 'wp' || e.target.name === 'wo') { wizSave(); } });
+$('wiz').addEventListener('submit', e => { e.preventDefault(); e.stopPropagation(); wizNext(); });
+wizRender();
+function orderProd(id) { Object.assign(W, { step: 1, prod: id, done: false }); wizRender(); goSec('#cta2'); }
+
+/* ---------- 3D: one viewer, moved between the 3D section and the product card ---------- */
+const V = { ready: null, host: null, id: null, roots: {}, loading: {} };
+const CDN = 'https://cdn.jsdelivr.net/npm/three@0.147.0/';
+const loadScript = src => new Promise((ok, fail) => { const s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = () => fail(new Error('не загрузился ' + src.split('/').pop())); document.head.appendChild(s); });
+function v3init() {
+  if (V.ready) return V.ready;
+  V.ready = loadScript(CDN + 'build/three.min.js').then(() => Promise.all(['examples/js/loaders/GLTFLoader.js', 'examples/js/loaders/DRACOLoader.js', 'examples/js/controls/OrbitControls.js', 'examples/js/environments/RoomEnvironment.js'].map(f => loadScript(CDN + f)))).then(() => {
+    const T = THREE, r = new T.WebGLRenderer({ antialias: true, alpha: true });
+    r.setPixelRatio(Math.min(devicePixelRatio || 1, 2)); r.outputEncoding = T.sRGBEncoding; r.toneMapping = T.ACESFilmicToneMapping; r.shadowMap.enabled = true; r.shadowMap.type = T.PCFSoftShadowMap;
+    const scene = new T.Scene(), pm = new T.PMREMGenerator(r); scene.environment = pm.fromScene(new T.RoomEnvironment(), .04).texture;
+    const sun = new T.DirectionalLight(0xffffff, 1.5); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); scene.add(sun, sun.target);
+    const camera = new T.PerspectiveCamera(32, 16 / 9, .05, 200), controls = new T.OrbitControls(camera, r.domElement);
+    controls.enableDamping = true; controls.dampingFactor = .08; controls.autoRotate = !reduced(); controls.autoRotateSpeed = .9; controls.maxPolarAngle = Math.PI * .52;
+    controls.addEventListener('start', () => { controls.autoRotate = false; });
+    const ground = new T.Mesh(new T.CircleGeometry(1, 64), new T.ShadowMaterial({ opacity: .14 })); ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
+    const draco = new T.DRACOLoader(); draco.setDecoderPath(new URL('draco/', location.href).href); draco.setDecoderConfig({ type: 'js' });
+    const loader = new T.GLTFLoader(); loader.setDRACOLoader(draco);
+    Object.assign(V, { T, r, scene, sun, camera, controls, ground, loader, need: true, home: null });
+    r.domElement.setAttribute('aria-label', '3D-модель изделия, зажмите и ведите, чтобы вращать');
+    controls.addEventListener('change', () => { V.need = true; });
+    new ResizeObserver(() => v3fit()).observe(document.body);
+    // render only while the viewer is on screen, so a spinning model never costs anything off screen
+    V.seen = new Set(); const io = new IntersectionObserver(en => en.forEach(x => { if (x.isIntersecting) { V.seen.add(x.target); V.need = true; } else V.seen.delete(x.target); }));
+    io.observe($('v3slot')); io.observe($('dwSlot'));
+    (function loop() { requestAnimationFrame(loop); if (!V.host || document.hidden || !V.seen.has(V.host) || !V.r.domElement.isConnected || V.host.closest('[hidden]') || !V.host.offsetWidth) return; if (controls.update()) V.need = true; if (V.need) { V.need = false; r.render(scene, camera); } })();
+  });
+  return V.ready;
+}
+function v3fit() { if (!V.host || !V.r) return; const w = V.host.clientWidth, h = V.host.clientHeight; if (!w || !h) return; V.r.setSize(w, h, false); V.camera.aspect = w / h; V.camera.updateProjectionMatrix(); V.need = true; }
+async function fetchGLB(url) { const txt = (await (await fetch(url)).text()).replace(/\s+/g, ''); const bin = atob(txt), buf = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) buf[i] = bin.charCodeAt(i); return buf.buffer; }
+function v3model(id) {
+  // the GLTF parser picks its texture loader when it is created: hide createImageBitmap only for that synchronous moment
+  if (!V.loading[id]) V.loading[id] = fetchGLB(P[id].glb).then(data => new Promise((ok, fail) => { const cib = self.createImageBitmap; try { self.createImageBitmap = undefined; } catch (_) {}
+    try { V.loader.parse(data, '', g => { g.scene.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } }); ok(g.scene); }, fail); } catch (e) { fail(e); } finally { try { self.createImageBitmap = cib; } catch (_) {} } }));
+  return V.loading[id];
+}
+function v3frame(root) {
+  const T = V.T, box = new T.Box3().setFromObject(root), size = box.getSize(new T.Vector3()), c = box.getCenter(new T.Vector3()), r = size.length() / 2;
+  V.ground.scale.setScalar(r * 3); V.ground.position.set(c.x, box.min.y - .002, c.z);
+  V.sun.position.set(c.x - r * 1.2, c.y + r * 2.2, c.z + r * 1.6); V.sun.target.position.copy(c);
+  const sc = V.sun.shadow.camera; sc.left = sc.bottom = -r * 1.5; sc.right = sc.top = r * 1.5; sc.near = .1; sc.far = r * 8; sc.updateProjectionMatrix();
+  const vf = T.MathUtils.degToRad(V.camera.fov / 2), asp = Math.max(1.2, V.camera.aspect), hf = Math.atan(Math.tan(vf) * asp), hxz = Math.hypot(size.x, size.z) / 2;
+  const dist = Math.max(size.y / 2 / Math.tan(vf), hxz / Math.tan(hf)) + hxz * .85, dir = new T.Vector3(-.55, .38, .75).normalize();
+  V.home = { pos: c.clone().addScaledVector(dir, dist), target: c.clone() };
+  V.camera.position.copy(V.home.pos); V.controls.target.copy(c); V.controls.minDistance = r * .3; V.controls.maxDistance = dist * 2.5;
+  V.camera.near = r / 100; V.camera.far = dist * 6; V.camera.updateProjectionMatrix(); V.need = true;
+}
+async function v3show(id, host, msgEl, zoom) {
+  msgEl.hidden = false; msgEl.textContent = 'Загружаю 3D-модель…';
+  try {
+    await v3init();
+    host.hidden = false; host.appendChild(V.r.domElement); V.host = host; V.controls.enableZoom = !!zoom; v3fit();
+    const root = await v3model(id);
+    if (V.host !== host) return;
+    if (V.cur && V.cur !== root) V.scene.remove(V.cur);
+    V.scene.add(root); V.cur = root; V.id = id; V.controls.autoRotate = !reduced(); v3frame(root); msgEl.hidden = true;
+    return true;
+  } catch (err) { msgEl.textContent = 'Не удалось показать 3D-модель: ' + (err && err.message || err) + '. Показываем рендер.'; host.hidden = true; return false; }
+}
+function v3zoom(k) { if (!V.r || !V.cur) return; const c = V.controls, off = V.camera.position.clone().sub(c.target).multiplyScalar(k); const d = off.length(); if (d < c.minDistance || d > c.maxDistance) return; V.camera.position.copy(c.target).add(off); V.need = true; }
+
+// the 3D section
+let v3id = 'btp', v3started = false; const coarse = matchMedia('(pointer: coarse)').matches;
+function v3spec(id) {
+  const p = P[id];
+  $('v3spec').innerHTML = `<span class="eb"><b>${pad2(p.i + 1)}_</b> ${p.s}</span><h3>${p.one}</h3><p>${p.text}</p><ol class="parts">${p.parts.map(x => `<li>${x}</li>`).join('')}</ol><div class="btns"><button class="btn btn-red" type="button" data-order="${id}">${sw('Рассчитать стоимость')} <span class="ar">→</span></button><button class="btn btn-line" type="button" data-prod="${id}">${sw('Фото и рендеры')}</button></div>`;
+  $('v3fb').src = p.media.find(m => m[2] === '3D')[0];
+  document.querySelectorAll('.v3tab').forEach(b => { const on = b.dataset.v3 === id; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1; });
+}
+function v3select(id) { v3id = id; v3spec(id); if (v3started) v3show(id, $('v3slot'), $('v3msg'), false); }
+v3spec('btp');
+$('v3tabs').addEventListener('click', e => { const b = e.target.closest('[data-v3]'); if (b) v3select(b.dataset.v3); });
+$('v3tabs').addEventListener('keydown', e => { const d = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key]; if (!d) return; e.preventDefault(); const i = (P[v3id].i + d + PD.length) % PD.length; v3select(PD[i].id); document.querySelector(`[data-v3="${PD[i].id}"]`).focus(); });
+function v3start() { if (v3started) return; v3started = true; $('v3go').hidden = true; v3show(v3id, $('v3slot'), $('v3msg'), false).then(ok => { if (ok) $('v3fb').hidden = true; }); }
+$('v3go').addEventListener('click', v3start);
+$('v3zi').addEventListener('click', () => { if (!v3started) v3start(); else v3zoom(.8); }); $('v3zo').addEventListener('click', () => v3zoom(1.25));
+$('v3rs').addEventListener('click', () => { if (V.home && V.host === $('v3slot')) { V.camera.position.copy(V.home.pos); V.controls.target.copy(V.home.target); V.controls.autoRotate = !reduced(); V.need = true; } });
+if (coarse) $('v3go').hidden = false;
+else new IntersectionObserver((en, ob) => { if (en.some(x => x.isIntersecting)) { ob.disconnect(); v3start(); } }, { rootMargin: '300px' }).observe($('v3d'));
+
+// product card
+const dw = $('dw'); let dwId = 'btp', dwM = 0, dw3 = false;
+function dwRender(id, mode) {
+  const p = P[id]; dwId = id; dwM = 0;
+  $('dwCode').innerHTML = `<b>${pad2(p.i + 1)}_</b> ${p.s}`; $('dwIx').textContent = `${pad2(p.i + 1)} / ${pad2(PD.length)}`;
+  $('dwTitle').textContent = p.one; $('dwText').textContent = p.text;
+  $('dwParts').innerHTML = p.parts.map(x => `<li>${x}</li>`).join('');
+  $('dwBtns').innerHTML = `<button class="btn btn-red" type="button" data-order="${id}">${sw('Рассчитать стоимость')} <span class="ar">→</span></button><button class="btn btn-line" type="button" data-ask="${p.one}">${sw('Задать вопрос')}</button>`;
+  $('dwStrip').innerHTML = p.media.map(([src, cap, k], i) => `<button type="button" data-m="${i}" aria-label="${k}: ${cap}" ${i ? '' : 'aria-current="true"'}><img src="${src.replace('img3d/', 'img3d/').replace(/\.webp$/, k === '3D' ? '-s.webp' : '.webp')}" alt="" loading="lazy"></button>`).join('');
+  dwMedia(0); dwMode(mode === '3d');
+}
+function dwMedia(i) { const p = P[dwId], [src, cap, k] = p.media[i]; dwM = i; const img = $('dwImg'); img.src = src; img.alt = cap; $('dwCap').innerHTML = `<b>${k}</b>${cap}`;
+  img.style.animation = 'none'; void img.offsetWidth; img.style.animation = '';
+  $('dwStrip').querySelectorAll('button').forEach((b, k2) => b.toggleAttribute('aria-current', k2 === i)); }
+function dwMode(three) {
+  dw3 = three; $('dwG').setAttribute('aria-pressed', !three); $('dw3').setAttribute('aria-pressed', three);
+  $('dwImg').hidden = three; $('dwCap').hidden = three; $('dwStrip').hidden = three; $('dwSlot').hidden = !three;
+  if (three) v3show(dwId, $('dwSlot'), $('dwMsg'), true).then(ok => { if (!ok) { $('dwImg').hidden = false; } });
+  else $('dwMsg').hidden = true;
+}
+function openProd(id, mode) { setMega(false); setMenu(false); dwRender(id, mode); if (!dw.open) openD(dw); dw.scrollTop = 0; }
+$('dwStrip').addEventListener('click', e => { const b = e.target.closest('[data-m]'); if (b) dwMedia(+b.dataset.m); });
+$('dwG').addEventListener('click', () => dwMode(false)); $('dw3').addEventListener('click', () => dwMode(true));
+$('dwPrev').addEventListener('click', () => dwRender(PD[(P[dwId].i + PD.length - 1) % PD.length].id, dw3 ? '3d' : ''));
+$('dwNext').addEventListener('click', () => dwRender(PD[(P[dwId].i + 1) % PD.length].id, dw3 ? '3d' : ''));
+$('dwX').addEventListener('click', () => closeD(dw));
+dw.addEventListener('keydown', e => { if (dw3 || e.target.closest('input, textarea')) return; if (e.key === 'ArrowRight') dwMedia((dwM + 1) % P[dwId].media.length); if (e.key === 'ArrowLeft') dwMedia((dwM - 1 + P[dwId].media.length) % P[dwId].media.length); });
+dw.addEventListener('close', () => { if (V.host === $('dwSlot') && v3started) v3show(v3id, $('v3slot'), $('v3msg'), false); });
+
+function goSec(id, then) {
+  const t = document.querySelector(id); if (!t) return;
+  t.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'start' });
+  if (then) setTimeout(then, reduced() ? 0 : 700);
+}
+const beyondTour = () => units.length && scrollY0() > units[units.length - 1].y1;
+document.addEventListener('submit', e => {
+  if (e.target.id === 'wform') return;
+  e.preventDefault(); const f = e.target, n = f.querySelector('.note'), p = f.querySelector('input[type="tel"]'), ok = f.querySelector('input[name="ok"]');
+  if (!n) return; n.className = 'note';
+  if (p && !p.value.trim()) { n.textContent = 'Укажите телефон, чтобы мы могли перезвонить.'; n.classList.add('err'); p.focus(); return; }
+  if (ok && !ok.checked) { n.textContent = 'Отметьте согласие на обработку данных.'; n.classList.add('err'); return; }
+  n.textContent = 'Это демоверсия: заявка не отправлена. На рабочем сайте она уйдёт в отдел продаж.'; n.classList.add('done');
+});
 document.addEventListener('click', e => {
   const c = e.target.closest('[data-copy]');
-  if (c) { const v = c.dataset.copy; const ok = () => { c.textContent = 'Скопировано'; setTimeout(() => c.textContent = 'Скопировать', 1500); };
-    try { navigator.clipboard.writeText(v).then(ok, () => sel(c)); } catch (_) { sel(c); } return; }
+  if (c) { const v = c.dataset.copy, ok = () => { c.textContent = 'Скопировано'; setTimeout(() => c.textContent = 'Скопировать', 1500); };
+    try { navigator.clipboard.writeText(v).then(ok, () => selText(c)); } catch (_) { selText(c); } return; }
+  if (e.target.closest('[data-soon]')) { e.preventDefault(); toast('Эта страница появится на рабочем сайте.'); return; }
+  if (e.target.closest('[data-film]')) { openD(fb); fv.play().catch(() => {}); return; }
+  const g = e.target.closest('[data-g]'); if (g) { showG(+g.dataset.g); openD(lb); return; }
+  const gf = e.target.closest('[data-gf]'); if (gf) { renderGal(gf.dataset.gf); return; }
+  const cf = e.target.closest('[data-cf]'); if (cf) { renderCases(cf.dataset.cf); return; }
+  const mo = e.target.closest('.case .more'); if (mo) { const o = mo.getAttribute('aria-expanded') !== 'true'; mo.setAttribute('aria-expanded', o); mo.nextElementSibling.classList.toggle('open', o); return; }
+  const it = e.target.closest('[data-it]'); if (it) { renderInd(+it.dataset.it); return; }
+  const pr = e.target.closest('[data-prod]'); if (pr) { e.preventDefault(); openProd(pr.dataset.prod); return; }
+  const od = e.target.closest('[data-order]'); if (od) { e.preventDefault(); if (dw.open) closeD(dw); orderProd(od.dataset.order); return; }
+  const ob = e.target.closest('[data-obj]'); if (ob) { e.preventDefault(); Object.assign(W, { step: W.prod ? 1 : 0, obj: OBJ.includes(ob.dataset.obj) ? ob.dataset.obj : (ob.dataset.obj.startsWith('Жил') ? 'Жилой дом' : ob.dataset.obj.startsWith('Произ') ? 'Производство' : ob.dataset.obj.startsWith('Общ') ? 'Общественное здание' : 'Коммунальный объект'), done: false }); wizRender(); goSec('#cta2'); return; }
+  const a = e.target.closest('[data-ask]');
+  if (a) { e.preventDefault(); setMega(false); setMenu(false); if (dw.open) closeD(dw); const q = $('q-q'); q.value = `Интересует: ${a.dataset.ask}. `; goSec('#contacts', () => $('q-n').focus({ preventScroll: true })); return; }
+  const cta = e.target.closest('[data-cta]');
+  if (cta) { e.preventDefault(); setMega(false); setMenu(false); if (beyondTour()) goSec('#cta2'); else glideTo(5); return; }
   const j = e.target.closest('[data-jump]');
-  if (j) { e.preventDefault(); jumpTo(+j.dataset.jump); }
+  if (j) { e.preventDefault(); setMega(false); setMenu(false); glideTo(+j.dataset.jump); return; }
+  const h = e.target.closest('a[href^="#"]');
+  if (h && h.getAttribute('href').length > 1) { e.preventDefault(); setMega(false); setMenu(false); goSec(h.getAttribute('href')); }
 });
-function sel(c) { const r = document.createRange(); r.selectNodeContents(c.previousElementSibling); const s = getSelection(); s.removeAllRanges(); s.addRange(r); c.textContent = 'Выделено, нажмите Ctrl+C'; }
+function selText(c) { const r = document.createRange(); r.selectNodeContents(c.previousElementSibling); const s = getSelection(); s.removeAllRanges(); s.addRange(r); c.textContent = 'Выделено, нажмите Ctrl+C'; }
+
+/* services: tabs change by themselves every few seconds while the stop is on screen */
+const utabs = [...document.querySelectorAll('.utab')], uslides = [...document.querySelectorAll('.uslide')], uPanel = $('usl');
+const U = { i: 0, el: 0, last: 0, hover: false, DUR: 5600 };
+const uVert = () => !matchMedia('(max-width: 760px)').matches;
+function uSet(i, focus) {
+  U.i = (i + USL.length) % USL.length; U.el = 0;
+  utabs.forEach((b, k) => { b.setAttribute('aria-selected', k === U.i); b.tabIndex = k === U.i ? 0 : -1; const bar = b.querySelector('.pr b'); bar.style.height = ''; bar.style.width = ''; });
+  uslides.forEach((s, k) => s.classList.toggle('on', k === U.i));
+  if (focus) utabs[U.i].focus();
+  const tb = utabs[U.i].parentElement.parentElement; if (tb.scrollWidth > tb.clientWidth) tb.scrollTo({ left: utabs[U.i].offsetLeft - 8, behavior: 'smooth' });
+}
+utabs.forEach((b, k) => { b.addEventListener('click', () => uSet(k)); b.addEventListener('keydown', e => { const d = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key]; if (d) { e.preventDefault(); e.stopPropagation(); uSet(U.i + d, true); } }); });
+uPanel.addEventListener('mouseenter', () => U.hover = true); uPanel.addEventListener('mouseleave', () => U.hover = false);
+function uLoop(now) {
+  const dt = Math.min(100, now - (U.last || now)); U.last = now;
+  if (stopEls[1].classList.contains('on') && !U.hover && !document.hidden && !reduced() && menu.hidden && !dw.open && !uPanel.contains(document.activeElement)) {
+    U.el += dt; if (U.el >= U.DUR) uSet(U.i + 1);
+    const bar = utabs[U.i].querySelector('.pr b'), pc = Math.min(100, U.el / U.DUR * 100) + '%';
+    if (uVert()) bar.style.height = pc; else bar.style.width = pc;
+  }
+  requestAnimationFrame(uLoop);
+}
+requestAnimationFrame(uLoop);
+
+// numbers count up the first time their stop is on screen
+const counted = new Set();
+function countUp(root) {
+  root.querySelectorAll('[data-count]').forEach(el => {
+    if (counted.has(el)) return; counted.add(el); const to = +el.dataset.count;
+    if (reduced()) { el.textContent = to; return; }
+    const t0 = performance.now(), d = 1400; (function f(now) { const k = Math.min(1, (now - t0) / d), e = 1 - Math.pow(1 - k, 3); el.textContent = Math.round(to * e); if (k < 1) requestAnimationFrame(f); })(t0);
+  });
+}
 
 /* ---------- film: one WebP per frame, drawn to canvas by scroll ---------- */
-const cv = document.getElementById('cv'), ctx = cv.getContext('2d', { alpha: false }), poster = document.getElementById('poster');
-const tour = document.getElementById('tour'), stage = document.getElementById('stage');
+const cv = $('cv'), ctx = cv.getContext('2d', { alpha: false }), poster = $('poster');
+const tour = $('tour'), film = $('film');
 const isPhone = () => innerWidth <= 760, DIR = 'frames3/';
 let M = null, total = 0, units = [], holdFrame = [], lastI = 0, dirF = 1, loaded = 0;
 const cache = new Map(), pending = new Set(), blobs = [], stillAt = new Map(); let cacheMax = 48;
+const PRE = { s1: false, frames: 0, need: 36 };
 
 async function boot() {
   cacheMax = isPhone() ? 28 : 48;
   M = await (await fetch(DIR + 'manifest.json')).json();
   total = M.legs.reduce((a, n) => a + n, 0);
-  holdFrame = M.stops.slice(); // global frame index of each stop; stops without footage yet hold the last frame
+  holdFrame = M.stops.slice(0, STOPS.length);
   while (holdFrame.length < STOPS.length) holdFrame.push(total - 1);
   layout();
+  if (location.hash && location.hash.length > 1 && !/^#s\d$/.test(location.hash)) { const t = document.querySelector(location.hash); if (t) t.scrollIntoView(); }
   // full-quality stills at the stops come first: that is what a visitor looks at
-  M.stills.forEach((f, k) => fetch(DIR + f).then(r => r.blob()).then(b => createImageBitmap(b)).then(b => { stillAt.set(M.stops[k], b); lastKey = ''; tick(true); }).catch(() => {}));
+  M.stills.forEach((f, k) => fetch(DIR + f).then(r => r.blob()).then(b => decode(b)).then(b => { stillAt.set(M.stops[k], b); if (k === 0) PRE.s1 = true; lastKey = ''; tick(true); }).catch(() => { if (k === 0) PRE.s1 = true; }));
   // frames load outward from where the visitor is
   const c = holdFrame[progressLeg()] || 0, queue = [];
   for (let d = 0; queue.length < total; d++) { if (c + d < total) queue.push(c + d); if (d && c - d >= 0) queue.push(c - d); }
-  const ld = document.getElementById('load'); let next = 0;
+  let next = 0;
   const worker = async () => { while (next < queue.length) { const i = queue[next++];
     await fetch(`${DIR}f/${String(i).padStart(4, '0')}.webp`).then(r => r.ok ? r.blob() : null).then(b => { blobs[i] = b; }).catch(() => {});
-    loaded++; if (loaded % 10 === 0 || loaded === total) ld.innerHTML = loaded < total ? `Загружаем цех ${Math.round(loaded / total * 100)}%<span class="bar"><i style="width:${loaded / total * 100}%"></i></span>` : '';
+    loaded++; PRE.frames = loaded;
     if (Math.abs(i - lastI) < 20) tick(true); } };
   await Promise.all(Array.from({ length: 6 }, worker));
 }
@@ -385,7 +1381,7 @@ function bitmap(i) {
   if (cache.has(i)) return cache.get(i);
   if (!blobs[i] || pending.has(i)) return null;
   pending.add(i);
-  createImageBitmap(blobs[i]).then(b => {
+  decode(blobs[i]).then(b => {
     pending.delete(i); cache.set(i, b);
     // keep the frames nearest to the camera, drop the farthest
     while (cache.size > cacheMax) { let far = -1, d = -1; for (const k of cache.keys()) if (Math.abs(k - lastI) > d) { d = Math.abs(k - lastI); far = k; } const x = cache.get(far); x.close && x.close(); cache.delete(far); }
@@ -393,8 +1389,13 @@ function bitmap(i) {
   }, () => pending.delete(i));
   return null;
 }
-
-// scroll units: a flight is two wheel notches (2 × 100 px) and a stop keeps only a short landing zone, so the film moves on the first scroll
+// hotspots follow the same cover fit as the canvas
+function placeHots() {
+  const W = film.clientWidth, H = film.clientHeight, s = Math.max(W / 1600, H / 900), ox = (W - 1600 * s) / 2, oy = (H - 900 * s) / 2;
+  const room = W < 700 ? 80 : 300; // label width; near the right edge the label opens to the left
+  document.querySelectorAll('.hot').forEach(b => { const x = ox + b.dataset.x * 1600 * s; b.style.left = x.toFixed(1) + 'px'; b.style.top = (oy + b.dataset.y * 900 * s).toFixed(1) + 'px'; b.classList.toggle('flip', x > W - room); });
+}
+// scroll units: a flight is two wheel notches (2 × 90 px) and a stop keeps only a short landing zone, so the film moves on the first scroll
 function layout() {
   const vh = innerHeight, ph = isPhone(); units = []; let y = 0;
   const HOLD = ph ? 40 : 20, FLY = ph ? Math.round(vh * .4) : 180;
@@ -405,26 +1406,27 @@ function layout() {
   tour.style.height = (y + vh) + 'px';
   const dpr = Math.min(devicePixelRatio || 1, 2), r = cv.getBoundingClientRect();
   cv.width = Math.max(1, Math.round(r.width * dpr)); cv.height = Math.max(1, Math.round(r.height * dpr));
-  tick(true);
+  placeHots(); tick(true);
 }
 function scrollY0() { return Math.max(0, -tour.getBoundingClientRect().top); }
 function progressLeg() { const y = scrollY0(); const u = units.find(u => y < u.y1) || units[units.length - 1]; return u ? u.s : 0; }
-function jumpTo(s) { glideTo(s); }
 
-let lastKey = '';
+let lastKey = '', lastCur = -1;
 function tick(force) {
   if (!units.length) return;
   const y = scrollY0(); const u = units.find(u => y < u.y1) || units[units.length - 1];
-  let f, op = new Array(STOPS.length).fill(0), metres;
+  let f, op = new Array(STOPS.length).fill(0), metres, legT = 0;
   if (u.t === 'hold') { f = holdFrame[u.s]; op[u.s] = 1; metres = AT[u.s]; }
-  else { const t = Math.min(1, Math.max(0, (y - u.y0) / (u.y1 - u.y0))); f = u.f0 + (u.f1 - u.f0) * t;
+  else { const t = Math.min(1, Math.max(0, (y - u.y0) / (u.y1 - u.y0))); legT = t; f = u.f0 + (u.f1 - u.f0) * t;
     op[u.s] = Math.max(0, 1 - t / .3); op[u.s + 1] = Math.max(0, (t - .7) / .3); metres = AT[u.s] + LEGS[u.s] * t; }
-  stopEls.forEach((el, i) => { const o = op[i]; el.style.opacity = o; el.style.visibility = o > .01 ? 'visible' : 'hidden'; el.classList.toggle('on', o > .6); el.style.transform = `translateY(${(1 - o) * 14}px)`; });
+  stopEls.forEach((el, i) => { const o = op[i]; el.style.opacity = o; el.style.visibility = o > .01 ? 'visible' : 'hidden'; const on = o > .6; if (on && !el.classList.contains('on') && i === 3) countUp(el); el.classList.toggle('on', on); el.style.transform = o < 1 ? `translateY(${(1 - o) * 12}px)` : ''; });
+  hotLayers.forEach(l => { const o = op[+l.dataset.s]; l.style.opacity = o; l.classList.toggle('on', o > .6); });
   const cur = u.t === 'hold' ? u.s : (op[u.s + 1] > op[u.s] ? u.s + 1 : u.s);
-  lis.forEach((li, i) => { li.classList.toggle('past', i < cur); li.classList.toggle('cur', i === cur); });
-  document.getElementById('fill').style.height = `calc(${(metres / AT[AT.length - 1]) * 100}% - 12px * ${(metres / AT[AT.length - 1]).toFixed(3)})`;
-  document.getElementById('odo').textContent = Math.round(metres);
-  document.getElementById('hint').style.opacity = y < 40 ? 1 : 0;
+  segs.forEach((li, i) => { li.classList.toggle('past', i < cur); li.classList.toggle('cur', i === cur);
+    li.style.setProperty('--f', i < u.s ? 1 : i === u.s && u.t === 'fly' ? legT.toFixed(3) : 0); });
+  if (cur !== lastCur) { lastCur = cur; $('rcur').innerHTML = `<b>${pad2(cur + 1)}_</b> ${STOPS[cur].zone}`; }
+  $('odo').textContent = Math.round(metres);
+  $('hint').style.opacity = y < 40 ? 1 : 0;
   draw(f, force);
 }
 // one real frame at a time: blending neighbours doubled every edge
@@ -449,9 +1451,8 @@ function paint(b) {
 }
 /* scenes glide: a wheel gesture, a key or a paused touch scroll carries the camera smoothly to the next stop,
    so the film never halts half-way through a flight */
-let glide = null, lastWheel = 0, glideEnd = 0, idleT = 0, lastY = scrollY, sdir = 1;
+let glide = null, lastWheel = 0, glideEnd = 0, idleT = 0, lastY = scrollY, sdir = 1, ready = false;
 const easeIO = k => (1 - Math.cos(Math.PI * k)) / 2; // gentle start, gentle landing
-const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 function holdTop(s) { const u = units.find(u => u.t === 'hold' && u.s === s); return tour.getBoundingClientRect().top + scrollY + (u.y0 + u.y1) / 2; }
 // the stop a move in direction dir goes to from the current position; -1 when the move leaves the tour
 function nextStop(dir) {
@@ -461,11 +1462,12 @@ function nextStop(dir) {
   const s = u.t === 'hold' ? u.s + dir : (dir > 0 ? u.s + 1 : u.s);
   return s < 0 || s >= STOPS.length ? -1 : s;
 }
-function glideTo(s) {
+function glideTo(s, done) {
   if (!units.length || !M) return;
   s = Math.max(0, Math.min(STOPS.length - 1, s));
-  const from = scrollY, to = holdTop(s), d = to - from; if (Math.abs(d) < 1) return;
-  if (reduced()) { scrollTo(0, to); return; }
+  const from = scrollY, to = holdTop(s), d = to - from;
+  if (Math.abs(d) < 1) { done && done(); return; }
+  if (reduced()) { scrollTo(0, to); done && done(); return; }
   const leg = units.find(u => u.t === 'fly'), legPx = leg ? leg.y1 - leg.y0 + 20 : 200, n = Math.abs(d) / legPx;
   const dur = n <= 1 ? 1200 * Math.max(.45, n) : Math.min(2800, 1200 + 420 * (n - 1));
   const t0 = performance.now(), me = glide = { s, dir: Math.sign(d), next: false };
@@ -473,17 +1475,20 @@ function glideTo(s) {
     if (glide !== me) return;
     const k = Math.min(1, (now - t0) / dur); scrollTo(0, from + d * easeIO(k));
     if (k < 1) return requestAnimationFrame(step);
-    glide = null; glideEnd = now; lastY = scrollY;
+    glide = null; glideEnd = now; lastY = scrollY; done && done();
     if (me.next) { const n2 = nextStop(me.dir); if (n2 >= 0) glideTo(n2); }
   };
   requestAnimationFrame(step);
 }
+const modalOpen = () => fb.open || lb.open || dw.open || !menu.hidden;
 addEventListener('wheel', e => {
-  if (e.ctrlKey || !M || fb.open) return; // pinch zoom, film playing
+  if (e.ctrlKey || !M || modalOpen()) return; // pinch zoom, film or menu open
+  if (!ready) { e.preventDefault(); return; }
+  if (e.target.closest && e.target.closest('#mega')) return;
   const dir = Math.sign(e.deltaY); if (!dir) return;
   if (glide && dir !== glide.dir) { e.preventDefault(); const n = nextStop(dir); if (n >= 0) glideTo(n); lastWheel = performance.now(); return; }
   const target = glide ? glide.s : nextStop(dir);
-  if (target < 0) return; // past the last stop the page scrolls on to the footer as usual
+  if (target < 0) return; // past the last stop the page scrolls on as usual
   e.preventDefault();
   const now = performance.now(), gap = now - lastWheel; lastWheel = now;
   if (glide) { if (gap > 260) glide.next = true; return; } // a fresh notch during a flight books the next scene
@@ -491,13 +1496,13 @@ addEventListener('wheel', e => {
   glideTo(target);
 }, { passive: false });
 addEventListener('keydown', e => {
-  if (e.altKey || e.ctrlKey || e.metaKey || fb.open || (e.target.closest && e.target.closest('input, textarea, select, button, a, dialog, [contenteditable]'))) return;
+  if (e.altKey || e.ctrlKey || e.metaKey || modalOpen() || (e.target.closest && e.target.closest('input, textarea, select, button, a, dialog, [contenteditable]'))) return;
   const dir = { ArrowDown: 1, PageDown: 1, ArrowUp: -1, PageUp: -1, ' ': e.shiftKey ? -1 : 1 }[e.key]; if (!dir) return;
   const n = nextStop(dir); if (n < 0) return;
   e.preventDefault(); if (glide && glide.dir === dir) glide.next = true; else glideTo(n);
 });
 // touch, scrollbar: whoever moves the page by hand takes over; if they let go half-way, the camera finishes the flight
-['touchstart', 'mousedown'].forEach(ev => addEventListener(ev, () => { glide = null; }, { passive: true }));
+['touchstart', 'mousedown'].forEach(ev => addEventListener(ev, e => { if (!e.target.closest || !e.target.closest('.track, .utabs, .cat, .v3tabs, dialog')) glide = null; }, { passive: true }));
 function settleSoon() {
   clearTimeout(idleT); idleT = setTimeout(() => {
     if (glide || !M) return; const y = scrollY0(), u = units.find(u => y < u.y1);
@@ -505,11 +1510,45 @@ function settleSoon() {
   }, 160);
 }
 addEventListener('touchend', settleSoon, { passive: true });
+const flowEl = $('flow'), flowLis = [...flowEl.children], topEl = $('top');
+function pageFx() {
+  const vh = innerHeight, max = document.documentElement.scrollHeight - vh;
+  topEl.style.setProperty('--pp', max > 0 ? (scrollY / max).toFixed(4) : 0);
+  const r = flowEl.getBoundingClientRect(), p = Math.min(1, Math.max(0, (vh * .85 - r.top) / (vh * .5)));
+  flowEl.style.setProperty('--fp', p.toFixed(3)); flowLis.forEach((li, i) => li.classList.toggle('on', p >= i / (flowLis.length - 1) - .02));
+}
 addEventListener('scroll', () => { if (scrollY !== lastY) sdir = scrollY > lastY ? 1 : -1; lastY = scrollY; if (!glide) settleSoon(); }, { passive: true });
-let raf = 0; addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; tick(); }); }, { passive: true });
-addEventListener('resize', () => { lastKey = ''; layout(); });
+let raf = 0; addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; tick(); pageFx(); }); }, { passive: true });
+addEventListener('resize', () => { lastKey = ''; layout(); pageFx(); });
 stopEls[0].style.opacity = 1; stopEls[0].style.visibility = 'visible'; stopEls[0].classList.add('on');
-boot().catch(err => { document.getElementById('load').textContent = 'Видео не загрузилось, показываем кадр.'; console.warn(err); });
+
+// sections appear as they come into view
+const rvObs = new IntersectionObserver(en => en.forEach(x => { if (!x.isIntersecting) return; x.target.classList.add('in'); x.target.classList.remove('split-wait'); rvObs.unobserve(x.target); }), { rootMargin: '0px 0px -8% 0px', threshold: .12 });
+document.querySelectorAll('[data-rv], .sec [data-split], .foot [data-split]').forEach(el => rvObs.observe(el));
+
+/* ---------- preloader: real progress of the first still and the first frames of the flight ---------- */
+const pre = $('pre'), LINES = ['Свариваем обвязку теплового пункта', 'Собираем узел учёта на раме', 'Опрессовываем контур', 'Настраиваем автоматику', 'Испытываем насосы на стенде', 'Готовим блок к отгрузке'];
+const LOG = ['Сварка обвязки', 'Сборка на раме', 'Опрессовка контура', 'Наладка автоматики', 'Испытания насосов', 'Отгрузка'];
+$('preSeg').innerHTML = '<i></i>'.repeat(20); const preSegs = [...$('preSeg').children];
+let shown = 0, lineI = 0, lineT = 0; const pre0 = performance.now();
+const preTarget = () => (PRE.s1 ? 34 : 0) + Math.min(PRE.frames, PRE.need) / PRE.need * 66;
+function preLoop(now) {
+  const age = now - pre0, done = preTarget() >= 99.9 || age > 6500;
+  const goal = done ? 100 : preTarget();
+  shown += (goal - shown) * (done ? .16 : .08); if (goal - shown < .3) shown = goal;
+  $('preNum').textContent = Math.floor(shown); preSegs.forEach((s, i) => s.classList.toggle('on', shown >= (i + 1) * 5));
+  if (now - lineT > 800 && shown < 100) { lineT = now; lineI = (lineI + 1) % LINES.length; $('preLine').textContent = LINES[lineI];
+    $('preLog').innerHTML = LOG.slice(Math.max(0, lineI - 3), lineI + 1).map((t, k, a) => `<span class="${k < a.length - 1 ? 'ok' : ''}">[${pad2(LOG.indexOf(t) + 1)}/06] ${t}…</span>`).join(''); }
+  if (shown >= 100 && age > 1100) {
+    ready = true; pre.classList.add('out'); pre.setAttribute('aria-busy', 'false');
+    setTimeout(() => { document.querySelectorAll('.stop [data-split]').forEach(el => el.classList.remove('split-wait')); }, reduced() ? 0 : 380);
+    setTimeout(() => { pre.hidden = true; }, reduced() ? 0 : 900); return;
+  }
+  requestAnimationFrame(preLoop);
+}
+requestAnimationFrame(preLoop);
+boot().catch(err => { PRE.s1 = true; PRE.frames = PRE.need; console.warn(err); });
+pageFx();
 </script>
 
 </body>
