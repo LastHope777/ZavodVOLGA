@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Завод ВОЛГА · блочные тепловые пункты и насосные станции</title>
+<meta name="description" content="Завод ВОЛГА, Самара: БТП, БМТП, АНС, КНС, шкафы управления и котельные. Демонстрационная версия сайта.">
+<link rel="icon" href="img/logo.png">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Unbounded:wght@500;600;700&display=swap">
+<style>
+/* Layout: the page is one continuous flight through the hall. A sticky film fills the screen; at each of the ten stops a heading band sits on top and the block's content on the bottom, so the product line in the middle stays clear. A route rail on the right counts the metres of the real camera path. */
+:root {
+  --ink: #0b1110;
+  --ink-2: #131c1a;
+  --glass: rgba(9, 15, 14, .66);
+  --glass-hi: rgba(18, 28, 26, .82);
+  --line: rgba(232, 240, 238, .16);
+  --fg: #f1f5f4;
+  --muted: #a3b1ad;
+  --green: #015a57;
+  --green-lt: #4bb8ae;
+  --red: #e84237;
+  --red-dk: #c8352b;
+  --f-display: 'Unbounded', 'Arial Black', 'Segoe UI', sans-serif;
+  --f-body: 'Golos Text', 'Segoe UI', Roboto, Arial, sans-serif;
+  --f-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  --gut: clamp(16px, 3.2vw, 48px);
+  --hdr: 68px;
+  --rail: 172px;
+  color-scheme: dark;
+}
+* { box-sizing: border-box }
+html { background: var(--ink) }
+body { margin: 0; background: var(--ink); color: var(--fg); font: 400 16px/1.5 var(--f-body); -webkit-font-smoothing: antialiased }
+a { color: inherit }
+button, input, select { font: inherit; color: inherit }
+:focus-visible { outline: 2px solid var(--green-lt); outline-offset: 2px }
+h1, h2, h3 { margin: 0; text-wrap: balance; font-family: var(--f-display); font-weight: 600; letter-spacing: -.01em }
+p { margin: 0 }
+
+/* header */
+.top { position: fixed; left: 0; right: 0; top: 0; z-index: 30; height: calc(var(--hdr) + env(safe-area-inset-top, 0px)); padding: env(safe-area-inset-top, 0px) var(--gut) 0; display: flex; align-items: center; gap: 28px;
+  background: linear-gradient(to bottom, rgba(8, 12, 11, .78), rgba(8, 12, 11, 0)); }
+.top .logo { display: block; height: 38px; flex: none }
+.top .logo img { height: 100%; width: auto; display: block }
+.top nav { display: flex; gap: 22px; font-size: 14px; font-weight: 500; flex-wrap: nowrap }
+.top nav a { text-decoration: none; color: var(--fg); opacity: .86; white-space: nowrap }
+.top nav a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 4px }
+.top .sp { flex: 1 }
+.top .ph { font: 500 15px/1.2 var(--f-mono); white-space: nowrap; user-select: all }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 0 20px; border-radius: 4px; border: 0; cursor: pointer; text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap; transition: background .15s, transform .15s }
+.btn-red { background: var(--red); color: #fff }
+.btn-red:hover { background: var(--red-dk) }
+.btn-ghost { background: rgba(255, 255, 255, .08); color: var(--fg); box-shadow: inset 0 0 0 1px var(--line) }
+.btn-ghost:hover { background: rgba(255, 255, 255, .14) }
+.btn:active { transform: translateY(1px) }
+
+/* the flight */
+#tour { position: relative }
+.stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: var(--ink) }
+.film { position: absolute; inset: 0 }
+.film canvas, .film .poster { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover }
+.film .poster { transition: opacity .4s }
+.scrim { position: absolute; left: 0; right: 0; pointer-events: none }
+.scrim.t { top: 0; height: 38%; background: linear-gradient(to bottom, rgba(7, 11, 10, .74), rgba(7, 11, 10, .28) 60%, rgba(7, 11, 10, 0)) }
+.scrim.b { bottom: 0; height: 46%; background: linear-gradient(to top, rgba(7, 11, 10, .84), rgba(7, 11, 10, .45) 55%, rgba(7, 11, 10, 0)) }
+
+.stop { position: absolute; inset: 0; pointer-events: none; opacity: 0; visibility: hidden }
+.stop.on { pointer-events: auto }
+.stop .head { isolation: isolate; position: absolute; left: var(--gut); top: calc(var(--hdr) + env(safe-area-inset-top, 0px) + 18px); max-width: min(720px, calc(100% - var(--rail) - 2 * var(--gut))); display: grid; gap: 14px; justify-items: start }
+.stop .body { position: absolute; left: var(--gut); right: calc(var(--gut) + var(--rail)); bottom: calc(26px + env(safe-area-inset-bottom, 0px)) }
+.stop .head::before { content: ''; position: absolute; z-index: -1; inset: -48px -90px -48px -70px; background: radial-gradient(closest-side, rgba(7, 11, 10, .58), rgba(7, 11, 10, 0)); pointer-events: none }
+.stop h1, .stop h2, .lead { text-shadow: 0 2px 16px rgba(0, 0, 0, .45) }
+.plate { position: relative; display: inline-block; background: var(--green); color: #fff; font: 600 12px/1 var(--f-display); letter-spacing: .12em; text-transform: uppercase; padding: 9px 14px 8px; border-radius: 2px; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14), 0 6px 18px rgba(0, 0, 0, .25) }
+.plate::before, .plate::after { content: ''; position: absolute; top: -12px; width: 1px; height: 12px; background: rgba(230, 236, 234, .55) }
+.plate::before { left: 14px } .plate::after { right: 14px }
+.stop h1 { font-size: clamp(30px, 4.1vw, 58px); line-height: 1.04 }
+.stop h2 { font-size: clamp(24px, 2.9vw, 40px); line-height: 1.08 }
+.lead { font-size: clamp(16px, 1.25vw, 19px); color: #dfe7e5; max-width: 58ch }
+.btns { display: flex; flex-wrap: wrap; gap: 10px }
+.mono { font-family: var(--f-mono) }
+
+.glass { background: var(--glass); backdrop-filter: blur(10px) saturate(1.1); -webkit-backdrop-filter: blur(10px) saturate(1.1); box-shadow: inset 0 0 0 1px var(--line); border-radius: 6px }
+.row { display: flex; gap: 12px; flex-wrap: wrap; align-items: stretch }
+.chip { padding: 12px 16px; display: grid; gap: 2px; min-width: 150px }
+.chip .k { font: 500 11px/1.2 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+.chip .v { font: 600 20px/1.15 var(--f-display) }
+
+.steps { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px }
+.step { padding: 14px 14px 16px; display: grid; gap: 6px; align-content: start }
+.step .n { font: 500 12px/1 var(--f-mono); color: var(--green-lt) }
+.step h3 { font: 600 15px/1.2 var(--f-body) }
+.step p { font-size: 13px; line-height: 1.4; color: var(--muted) }
+
+.prods { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(170px, 1fr); gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 4px; scrollbar-width: thin }
+.prod { scroll-snap-align: start; overflow: hidden; display: grid; grid-template-rows: auto 1fr; text-decoration: none; transition: transform .2s }
+.prod:hover { transform: translateY(-3px) }
+.prod .im { aspect-ratio: 4 / 3; overflow: hidden; background: var(--ink-2) }
+.prod .im img { width: 100%; height: 100%; object-fit: cover; display: block }
+.prod .tx { padding: 10px 12px 12px; display: grid; gap: 4px; align-content: start }
+.prod .tx b { font: 600 13px/1 var(--f-display); letter-spacing: .06em; color: var(--green-lt) }
+.prod .tx span { font-size: 13.5px; line-height: 1.35; color: #e3eae8 }
+
+.gauges { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; max-width: 980px }
+.gauge { padding: 14px 16px 16px; display: grid; gap: 4px; align-content: start }
+.gauge svg { width: 110px; height: auto; display: block }
+.gauge b { font: 700 30px/1 var(--f-display); font-variant-numeric: tabular-nums }
+.gauge span { font-size: 13.5px; color: var(--muted); line-height: 1.35 }
+
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; max-width: 1080px }
+.cell { padding: 14px 16px; display: grid; gap: 4px; align-content: start }
+.cell h3 { font: 600 15.5px/1.25 var(--f-body) }
+.cell p { font-size: 13.5px; line-height: 1.4; color: var(--muted) }
+.cell .k { font: 500 11px/1.2 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--green-lt) }
+
+.warranty { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 24px; align-items: center; padding: 18px 22px; max-width: 920px }
+.warranty .big { font: 700 72px/0.9 var(--f-display); color: var(--red) }
+.warranty .big small { display: block; font: 600 16px/1 var(--f-display); letter-spacing: .1em; color: var(--fg); margin-top: 6px }
+.warranty p { color: #d9e2e0; font-size: 15px; max-width: 52ch }
+.warranty .stamp { width: 118px }
+
+.form { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.2fr) auto; gap: 10px; align-items: end; padding: 16px; max-width: 1080px }
+.field { display: grid; gap: 6px; min-width: 0 }
+.field label { font: 500 11px/1.2 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+.field input, .field select { height: 46px; border-radius: 4px; border: 0; padding: 0 12px; background: rgba(255, 255, 255, .08); box-shadow: inset 0 0 0 1px var(--line); width: 100%; min-width: 0 }
+.field select option { background: var(--ink-2); color: var(--fg) }
+.form .note, .done { grid-column: 1 / -1; font-size: 13px; color: var(--muted) }
+.done { color: var(--green-lt) }
+
+.cases { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(250px, 1fr); gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; max-width: 1180px; scrollbar-width: thin }
+.case { scroll-snap-align: start; display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 12px; padding: 12px; align-items: start }
+.case img { width: 92px; height: 92px; object-fit: cover; border-radius: 4px; display: block }
+.case b { display: block; font-size: 14px; line-height: 1.3 }
+.case p { font-size: 13px; color: var(--muted); line-height: 1.35; margin-top: 3px }
+.params { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px }
+.params span { font: 500 11.5px/1 var(--f-mono); padding: 5px 7px; border-radius: 3px; background: rgba(75, 184, 174, .14); color: #cdeeea; white-space: nowrap }
+
+.contacts { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 12px; max-width: 1080px }
+.clist { padding: 16px 18px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px }
+.clist div { display: grid; gap: 2px; min-width: 0 }
+.clist .k { font: 500 11px/1.2 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+.clist .v { font-size: 15px; font-weight: 500; overflow-wrap: anywhere; user-select: all }
+.clist .v.mono { font-size: 15.5px; white-space: nowrap; overflow-wrap: normal }
+.copy { justify-self: start; margin-top: 2px; background: none; border: 0; padding: 0; font: 500 12px/1.2 var(--f-mono); color: var(--green-lt); cursor: pointer; text-decoration: underline; text-underline-offset: 3px }
+.mini { padding: 16px; display: grid; gap: 10px; align-content: start }
+
+/* route rail */
+.rail { position: absolute; right: var(--gut); top: calc(var(--hdr) + env(safe-area-inset-top, 0px) + 18px); bottom: 26px; width: calc(var(--rail) - 16px); display: grid; grid-template-rows: auto 1fr auto; gap: 14px; z-index: 5; padding: 14px 14px 12px; background: var(--glass); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 0 0 1px var(--line); border-radius: 6px }
+.odo { display: grid; gap: 2px; justify-items: end; text-align: right }
+.odo .k { font: 500 10.5px/1.2 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted) }
+.odo .v { font: 600 30px/1 var(--f-mono); font-variant-numeric: tabular-nums; letter-spacing: -.02em }
+.odo .v small { font-size: 14px; color: var(--muted); margin-left: 4px }
+.line { position: relative; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; justify-content: space-between }
+.line::before { content: ''; position: absolute; right: 5px; top: 6px; bottom: 6px; width: 2px; background: rgba(232, 240, 238, .18); border-radius: 1px }
+.line .fill { position: absolute; right: 5px; top: 6px; width: 2px; background: var(--red); border-radius: 1px; height: 0 }
+.line li { position: relative; display: flex; justify-content: flex-end; align-items: center; gap: 10px }
+.line button { display: flex; align-items: center; gap: 10px; background: none; border: 0; padding: 2px 0; cursor: pointer; text-align: right; color: #c3ceca }
+.line button:hover { color: var(--fg) }
+.line button .nm { font: 500 11px/1.15 var(--f-mono); letter-spacing: .06em; text-transform: uppercase }
+.line button .m { font: 400 10.5px/1 var(--f-mono); opacity: .75; font-variant-numeric: tabular-nums; min-width: 38px }
+.line button i { width: 12px; height: 12px; border-radius: 50%; background: var(--ink); box-shadow: inset 0 0 0 2px rgba(232, 240, 238, .45); flex: none; position: relative; z-index: 1 }
+.line li.past button i { background: var(--red); box-shadow: none }
+.line li.cur button { color: var(--fg) }
+.line li.cur button i { background: var(--fg); box-shadow: 0 0 0 4px rgba(232, 66, 55, .45) }
+.load { font: 500 11px/1.3 var(--f-mono); color: var(--muted); text-align: right; min-height: 1.3em }
+.load .bar { display: block; height: 2px; background: rgba(232, 240, 238, .16); margin-top: 6px; border-radius: 1px; overflow: hidden }
+.load .bar i { display: block; height: 100%; width: 0; background: var(--green-lt); transition: width .3s }
+.hint { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); font: 500 11px/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: rgba(241, 245, 244, .7); display: flex; gap: 10px; align-items: center; transition: opacity .3s; pointer-events: none }
+.hint i { width: 1px; height: 22px; background: currentColor; animation: drop 1.6s ease-in-out infinite }
+@keyframes drop { 0%, 100% { transform: scaleY(.3); transform-origin: top } 50% { transform: scaleY(1); transform-origin: top } }
+
+/* after the flight */
+.foot { padding-block: 56px 40px; padding-inline: var(--gut); background: var(--ink); border-top: 1px solid var(--line) }
+.foot .wrap { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.3fr) repeat(3, minmax(0, 1fr)); gap: 28px }
+.foot h3 { font: 600 12px/1.2 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px }
+.foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 14.5px }
+.foot a { text-decoration: none; opacity: .9 }
+.foot a:hover { text-decoration: underline }
+.foot .fine { grid-column: 1 / -1; font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 18px }
+.foot img { height: 40px; width: auto }
+
+.filmbox { padding: 0; border: 0; background: var(--ink); width: min(1280px, calc(100vw - 32px)); max-width: none; border-radius: 6px; box-shadow: 0 30px 80px rgba(0, 0, 0, .6), inset 0 0 0 1px var(--line); color: var(--fg) }
+.filmbox::backdrop { background: rgba(4, 7, 6, .82) }
+.filmbox video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #000 }
+.filmbox .x { position: absolute; top: 10px; right: 10px; min-height: 36px }
+@media (max-width: 1280px) {
+  .top nav { gap: 16px } .top nav a.x { display: none }
+  .steps { grid-template-columns: repeat(3, minmax(0, 1fr)) } .steps .step p { display: none }
+}
+@media (max-width: 1080px) {
+  :root { --rail: 0px }
+  .rail .line, .rail .load { display: none }
+  .rail { bottom: auto; width: auto; height: auto; top: calc(var(--hdr) + env(safe-area-inset-top, 0px) + 18px); padding: 10px 12px }
+  .top nav { display: none }
+  .gauges { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+}
+
+/* phones: the film takes the upper part of the screen, the block sits under it on solid ground */
+@media (max-width: 760px) {
+  :root { --hdr: 56px; --filmh: 52svh }
+  .top { gap: 12px } .top .logo { height: 30px } .top .ph { display: none } .top .btn { min-height: 38px; padding: 0 14px; font-size: 13.5px }
+  .film { bottom: auto; height: var(--filmh) }
+  .scrim.t { height: 30% } .scrim.b { top: calc(var(--filmh) - 90px); bottom: auto; height: 90px; background: linear-gradient(to top, var(--ink), rgba(11, 17, 16, 0)) }
+  .rail { display: none }
+  .stop .head { position: absolute; top: calc(var(--filmh) - 4px); left: var(--gut); right: var(--gut); max-width: none; gap: 8px }
+  .stop .head .btns { display: none } .stop .head.keep .btns { display: flex } .stop .head.keep .btn-ghost { display: none }
+  .lead { font-size: 14px; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden }
+  .stop .head.keep .lead { display: none }
+  .stop .head::before { display: none }
+  .stop h1 { font-size: 26px } .stop h2 { font-size: 21px }
+  .plate { position: absolute; top: calc(-1 * var(--filmh) + var(--hdr) + env(safe-area-inset-top, 0px) + 22px); font-size: 10.5px; padding: 7px 10px 6px }
+  .stop .body { left: var(--gut); right: var(--gut); bottom: calc(14px + env(safe-area-inset-bottom, 0px)) }
+  .stop .body .row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px } .chip { min-width: 0; padding: 9px 12px } .chip .v { font-size: 15px }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px } .step { padding: 10px 12px } .step h3 { font-size: 13.5px }
+  .prods { grid-auto-columns: 148px } .prod .tx span { font-size: 12.5px }
+  .gauges { gap: 6px } .gauge { padding: 10px 12px; grid-template-columns: auto 1fr; align-items: center; column-gap: 10px } .gauge svg { width: 54px; grid-row: span 2 } .gauge b { font-size: 20px } .gauge span { font-size: 12px }
+  .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px } .cell { padding: 10px 12px } .cell p { display: none } .cell h3 { font-size: 13.5px }
+  .warranty { grid-template-columns: auto minmax(0, 1fr); gap: 14px; padding: 14px } .warranty .big { font-size: 48px } .warranty .stamp { display: none } .warranty p { font-size: 13px }
+  .form { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); padding: 12px; gap: 8px } .form .field.wide { grid-column: 1 / -1 } .form .btn { grid-column: 1 / -1 } .field input, .field select { height: 42px }
+  .cases { grid-auto-columns: 260px } .case { grid-template-columns: 64px minmax(0, 1fr) } .case img { width: 64px; height: 64px }
+  .contacts { grid-template-columns: minmax(0, 1fr) } .contacts .mini { display: none } .clist { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px 14px; padding: 12px 14px } .clist .v { font-size: 13px } .clist .v.mono { font-size: 12.5px }
+  .hint { display: none }
+  .foot .wrap { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) } .foot .wrap > :first-child { grid-column: 1 / -1 }
+}
+@media (prefers-reduced-motion: reduce) { .prod, .btn, .film .poster { transition: none } .hint i { animation: none } }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="#s1" data-jump="0" aria-label="Завод ВОЛГА, в начало"><img src="img/logo.png" alt="Завод ВОЛГА" width="480" height="167"></a>
+  <nav aria-label="Разделы">
+    <a href="#s3" data-jump="2">Каталог</a>
+    <a href="#s2" data-jump="1">Услуги</a>
+    <a href="#s7" data-jump="6">Условия</a>
+    <a href="#s9" data-jump="8" class="x">Проекты</a>
+    <a href="#s10" data-jump="9">Контакты</a>
+  </nav>
+  <span class="sp"></span>
+  <span class="ph" id="hdrPhone"></span>
+  <a class="btn btn-red" href="#s8" data-jump="7">Расчёт за 1 день</a>
+</header>
+
+<main id="tour">
+  <div class="stage" id="stage">
+    <div class="film" id="film">
+      <img class="poster" id="poster" src="frames3/stills/s1.webp" alt="Цех Завода ВОЛГА: зона сборки с тепловым пунктом и насосной станцией">
+      <canvas id="cv" aria-hidden="true"></canvas>
+    </div>
+    <div class="scrim t"></div><div class="scrim b"></div>
+    <div id="stops"></div>
+    <aside class="rail" aria-label="Маршрут по заводу">
+      <div class="odo"><span class="k">Пройдено по маршруту</span><span class="v"><span id="odo">0</span><small>м</small></span><span class="k" id="odoOf">из 756 м</span></div>
+      <ol class="line" id="line"><span class="fill" id="fill"></span></ol>
+      <div class="load" id="load"></div>
+    </aside>
+    <div class="hint" id="hint"><i></i>Листайте, чтобы пройти по заводу</div>
+  </div>
+</main>
+
+<dialog class="filmbox" id="filmbox" aria-label="Видео цеха целиком">
+  <video id="filmv" controls playsinline preload="none" poster="frames3/stills/s1.webp"><source src="film.mp4" type="video/mp4"></video>
+  <button class="btn btn-ghost x" type="button" id="filmx">Закрыть</button>
+</dialog>
+
+<footer class="foot">
+  <div class="wrap">
+    <div><img src="img/logo.png" alt="Завод ВОЛГА" width="480" height="167"><p style="margin-top:12px;color:var(--muted);font-size:14px;max-width:38ch">Проектируем и собираем тепловые пункты, насосные станции и шкафы управления в Самаре. Доставляем по всей России.</p></div>
+    <div><h3>Оборудование</h3><ul><li><a href="#s3" data-jump="2">Блочные тепловые пункты</a></li><li><a href="#s3" data-jump="2">Блочно-модульные БТП</a></li><li><a href="#s3" data-jump="2">Насосные станции АНС</a></li><li><a href="#s3" data-jump="2">Канализационные КНС</a></li><li><a href="#s3" data-jump="2">Шкафы управления</a></li><li><a href="#s3" data-jump="2">Котельные</a></li></ul></div>
+    <div><h3>Компания</h3><ul><li><a href="#s2" data-jump="1">Услуги</a></li><li><a href="#s7" data-jump="6">Условия работы</a></li><li><a href="#s9" data-jump="8">Проекты и письма</a></li><li><a href="#s4" data-jump="3">О заводе в цифрах</a></li></ul></div>
+    <div><h3>Связаться</h3><ul id="footContacts"></ul></div>
+    <p class="fine">Демоверсия главной страницы. Видео собрано из роликов, сгенерированных по сцене цеха: пролёт от изделий к складу, отгрузка и улица появятся, когда будут готовы их ролики. Заявки с этой страницы не отправляются.</p>
+  </div>
+</footer>
+
+<script>
+const C = { phone: '+7 (846) 214-03-34', phone2: '+7 (939) 700-67-73', email: 'sales@zavod-volga.ru', addr: 'г. Самара, ул. Авроры, 114А к2, офис 402', hours: 'Пн–Пт, 9:00–18:00', msg: '+7 927 015-72-96' };
+// real camera path of the Blender route, metres per leg (01→02 … 09→10)
+const LEGS = [45.3, 128.2, 139.3, 142.9, 13.0, 156.0, 33.0, 62.2, 35.9];
+const AT = LEGS.reduce((a, l) => (a.push(a[a.length - 1] + l), a), [0]);
+
+const gauge = f => { let t = '';
+  for (let i = 0; i <= 10; i++) { const a = Math.PI * i / 10, r1 = i % 5 ? 36 : 32; t += `<line x1="${(60 - 40 * Math.cos(a)).toFixed(1)}" y1="${(64 - 40 * Math.sin(a)).toFixed(1)}" x2="${(60 - r1 * Math.cos(a)).toFixed(1)}" y2="${(64 - r1 * Math.sin(a)).toFixed(1)}" stroke="#dfe7e5" stroke-width="${i % 5 ? 1 : 1.6}"/>`; }
+  const a = Math.PI * f;
+  return `<svg viewBox="0 0 120 72" aria-hidden="true"><path d="M12 64 A48 48 0 0 1 108 64" fill="none" stroke="rgba(232,240,238,.18)" stroke-width="7"/><path d="M12 64 A48 48 0 0 1 108 64" fill="none" stroke="#4bb8ae" stroke-width="7" stroke-dasharray="${(150.8 * f).toFixed(1)} 200"/><path d="M94 30 A48 48 0 0 1 108 64" fill="none" stroke="#e84237" stroke-width="7"/>${t}<line x1="60" y1="64" x2="${(60 - 38 * Math.cos(a)).toFixed(1)}" y2="${(64 - 38 * Math.sin(a)).toFixed(1)}" stroke="#e84237" stroke-width="2.8" stroke-linecap="round"/><circle cx="60" cy="64" r="5.5" fill="#f1f5f4"/><circle cx="60" cy="64" r="2" fill="#0b1110"/></svg>`; };
+const stamp = `<svg viewBox="0 0 160 160" role="img" aria-label="Штамп ОТК: гарантия 5 лет"><defs><path id="stP" d="M80 80 m-57 0 a57 57 0 1 1 114 0 a57 57 0 1 1 -114 0"/></defs><circle cx="80" cy="80" r="74" fill="none" stroke="#e84237" stroke-width="3"/><circle cx="80" cy="80" r="45" fill="none" stroke="#e84237" stroke-width="1.6"/><text font-family="IBM Plex Mono, monospace" font-size="11" font-weight="500" letter-spacing="2" fill="#e84237"><textPath href="#stP">ОТК · ЗАВОД ВОЛГА · САМАРА · ПРОВЕРЕНО ·</textPath></text><text x="80" y="77" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="500" fill="#e84237" letter-spacing="1">ГАРАНТИЯ</text><text x="80" y="99" text-anchor="middle" font-family="Unbounded, sans-serif" font-size="20" font-weight="600" fill="#e84237">5 ЛЕТ</text></svg>`;
+const PRODS = [
+  ['БТП', 'Блочные тепловые пункты на раме с узлом учёта', 'btp-3.webp', 'Блочный тепловой пункт на раме в цехе'],
+  ['БМТП', 'Тепловой пункт в утеплённом блок-модуле', 'bmtp-1.webp', 'Блочно-модульный тепловой пункт с открытой дверью'],
+  ['АНС', 'Насосные станции пожаротушения и водоснабжения', 'ans-1.webp', 'Насосная станция с вертикальными насосами и красным шкафом'],
+  ['КНС', 'Канализационные станции в корпусе из стеклопластика', 'kns-1.webp', 'Корпус КНС из стеклопластика'],
+  ['ШУ', 'Шкафы управления насосами и тепловыми пунктами', 'shu-1.webp', 'Красный шкаф управления с сенсорной панелью'],
+  ['Котельные', 'Блочно-модульные котельные для отопления и ГВС', 'kotelnye.webp', 'Ряды белых блочных котельных в цехе']];
+const CASES = [
+  ['АО «ФСК Лада-Дом», Самара', 'Насосная станция пожаротушения производственно-складских помещений', 'ans-1.webp', ['Q 553 м³/ч', 'H 78 м', 'P 90 кВт', 'Ду 250']],
+  ['ООО «А1-Проект», Москва', 'БТП для административно-жилого комплекса: отопление, вентиляция, бассейн и ГВС', 'btp-1.webp', ['0,467 Гкал/ч', 'T 95/70 °C', 'Ду 100']],
+  ['ООО «Вираж-Спецстрой», Самара', 'Общий ЦТП для группы домов с поэтапным подключением и узлами учёта', 'btp-4.webp', ['Погодное регулирование']],
+  ['Объект в Казани', 'Автоматическая установка водяного пожаротушения', 'ans-2.webp', ['Q 163 м³/ч', 'H 70 м', 'P 22 кВт']]];
+const OPTS = ['Блочный тепловой пункт', 'Блочно-модульный тепловой пункт', 'Насосная станция (АНС)', 'Канализационная станция (КНС)', 'Шкаф управления', 'Котельная', 'Другое'];
+
+const form = (id, btn) => `<form class="form glass" id="${id}" novalidate>
+  <div class="field"><label for="${id}-n">Имя</label><input id="${id}-n" name="n" autocomplete="name" placeholder="Как к вам обращаться"></div>
+  <div class="field"><label for="${id}-p">Телефон</label><input id="${id}-p" name="p" type="tel" autocomplete="tel" placeholder="+7 ___ ___-__-__"></div>
+  <div class="field wide"><label for="${id}-e">Оборудование</label><select id="${id}-e" name="e">${OPTS.map(o => `<option>${o}</option>`).join('')}</select></div>
+  <button class="btn btn-red" type="submit">${btn}</button>
+  <p class="note" aria-live="polite">Перезвоним в рабочее время и пришлём опросный лист.</p></form>`;
+
+const STOPS = [
+  { zone: 'Сборка', name: 'Сборка', h: 'h1', title: 'Тепловые пункты и насосные станции заводской сборки',
+    lead: 'Проектируем и собираем БТП, БМТП, АНС, КНС, шкафы управления и котельные в своём цехе в Самаре и привозим на объект готовыми к подключению.',
+    btns: `<a class="btn btn-red" href="#s8" data-jump="7">Рассчитать стоимость</a><button class="btn btn-ghost" type="button" data-film><svg width="12" height="14" viewBox="0 0 12 14" aria-hidden="true"><path d="M0 0l12 7-12 7z" fill="currentColor"/></svg>Видео цеха целиком</button>`, keep: true,
+    body: `<div class="row">${[['Расчёт', '1 день'], ['Изготовление', 'до 6 недель'], ['Гарантия', '5 лет'], ['Доставка', 'по всей России']].map(([k, v]) => `<div class="chip glass"><span class="k">${k}</span><span class="v">${v}</span></div>`).join('')}</div>` },
+  { zone: 'Проектирование', name: 'Проект', title: 'Берём на себя весь путь оборудования', lead: 'Можно заказать одну услугу или всё вместе: от расчёта до сервиса после запуска.',
+    body: `<div class="steps">${[['Проектирование', 'Инженерное решение с нуля или по вашему проекту и опросному листу.'], ['Подбор', 'Несколько вариантов комплектации под параметры и бюджет.'], ['Производство', 'Сборка узлов в своём цехе и испытания до отгрузки.'], ['Доставка', 'В любой регион России, груз застрахован.'], ['Монтаж и запуск', 'Монтаж, пусконаладка и обучение персонала.'], ['Сервис', 'Гарантийное и постгарантийное обслуживание.']].map(([t, d], i) => `<div class="step glass"><span class="n">${String(i + 1).padStart(2, '0')}</span><h3>${t}</h3><p>${d}</p></div>`).join('')}</div>` },
+  { zone: 'Изделия', name: 'Каталог', title: 'Оборудование собственного производства', lead: 'Всё, что стоит в этом ряду, мы проектируем и собираем сами.',
+    body: `<div class="prods">${PRODS.map(([s, t, img, alt]) => `<a class="prod glass" href="#s8" data-jump="7"><div class="im"><img src="img/${img}" alt="${alt}" loading="lazy" width="320" height="240"></div><div class="tx"><b>${s}</b><span>${t}</span></div></a>`).join('')}</div>` },
+  { zone: 'Склад', name: 'Цифры', title: 'Завод в цифрах', lead: 'Производим оборудование с 2020 года и держим комплектующие на своём складе.',
+    body: `<div class="gauges">${[[.55, 'с 2020', 'года производим оборудование'], [.66, '150', 'тепловых пунктов для 100 клиентов'], [.8, '450', 'насосных станций для 200 клиентов'], [.8, '80%', 'комплектующих отечественного производства']].map(([f, b, s]) => `<div class="gauge glass">${gauge(f)}<b>${b}</b><span>${s}</span></div>`).join('')}</div>` },
+  { zone: 'Испытания', name: 'Испытания', title: 'Каждую установку испытываем до отгрузки', lead: 'Поэтому на объект приезжает проверенный блок, а не набор деталей для сборки в подвале.',
+    body: `<div class="grid3">${[['Заводская сборка', 'Узлы собирают монтажники в цехе, в контролируемых условиях.'], ['Испытания на заводе', 'Гидравлические испытания и проверка автоматики до отгрузки.'], ['3D-модель заранее', 'Показываем узлы и расстановку оборудования до изготовления.'], ['Документы в комплекте', 'Паспорт, сертификаты на комплектующие, руководство по эксплуатации.'], ['Сроки в договоре', 'Фиксируем срок изготовления и отвечаем за него.'], ['Отечественная база', '80% комплектующих российского производства.']].map(([t, d]) => `<div class="cell glass"><h3>${t}</h3><p>${d}</p></div>`).join('')}</div>` },
+  { zone: 'Манометр', name: 'Гарантия', title: 'Заводская гарантия 5 лет на всё изделие', lead: '',
+    body: `<div class="warranty glass"><div class="big">5<small>ЛЕТ</small></div><div style="display:grid;gap:12px"><p>Гарантия распространяется на тепловой пункт или станцию целиком, а не только на комплектующие. Бесплатно заменим или отремонтируем неисправные детали при нормальной эксплуатации.</p><div class="btns"><a class="btn btn-red" href="#s8" data-jump="7">Получить расчёт с гарантией</a></div></div><div class="stamp">${stamp}</div></div>` },
+  { zone: 'Отгрузка', name: 'Условия', title: 'Условия работы', lead: 'Отгружаем из Самары готовые блоки, остаётся подключить их к сетям.',
+    body: `<div class="grid3">${[['01', 'Расчёт за 1 день', 'По параметрам объекта или опросному листу, в нескольких вариантах.'], ['02', 'Изготовление до 6 недель', 'Срок прописываем в договоре.'], ['03', 'Доставка по России', 'В любой регион, груз застрахован.'], ['04', 'Монтаж и пусконаладка', 'Запускаем и помогаем сдать объект.'], ['05', 'Гарантия 5 лет', 'На всё изделие целиком.'], ['06', 'Сервис и запчасти', 'Обслуживание и комплектующие со склада.']].map(([k, t, d]) => `<div class="cell glass"><span class="k">${k}</span><h3>${t}</h3><p>${d}</p></div>`).join('')}</div>` },
+  { zone: 'В путь', name: 'Заявка', title: 'Рассчитаем стоимость за 1 день', lead: 'Оставьте телефон: уточним параметры и пришлём расчёт в нескольких вариантах комплектации.',
+    body: form('f1', 'Получить расчёт') },
+  { zone: 'На объекте', name: 'Проекты', title: 'Наше оборудование уже работает на объектах', lead: 'Тепловые пункты и насосные станции для жилых комплексов, складов и общественных зданий.',
+    body: `<div class="cases">${CASES.map(([w, t, img, ps]) => `<div class="case glass"><img src="img/${img}" alt="" loading="lazy" width="92" height="92"><div><b>${w}</b><p>${t}</p><div class="params">${ps.map(p => `<span>${p}</span>`).join('')}</div></div></div>`).join('')}</div>` },
+  { zone: 'Контакты', name: 'Контакты', title: 'Ваш объект может стать следующим', lead: 'Позвоните или оставьте заявку, ответим в рабочее время.',
+    body: `<div class="contacts"><div class="clist glass">${[['Телефон', C.phone, 1], ['Отдел продаж', C.phone2, 1], ['Почта', C.email, 1], ['WhatsApp и Telegram', C.msg, 1], ['Адрес офиса', C.addr], ['Часы работы', C.hours]].map(([k, v, cp]) => `<div><span class="k">${k}</span><span class="v${cp ? ' mono' : ''}">${v}</span>${cp ? `<button class="copy" type="button" data-copy="${v}">Скопировать</button>` : ''}</div>`).join('')}</div>
+      <form class="mini glass" id="f2" novalidate><div class="field"><label for="f2-p">Телефон</label><input id="f2-p" type="tel" autocomplete="tel" placeholder="+7 ___ ___-__-__"></div><button class="btn btn-red" type="submit">Перезвоните мне</button><p class="note" aria-live="polite" style="font-size:13px;color:var(--muted)">Заявки в демоверсии не отправляются.</p></form></div>` }];
+
+const stopsEl = document.getElementById('stops');
+stopsEl.innerHTML = STOPS.map((s, i) => `<section class="stop" id="s${i + 1}" aria-label="${s.name}"><div class="head${s.keep ? ' keep' : ''}"><span class="plate">${s.zone}</span><${s.h || 'h2'}>${s.title}</${s.h || 'h2'}>${s.lead ? `<p class="lead">${s.lead}</p>` : ''}${s.btns ? `<div class="btns">${s.btns}</div>` : ''}</div><div class="body">${s.body}</div></section>`).join('');
+const stopEls = [...stopsEl.children];
+document.getElementById('hdrPhone').textContent = C.phone;
+document.getElementById('footContacts').innerHTML = [C.phone, C.phone2, C.email, C.addr].map(v => `<li style="user-select:all">${v}</li>`).join('');
+const line = document.getElementById('line');
+line.insertAdjacentHTML('beforeend', STOPS.map((s, i) => `<li><button type="button" data-jump="${i}"><span class="nm">${s.name}</span><span class="m">${Math.round(AT[i])} м</span><i></i></button></li>`).join(''));
+const lis = [...line.querySelectorAll('li')];
+
+const fb = document.getElementById('filmbox'), fv = document.getElementById('filmv');
+document.addEventListener('click', e => { if (e.target.closest('[data-film]')) { try { fb.showModal(); } catch (_) { fb.setAttribute('open', ''); } fv.play().catch(() => {}); } });
+document.getElementById('filmx').addEventListener('click', () => { fv.pause(); fb.close ? fb.close() : fb.removeAttribute('open'); });
+fb.addEventListener('close', () => fv.pause());
+document.addEventListener('submit', e => { e.preventDefault(); const n = e.target.querySelector('.note'); if (n) { n.textContent = 'Это демоверсия: заявка не отправлена. На рабочем сайте она уйдёт в отдел продаж.'; n.classList.add('done'); } });
+document.addEventListener('click', e => {
+  const c = e.target.closest('[data-copy]');
+  if (c) { const v = c.dataset.copy; const ok = () => { c.textContent = 'Скопировано'; setTimeout(() => c.textContent = 'Скопировать', 1500); };
+    try { navigator.clipboard.writeText(v).then(ok, () => sel(c)); } catch (_) { sel(c); } return; }
+  const j = e.target.closest('[data-jump]');
+  if (j) { e.preventDefault(); jumpTo(+j.dataset.jump); }
+});
+function sel(c) { const r = document.createRange(); r.selectNodeContents(c.previousElementSibling); const s = getSelection(); s.removeAllRanges(); s.addRange(r); c.textContent = 'Выделено, нажмите Ctrl+C'; }
+
+/* ---------- film: one WebP per frame, drawn to canvas by scroll ---------- */
+const cv = document.getElementById('cv'), ctx = cv.getContext('2d', { alpha: false }), poster = document.getElementById('poster');
+const tour = document.getElementById('tour'), stage = document.getElementById('stage');
+const isPhone = () => innerWidth <= 760, DIR = 'frames3/';
+let M = null, total = 0, units = [], holdFrame = [], lastI = 0, dirF = 1, loaded = 0;
+const cache = new Map(), pending = new Set(), blobs = [], stillAt = new Map(); let cacheMax = 48;
+
+async function boot() {
+  cacheMax = isPhone() ? 28 : 48;
+  M = await (await fetch(DIR + 'manifest.json')).json();
+  total = M.legs.reduce((a, n) => a + n, 0);
+  holdFrame = M.stops.slice(); // global frame index of each stop; stops without footage yet hold the last frame
+  while (holdFrame.length < STOPS.length) holdFrame.push(total - 1);
+  layout();
+  // full-quality stills at the stops come first: that is what a visitor looks at
+  M.stills.forEach((f, k) => fetch(DIR + f).then(r => r.blob()).then(b => createImageBitmap(b)).then(b => { stillAt.set(M.stops[k], b); lastKey = ''; tick(true); }).catch(() => {}));
+  // frames load outward from where the visitor is
+  const c = holdFrame[progressLeg()] || 0, queue = [];
+  for (let d = 0; queue.length < total; d++) { if (c + d < total) queue.push(c + d); if (d && c - d >= 0) queue.push(c - d); }
+  const ld = document.getElementById('load'); let next = 0;
+  const worker = async () => { while (next < queue.length) { const i = queue[next++];
+    await fetch(`${DIR}f/${String(i).padStart(4, '0')}.webp`).then(r => r.ok ? r.blob() : null).then(b => { blobs[i] = b; }).catch(() => {});
+    loaded++; if (loaded % 10 === 0 || loaded === total) ld.innerHTML = loaded < total ? `Загружаем цех ${Math.round(loaded / total * 100)}%<span class="bar"><i style="width:${loaded / total * 100}%"></i></span>` : '';
+    if (Math.abs(i - lastI) < 20) tick(true); } };
+  await Promise.all(Array.from({ length: 6 }, worker));
+}
+function bitmap(i) {
+  if (cache.has(i)) return cache.get(i);
+  if (!blobs[i] || pending.has(i)) return null;
+  pending.add(i);
+  createImageBitmap(blobs[i]).then(b => {
+    pending.delete(i); cache.set(i, b);
+    // keep the frames nearest to the camera, drop the farthest
+    while (cache.size > cacheMax) { let far = -1, d = -1; for (const k of cache.keys()) if (Math.abs(k - lastI) > d) { d = Math.abs(k - lastI); far = k; } const x = cache.get(far); x.close && x.close(); cache.delete(far); }
+    if (Math.abs(i - lastI) <= 1) { lastKey = ''; tick(true); }
+  }, () => pending.delete(i));
+  return null;
+}
+
+// scroll units: a flight is two wheel notches (2 × 100 px) and a stop keeps only a short landing zone, so the film moves on the first scroll
+function layout() {
+  const vh = innerHeight, ph = isPhone(); units = []; let y = 0;
+  const HOLD = ph ? 40 : 20, FLY = ph ? Math.round(vh * .4) : 180;
+  for (let s = 0; s < STOPS.length; s++) {
+    units.push({ t: 'hold', s, y0: y, y1: y + HOLD }); y += HOLD;
+    if (s < STOPS.length - 1 && M) { units.push({ t: 'fly', s, f0: holdFrame[s], f1: holdFrame[s + 1], y0: y, y1: y + FLY }); y += FLY; }
+  }
+  tour.style.height = (y + vh) + 'px';
+  const dpr = Math.min(devicePixelRatio || 1, 2), r = cv.getBoundingClientRect();
+  cv.width = Math.max(1, Math.round(r.width * dpr)); cv.height = Math.max(1, Math.round(r.height * dpr));
+  tick(true);
+}
+function scrollY0() { return Math.max(0, -tour.getBoundingClientRect().top); }
+function progressLeg() { const y = scrollY0(); const u = units.find(u => y < u.y1) || units[units.length - 1]; return u ? u.s : 0; }
+function jumpTo(s) { glideTo(s); }
+
+let lastKey = '';
+function tick(force) {
+  if (!units.length) return;
+  const y = scrollY0(); const u = units.find(u => y < u.y1) || units[units.length - 1];
+  let f, op = new Array(STOPS.length).fill(0), metres;
+  if (u.t === 'hold') { f = holdFrame[u.s]; op[u.s] = 1; metres = AT[u.s]; }
+  else { const t = Math.min(1, Math.max(0, (y - u.y0) / (u.y1 - u.y0))); f = u.f0 + (u.f1 - u.f0) * t;
+    op[u.s] = Math.max(0, 1 - t / .3); op[u.s + 1] = Math.max(0, (t - .7) / .3); metres = AT[u.s] + LEGS[u.s] * t; }
+  stopEls.forEach((el, i) => { const o = op[i]; el.style.opacity = o; el.style.visibility = o > .01 ? 'visible' : 'hidden'; el.classList.toggle('on', o > .6); el.style.transform = `translateY(${(1 - o) * 14}px)`; });
+  const cur = u.t === 'hold' ? u.s : (op[u.s + 1] > op[u.s] ? u.s + 1 : u.s);
+  lis.forEach((li, i) => { li.classList.toggle('past', i < cur); li.classList.toggle('cur', i === cur); });
+  document.getElementById('fill').style.height = `calc(${(metres / AT[AT.length - 1]) * 100}% - 12px * ${(metres / AT[AT.length - 1]).toFixed(3)})`;
+  document.getElementById('odo').textContent = Math.round(metres);
+  document.getElementById('hint').style.opacity = y < 40 ? 1 : 0;
+  draw(f, force);
+}
+// one real frame at a time: blending neighbours doubled every edge
+function draw(f, force) {
+  if (!total) return;
+  const i = Math.min(total - 1, Math.max(0, Math.round(f)));
+  if (i !== lastI) { dirF = i > lastI ? 1 : -1; lastI = i; }
+  const key = i + ':' + cv.width + ':' + cv.height;
+  if (key === lastKey && !force) return;
+  const exact = stillAt.get(i) || bitmap(i); let b = exact;
+  // decode ahead in the direction of travel
+  for (let k = Math.max(0, i - (dirF > 0 ? 6 : 18)); k <= Math.min(total - 1, i + (dirF > 0 ? 18 : 6)); k++) if (k !== i) bitmap(k);
+  if (!b) { for (let k = 1; k < 40 && !b; k++) b = cache.get(i - k * dirF) || stillAt.get(i - k * dirF) || cache.get(i + k * dirF) || stillAt.get(i + k * dirF) || null; }
+  if (!b) return;
+  lastKey = exact ? key : '';
+  paint(b);
+  if (poster.style.opacity !== '0') poster.style.opacity = '0';
+}
+function paint(b) {
+  const W = cv.width, H = cv.height, s = Math.max(W / b.width, H / b.height), w = b.width * s, h = b.height * s;
+  ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high'; ctx.drawImage(b, (W - w) / 2, (H - h) / 2, w, h);
+}
+/* scenes glide: a wheel gesture, a key or a paused touch scroll carries the camera smoothly to the next stop,
+   so the film never halts half-way through a flight */
+let glide = null, lastWheel = 0, glideEnd = 0, idleT = 0, lastY = scrollY, sdir = 1;
+const easeIO = k => (1 - Math.cos(Math.PI * k)) / 2; // gentle start, gentle landing
+const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+function holdTop(s) { const u = units.find(u => u.t === 'hold' && u.s === s); return tour.getBoundingClientRect().top + scrollY + (u.y0 + u.y1) / 2; }
+// the stop a move in direction dir goes to from the current position; -1 when the move leaves the tour
+function nextStop(dir) {
+  const y = scrollY0(), last = units[units.length - 1];
+  if (y > last.y1) return -1;
+  const u = units.find(u => y < u.y1) || last;
+  const s = u.t === 'hold' ? u.s + dir : (dir > 0 ? u.s + 1 : u.s);
+  return s < 0 || s >= STOPS.length ? -1 : s;
+}
+function glideTo(s) {
+  if (!units.length || !M) return;
+  s = Math.max(0, Math.min(STOPS.length - 1, s));
+  const from = scrollY, to = holdTop(s), d = to - from; if (Math.abs(d) < 1) return;
+  if (reduced()) { scrollTo(0, to); return; }
+  const leg = units.find(u => u.t === 'fly'), legPx = leg ? leg.y1 - leg.y0 + 20 : 200, n = Math.abs(d) / legPx;
+  const dur = n <= 1 ? 1200 * Math.max(.45, n) : Math.min(2800, 1200 + 420 * (n - 1));
+  const t0 = performance.now(), me = glide = { s, dir: Math.sign(d), next: false };
+  const step = now => {
+    if (glide !== me) return;
+    const k = Math.min(1, (now - t0) / dur); scrollTo(0, from + d * easeIO(k));
+    if (k < 1) return requestAnimationFrame(step);
+    glide = null; glideEnd = now; lastY = scrollY;
+    if (me.next) { const n2 = nextStop(me.dir); if (n2 >= 0) glideTo(n2); }
+  };
+  requestAnimationFrame(step);
+}
+addEventListener('wheel', e => {
+  if (e.ctrlKey || !M || fb.open) return; // pinch zoom, film playing
+  const dir = Math.sign(e.deltaY); if (!dir) return;
+  if (glide && dir !== glide.dir) { e.preventDefault(); const n = nextStop(dir); if (n >= 0) glideTo(n); lastWheel = performance.now(); return; }
+  const target = glide ? glide.s : nextStop(dir);
+  if (target < 0) return; // past the last stop the page scrolls on to the footer as usual
+  e.preventDefault();
+  const now = performance.now(), gap = now - lastWheel; lastWheel = now;
+  if (glide) { if (gap > 260) glide.next = true; return; } // a fresh notch during a flight books the next scene
+  if (gap < 260 && now - glideEnd < 650) return; // the tail of the gesture that started the last flight (trackpad inertia)
+  glideTo(target);
+}, { passive: false });
+addEventListener('keydown', e => {
+  if (e.altKey || e.ctrlKey || e.metaKey || fb.open || (e.target.closest && e.target.closest('input, textarea, select, button, a, dialog, [contenteditable]'))) return;
+  const dir = { ArrowDown: 1, PageDown: 1, ArrowUp: -1, PageUp: -1, ' ': e.shiftKey ? -1 : 1 }[e.key]; if (!dir) return;
+  const n = nextStop(dir); if (n < 0) return;
+  e.preventDefault(); if (glide && glide.dir === dir) glide.next = true; else glideTo(n);
+});
+// touch, scrollbar: whoever moves the page by hand takes over; if they let go half-way, the camera finishes the flight
+['touchstart', 'mousedown'].forEach(ev => addEventListener(ev, () => { glide = null; }, { passive: true }));
+function settleSoon() {
+  clearTimeout(idleT); idleT = setTimeout(() => {
+    if (glide || !M) return; const y = scrollY0(), u = units.find(u => y < u.y1);
+    if (u && u.t === 'fly') glideTo(sdir > 0 ? u.s + 1 : u.s);
+  }, 160);
+}
+addEventListener('touchend', settleSoon, { passive: true });
+addEventListener('scroll', () => { if (scrollY !== lastY) sdir = scrollY > lastY ? 1 : -1; lastY = scrollY; if (!glide) settleSoon(); }, { passive: true });
+let raf = 0; addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; tick(); }); }, { passive: true });
+addEventListener('resize', () => { lastKey = ''; layout(); });
+stopEls[0].style.opacity = 1; stopEls[0].style.visibility = 'visible'; stopEls[0].classList.add('on');
+boot().catch(err => { document.getElementById('load').textContent = 'Видео не загрузилось, показываем кадр.'; console.warn(err); });
+</script>
+
+</body>
+</html>

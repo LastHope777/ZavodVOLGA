@@ -1,0 +1,10 @@
+Завод ВОЛГА: демо-сайт для Render
+
+Папка public/ и есть сайт (index.html, film.mp4, frames3/, img/).
+render.yaml нужен только для варианта "Blueprint".
+
+1. Залейте эту папку целиком в новый репозиторий GitHub.
+2. render.com: New > Static Site > выберите репозиторий.
+3. Build Command: echo ok
+   Publish Directory: public
+4. Create Static Site. Через пару минут сайт откроется по адресу вида https://zavod-volga-demo.onrender.com
